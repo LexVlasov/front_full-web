@@ -4,10 +4,11 @@ import Container from '@mui/material/Container';
 
 
 import { Header } from './components';
-import { Home, FullPost, Registration, AddPost, Login } from './pages';
+import { Home, FullPost, Registration, AddPost, Login, PostsByTag } from './pages';
 import { useDispatch, useSelector } from 'react-redux';
 import React from 'react';
 import { fetchAuthMe, selectIsAuth } from './redux/slices/auth';
+
 
 
 
@@ -26,6 +27,7 @@ function App() {
         <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/posts/:id" element={<FullPost />} />
+        <Route path="/tags/:tag" element={<PostsByTag />} />
         <Route path="/posts/:id/edit" element={<AddPost />} />
         <Route path="/add-post" element={<AddPost />} />
         <Route path="/login" element={<Login />} />

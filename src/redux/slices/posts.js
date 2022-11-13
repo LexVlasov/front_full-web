@@ -11,6 +11,12 @@ export const fetchTags = createAsyncThunk('posts/fetchTags', async ()=>{
     return data;
 })
 
+export const fetchPostbyTag = createAsyncThunk('posts/fetchPostbyTag', async (tag)=>{
+    const {data} = await axios.get(`/tags/${tag}`);
+    return data;
+})
+
+
 export const fetchRemovePost = createAsyncThunk('posts/fetchRemovepost', async (id)=>
     axios.delete(`/posts/${id}`)
 
@@ -65,6 +71,20 @@ const postsSlice = createSlice({
         // Удаление статей
         [fetchRemovePost.pending]:(state, action)=>{
             state.posts.items = state.posts.items.filter(obj => obj._id != action.meta.arg);
+        },
+        //Получение статей по тэгу
+        [fetchPostbyTag.pending]:(state)=>{
+            state.posts.items = [];
+            state.posts.status='loading';
+        },
+        [fetchPostbyTag.fulfilled]:(state,action)=>{
+
+            state.posts.items = action.payload;
+            state.posts.status='loaded';
+        },
+        [fetchPostbyTag.rejected]:(state)=>{
+            state.posts.items = [];
+            state.posts.status='error';
         },
 
     }

@@ -16,28 +16,26 @@ export const Registration = () => {
   const backHost = 
   process.env.REACT_APP_API_URL?process.env.REACT_APP_API_URL:
   'http://localhost:4444';
+  const {id} = useParams();
   const isAuth = useSelector(selectIsAuth);
   const dispatch = useDispatch();
   const [avatarUrl, setImageUrl] = React.useState('');
   const inputAvatarRef = React.useRef(null);
-  // const [fullName, setFullname] = React.useState('');
-  // const [email, setEmail] = React.useState('');
-  // const [password, setPassword] = React.useState('');
-  // const [isLoading, setLoading] = React.useState(false);
+  const [fullName, setFullname] = React.useState('');
+  const [email, setEmail] = React.useState('');
+  const [password, setPassword] = React.useState('');
+  const [isLoading, setLoading] = React.useState(false);
 
   
   
   const {
-    register,
-    handleSubmit,
-    setError,
-    setValue,
+    // register,
+    // handleSubmit,
     formState:{errors,isValid},} = useForm({
       defaultValues:{
         fullName:'Ivan Ivanov',
         email:'test@test.ru',
         password:'1234',
-        avatarUrl:avatarUrl,
       },
       mode:'onChange',
   });
@@ -49,16 +47,23 @@ export const Registration = () => {
       formData.append('image',file);
       const {data} = await axios.post('/avatar',formData);
       setImageUrl(data.url);
-      ;
     } catch(err){
       console.warn(err);
       alert('Error upload image')
     }
   };
-  const onSubmit = async (values) =>{
+  const onSubmit = async (/*values*/) =>{
     try{
-      const data = await dispatch(fetchRegister(values));
-         if(!data.payload){
+      setLoading(true);
+      const fields = {
+        fullName,
+        email,
+        avatarUrl,
+        password,
+      }
+      const {data} = await dispatch(fetchRegister(fields));
+      console.log('data:',data.payload);
+      if(!data.payload){
         alert('Error in registration!');
       }
       if('token' in data.payload){
@@ -91,21 +96,14 @@ export const Registration = () => {
       <Typography classes={{ root: styles.title }} variant="h5">
         Создание аккаунта
       </Typography>
-      <form onSubmit={handleSubmit(onSubmit)}>
       <div className={styles.avatar}>
         <Button 
         onClick={()=>inputAvatarRef.current.click()} 
-        sx={{ width: 100, height: 100 }}
-        // name = 'image'
-        // {...register('avatarUrl')}
-        >
+        sx={{ width: 100, height: 100 }}>
         <input 
-        ref={inputAvatarRef}     
+        ref={inputAvatarRef} 
         type="file" 
-        onChange={handleChangeFile} 
-        {...setValue('avatarUrl',avatarUrl)} 
-        hidden       
-         />
+        onChange={handleChangeFile} hidden />
           {avatarUrl ? <img className={styles.imgborder} 
           src={`${backHost}${avatarUrl}`}
           alt="Uploaded"  width= '100' height= '100' /> 
@@ -113,13 +111,16 @@ export const Registration = () => {
           
         </Button> 
       </div>
-      
+      {/* <form onSubmit={handleSubmit(onSubmit)}> */}
       <TextField 
       className={styles.field} 
       label="Полное имя" 
       error={Boolean(errors.fullName?.message)}
       helperText={errors.fullName?.message}
-      {...register('fullName',{required:'Enter Full Name'})}
+      value={fullName}
+      required
+      // {...register('fullName',{required:'Enter Full Name'})}
+      onChange={e=>setFullname(e.target.value)}
       fullWidth />
       <TextField 
       className={styles.field} 
@@ -127,7 +128,9 @@ export const Registration = () => {
       error={Boolean(errors.email?.message)}
       helperText={errors.email?.message}
       type='email'
-      {...register('email',{required:'Enter email'})}
+      value={email}
+      // {...register('email',{required:'Enter email'})}
+      onChange={e=>setEmail(e.target.value)}
       fullWidth />
       <TextField 
       className={styles.field} 
@@ -135,12 +138,14 @@ export const Registration = () => {
       error={Boolean(errors.password?.message)}
       helperText={errors.password?.message}
       type='password'
-      {...register('password',{required:'Enter password'})} 
+      value={password}
+      // {...register('password',{required:'Enter password'})} 
+      onChange={e=>setPassword(e.target.value)}
       fullWidth />
-      <Button disabled={!isValid} type='submit' size="large" variant="contained" fullWidth >
+      <Button disabled={!isValid} /*type='submit'*/ size="large" variant="contained" fullWidth onClick={onSubmit}>
         Зарегистрироваться
       </Button>
-      </form>
+      {/* </form> */}
     </Paper>
   );
 };

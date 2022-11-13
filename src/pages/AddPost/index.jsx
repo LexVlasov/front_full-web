@@ -12,6 +12,9 @@ import { Navigate, useNavigate, useParams } from 'react-router-dom';
 import axios from '../../axios.js';
 
 export const AddPost = () => {
+  const backHost = 
+  process.env.REACT_APP_API_URL?process.env.REACT_APP_API_URL:
+  'http://localhost:4444';
   const {id} = useParams();
   const navigate = useNavigate();
   const isAuth = useSelector(selectIsAuth);
@@ -25,11 +28,13 @@ export const AddPost = () => {
 
   const handleChangeFile = async(event) => {
     try{
+      
       const formData = new FormData();
       const file = event.target.files[0];
       formData.append('image',file);
       const {data} = await axios.post('/upload',formData);
       setImageUrl(data.url);
+      console.log(data);
     } catch(err){
       console.warn(err);
       alert('Error upload image')
@@ -56,7 +61,6 @@ export const AddPost = () => {
       }
       const {data}= isEditing ? await axios.patch(`/posts/${id}`,fields) :
       await axios.post('/posts',fields);
-
       const _id = isEditing ? id : data._id;
       navigate(`/posts/${_id}`);
     }catch(err){
@@ -106,7 +110,7 @@ export const AddPost = () => {
         <Button variant="contained" color="error" onClick={onClickRemoveImage}>
           Удалить
         </Button>
-        <img className={styles.image} src={`${process.env.REACT_APP_API_URL}${imageUrl}`} alt="Uploaded" />
+        <img className={styles.image} src={`${backHost}${imageUrl}`} alt="Uploaded" />
         </>
       )}
       

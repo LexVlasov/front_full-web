@@ -9,25 +9,36 @@ import { Post } from '../components/Post';
 import { TagsBlock } from '../components/TagsBlock';
 import { CommentsBlock } from '../components/CommentsBlock';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchPostbyTag, fetchPosts, fetchTags } from '../redux/slices/posts';
+import { fetchTags } from '../redux/slices/posts';
+import { useParams } from 'react-router-dom';
+import axios from "../axios";
 
-export const Home = () => {
+export const PostsByTag = () => {
   const backHost = 
   process.env.REACT_APP_API_URL?process.env.REACT_APP_API_URL:
   'http://localhost:4444';
   const dispatch = useDispatch();
+  const {tag} = useParams();
   const userData = useSelector((state)=> state.auth.data);
+  const [data,setData] = React.useState();
+  const [isLoading,setLoading] = React.useState(true);
   const {posts,tags} = useSelector((state) => state.posts);
- 
-  const isPostsLoading =posts.status==='loading';
   const isTagsLoading =tags.status==='loading';
 
   React.useEffect(()=>{
-      dispatch(fetchPosts());
-      dispatch(fetchTags());
+    dispatch(fetchTags());
+    axios.get(`/tags/${tag}`).then(res=>{
+      setData(res.data);
+      setLoading(false);
+    }).catch((err)=>{
+      console.warn(err);
+      alert('Error in getting post');
+    })
   },[]);
 
+  console.log(tags);
   return (
+    
     <>
       <Tabs style={{ marginBottom: 15 }} value={0} aria-label="basic tabs example">
         <Tab label="Новые" />
@@ -35,7 +46,7 @@ export const Home = () => {
       </Tabs>
       <Grid container spacing={4}>
         <Grid xs={8} item>
-          {(isPostsLoading?[...Array(5)]:posts.items).map((obj,index) => isPostsLoading ? (
+          {(isLoading?[...Array(5)]:data).map((obj,index) => isLoading ? (
             <Post key={index} isLoading={true}/>
           ) : (
             <Post
@@ -47,7 +58,7 @@ export const Home = () => {
               viewsCount={obj.viewsCount}
               commentsCount={obj.commentsCount}
               tags={obj.tags}
-              isEditable={userData?._id === obj.user._id}
+              isEditable={userData?._id === obj.user}
             />
           ))}
         </Grid>

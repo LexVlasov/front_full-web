@@ -9,10 +9,18 @@ import ListItemText from "@mui/material/ListItemText";
 import Skeleton from "@mui/material/Skeleton";
 
 import { SideBlock } from "./SideBlock";
+import { useDispatch } from "react-redux";
+import { Link } from "react-router-dom";
+import { fetchPostbyTag } from "../redux/slices/posts";
 
 export const TagsBlock = ({ items, isLoading = true }) => {
+
+//   const dispatch = useDispatch();
+//   React.useEffect(()=>{
+//     dispatch(fetchPostbyTag());
+// },[]);
   return (
-    <SideBlock title="Тэги">
+    <SideBlock title="Популярные тэги">
       <List>
         {(isLoading ? [...Array(5)] : items).map((name, i) => (
           <a
@@ -27,7 +35,9 @@ export const TagsBlock = ({ items, isLoading = true }) => {
                 {isLoading ? (
                   <Skeleton width={100} />
                 ) : (
+                  <>
                   <ListItemText primary={name} />
+                  </>
                 )}
               </ListItemButton>
             </ListItem>

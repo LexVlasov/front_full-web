@@ -10,6 +10,9 @@ import axios from "../axios";
 // import { objectTraps } from "immer/dist/internal";
 
 export const FullPost = () => {
+  const backHost = 
+  process.env.REACT_APP_API_URL?process.env.REACT_APP_API_URL:
+  'http://localhost:4444';
   const [data,setData] = React.useState();
   const [isLoading,setLoading] = React.useState(true);
   const {id} = useParams();
@@ -22,8 +25,7 @@ export const FullPost = () => {
       console.warn(err);
       alert('Error in getting post');
     })
-  },[])
-
+  },[]);
   if(isLoading){
     return <Post isLoading={isLoading} isFullPost/>;
   }
@@ -33,7 +35,7 @@ export const FullPost = () => {
       <Post
         id={data._id}
         title={data.title}
-        imageUrl={data.imageUrl ? `${process.env.REACT_APP_API_URL}${data.imageUrl}` : ''}
+        imageUrl={data.imageUrl ? `${backHost}${data.imageUrl}` : ''}
         user={data.user}
         createdAt={data.createdAt}
         viewsCount={data.viewsCount}
