@@ -20,10 +20,7 @@ export const Registration = () => {
   const dispatch = useDispatch();
   const [avatarUrl, setImageUrl] = React.useState('');
   const inputAvatarRef = React.useRef(null);
-  // const [fullName, setFullname] = React.useState('');
-  // const [email, setEmail] = React.useState('');
-  // const [password, setPassword] = React.useState('');
-  // const [isLoading, setLoading] = React.useState(false);
+
 
   
   

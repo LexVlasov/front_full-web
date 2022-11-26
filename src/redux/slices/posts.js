@@ -11,6 +11,16 @@ export const fetchTags = createAsyncThunk('posts/fetchTags', async ()=>{
     return data;
 })
 
+export const fetchComment = createAsyncThunk('posts/fetchComment', async ()=>{
+    const {data} = await axios.get('/comment');
+    return data;
+})
+
+export const fetchCommentByPost = createAsyncThunk('posts/fetchCommentByPost', async (id)=>{
+    const {data} = await axios.get(`/posts/${id}/comment`);
+    return data;
+})
+
 export const fetchPostbyTag = createAsyncThunk('posts/fetchPostbyTag', async (tag)=>{
     const {data} = await axios.get(`/tags/${tag}`);
     return data;
@@ -28,6 +38,10 @@ const initialState = {
         status: 'loading',
     },
     tags:{
+        items:[],
+        status:'loading',
+    },
+    comments:{
         items:[],
         status:'loading',
     }
@@ -70,7 +84,7 @@ const postsSlice = createSlice({
         },
         // Удаление статей
         [fetchRemovePost.pending]:(state, action)=>{
-            state.posts.items = state.posts.items.filter(obj => obj._id != action.meta.arg);
+            state.posts.items = state.posts.items.filter(obj => obj._id !== action.meta.arg);
         },
         //Получение статей по тэгу
         [fetchPostbyTag.pending]:(state)=>{
@@ -86,7 +100,34 @@ const postsSlice = createSlice({
             state.posts.items = [];
             state.posts.status='error';
         },
+        //Получение комментариев
+        [fetchComment.pending]:(state)=>{
+            state.comments.items = [];
+            state.comments.status='loading';
+        },
+        [fetchComment.fulfilled]:(state,action)=>{
 
+            state.comments.items = action.payload;
+            state.comments.status='loaded';
+        },
+        [fetchComment.rejected]:(state)=>{
+            state.comments.items = [];
+            state.comments.status='error';
+        },
+        //Получение комментариев по посту
+        [fetchCommentByPost.pending]:(state)=>{
+            state.comments.items = [];
+            state.comments.status='loading';
+        },
+        [fetchCommentByPost.fulfilled]:(state,action)=>{
+
+            state.comments.items = action.payload;
+            state.comments.status='loaded';
+        },
+        [fetchCommentByPost.rejected]:(state)=>{
+            state.comments.items = [];
+            state.comments.status='error';
+        },
     }
 })
 

@@ -9,7 +9,7 @@ import { Post } from '../components/Post';
 import { TagsBlock } from '../components/TagsBlock';
 import { CommentsBlock } from '../components/CommentsBlock';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchPostbyTag, fetchTags } from '../redux/slices/posts';
+import { fetchTags } from '../redux/slices/posts';
 import { useParams } from 'react-router-dom';
 import axios from "../axios";
 
@@ -25,8 +25,7 @@ export const PostsByTag = () => {
   const {posts,tags} = useSelector((state) => state.posts);
   const isTagsLoading =tags.status==='loading';
 
-  const isPostsLoading =posts.status==='loading';
-
+  console.log(backHost);
   React.useEffect(()=>{
     dispatch(fetchTags());
     axios.get(`/tags/${tag}`).then(res=>{

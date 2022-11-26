@@ -9,7 +9,7 @@ import { Post } from '../components/Post';
 import { TagsBlock } from '../components/TagsBlock';
 import { CommentsBlock } from '../components/CommentsBlock';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchPostbyTag, fetchPosts, fetchTags } from '../redux/slices/posts';
+import { fetchComment, fetchPosts, fetchTags } from '../redux/slices/posts';
 
 export const Home = () => {
   const backHost = 
@@ -17,16 +17,16 @@ export const Home = () => {
   'http://localhost:4444';
   const dispatch = useDispatch();
   const userData = useSelector((state)=> state.auth.data);
-  const {posts,tags} = useSelector((state) => state.posts);
+  const {posts,tags,comments} = useSelector((state) => state.posts);
  
   const isPostsLoading =posts.status==='loading';
   const isTagsLoading =tags.status==='loading';
-
+  const isCommentLoading =comments.status==='loading';
   React.useEffect(()=>{
       dispatch(fetchPosts());
       dispatch(fetchTags());
+      dispatch(fetchComment());
   },[]);
-
   return (
     <>
       <Tabs style={{ marginBottom: 15 }} value={0} aria-label="basic tabs example">
@@ -53,27 +53,17 @@ export const Home = () => {
         </Grid>
         <Grid xs={4} item>
           <TagsBlock items={tags.items} isLoading={isTagsLoading} />
-          <CommentsBlock
-            items={[
-              {
-                user: {
-                  fullName: 'Вася Пупкин',
-                  avatarUrl: 'https://mui.com/static/images/avatar/1.jpg',
-                },
-                text: 'Это тестовый комментарий',
-              },
-              {
-                user: {
-                  fullName: 'Иван Иванов',
-                  avatarUrl: 'https://mui.com/static/images/avatar/2.jpg',
-                },
-                text: 'When displaying three lines or more, the avatar is not aligned at the top. You should set the prop to align the avatar at the top',
-              },
-            ]}
-            isLoading={false}
+  
+          <CommentsBlock isLoading={isCommentLoading}
+            items={comments.items}
           />
+          
         </Grid>
       </Grid>
     </>
   );
 };
+
+
+
+           
