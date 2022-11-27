@@ -6,8 +6,6 @@ import TabContext from '@mui/lab/TabContext';
 import Box from '@mui/material/Box';
 import Tab from '@mui/material/Tab';
 import Grid from '@mui/material/Grid';
-import Typography from '@mui/material/Typography';
-import PropTypes from 'prop-types';
 
 // import axios from '../axios';
 
@@ -15,9 +13,40 @@ import { Post } from '../components/Post';
 import { TagsBlock } from '../components/TagsBlock';
 import { CommentsBlock } from '../components/CommentsBlock';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchComment, fetchPopularPosts, fetchPosts, fetchTags } from '../redux/slices/posts';
+import { fetchComment, fetchPosts, fetchTags } from '../redux/slices/posts';
 
+function TabPanel(props) {
+  const { children, value, index, ...other } = props;
 
+  return (
+    <div
+      role="tabpanel"
+      hidden={value !== index}
+      id={`vertical-tabpanel-${index}`}
+      aria-labelledby={`vertical-tab-${index}`}
+      {...other}
+    >
+      {value === index && (
+        <Box sx={{ p: 3 }}>
+          <Typography>{children}</Typography>
+        </Box>
+      )}
+    </div>
+  );
+}
+
+TabPanel.propTypes = {
+  children: PropTypes.node,
+  index: PropTypes.number.isRequired,
+  value: PropTypes.number.isRequired,
+};
+
+function a11yProps(index) {
+  return {
+    id: `vertical-tab-${index}`,
+    'aria-controls': `vertical-tabpanel-${index}`,
+  };
+}
 
 export const Home = () => {
   const backHost = 
@@ -25,74 +54,39 @@ export const Home = () => {
   'http://localhost:4444';
   const dispatch = useDispatch();
   const userData = useSelector((state)=> state.auth.data);
-  const [value, setValue] = React.useState(0);
-  const [oneValue, setOneValue] = React.useState();
-  const {posts,tags,comments,popularPosts} = useSelector((state) => state.posts);
+  const [value, setValue] = React.useState('1');
+  const {posts,tags,comments} = useSelector((state) => state.posts);
 
   const isPostsLoading =posts.status==='loading';
   const isTagsLoading =tags.status==='loading';
   const isCommentLoading =comments.status==='loading';
-  const isPopularPosts =popularPosts.status==='loading';
+  console.log(value);
   React.useEffect(()=>{
       dispatch(fetchPosts());
       dispatch(fetchTags());
       dispatch(fetchComment());
-      dispatch(fetchPopularPosts());
   },[]);
   const handleChange = async(event, newValue)=>{
     try{
       const formData = new FormData();
       const file = event.target.innerText;
       setValue(newValue);
-      setOneValue(file);
+      
     } catch(err){
       console.warn(err);
       alert('Error change')
     }
   };
-
-  function TabPanel(props) {
-    const { children, value, index, ...other } = props;
-  
-    return (
-      <div
-        role="tabpanel"
-        hidden={value !== index}
-        id={`simple-tabpanel-${index}`}
-        aria-labelledby={`simple-tab-${index}`}
-        {...other}
-      >
-        {value === index && (
-          <Box sx={{ p: 3 }}>
-            <Typography>{children}</Typography>
-          </Box>
-        )}
-      </div>
-    );
-  }
-  
-  TabPanel.propTypes = {
-    children: PropTypes.node,
-    index: PropTypes.number.isRequired,
-    value: PropTypes.number.isRequired,
-  };
-  
-  function a11yProps(index) {
-    return {
-      id: `simple-tab-${index}`,
-      'aria-controls': `simple-tabpanel-${index}`,
-    };
-  } 
   return (
     <>
       <Tabs style={{ marginBottom: 15 }} value={value} onChange={handleChange} aria-label="basic tabs example" >
-        <Tab label="Новые" {...a11yProps(0)}/>
-        <Tab label="Популярные" {...a11yProps(1)} />
+        <Tab label="Новые" value={1}/>
+        <Tab label="Популярные" value={2} />
       </Tabs>
       <Grid container spacing={4}>
         <Grid xs={8} item>
-        <TabPanel value={value} index={value} >
-          {(isPostsLoading||isPopularPosts?[...Array(5)]:(oneValue!="Новые"?popularPosts:posts).items).map((obj,index) => isPostsLoading||isPopularPosts ? (
+        <TabPanel value={value} >
+          {(isPostsLoading?[...Array(5)]:posts.items).map((obj,index) => isPostsLoading ? (
             <Post key={index} isLoading={true}/>
           ) : (
             <Post
@@ -108,6 +102,7 @@ export const Home = () => {
             />
           ))}
           </TabPanel>
+          <TabPanel value={value} ></TabPanel>
         </Grid>
         <Grid xs={4} item>
           <TagsBlock items={tags.items} isLoading={isTagsLoading} />

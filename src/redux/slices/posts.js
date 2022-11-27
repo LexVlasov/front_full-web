@@ -32,6 +32,11 @@ export const fetchRemovePost = createAsyncThunk('posts/fetchRemovepost', async (
 
 )
 
+export const fetchPopularPosts = createAsyncThunk('posts/fetchPopularPosts', async ()=>{
+    const {data} = await axios.get('/popular');
+    return data;
+})
+
 const initialState = {
     posts: {
         items: [],
@@ -44,6 +49,10 @@ const initialState = {
     comments:{
         items:[],
         status:'loading',
+    },
+    popularPosts:{
+        items: [],
+        status: 'loading',
     }
 }
 
@@ -127,6 +136,20 @@ const postsSlice = createSlice({
         [fetchCommentByPost.rejected]:(state)=>{
             state.comments.items = [];
             state.comments.status='error';
+        },
+        //Получение популярных статей
+        [fetchPopularPosts.pending]:(state)=>{
+            state.popularPosts.items = [];
+            state.popularPosts.status='loading';
+        },
+        [fetchPopularPosts.fulfilled]:(state,action)=>{
+
+            state.popularPosts.items = action.payload;
+            state.popularPosts.status='loaded';
+        },
+        [fetchPopularPosts.rejected]:(state)=>{
+            state.popularPosts.items = [];
+            state.popularPosts.status='error';
         },
     }
 })

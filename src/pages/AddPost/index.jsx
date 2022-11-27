@@ -34,7 +34,6 @@ export const AddPost = () => {
       formData.append('image',file);
       const {data} = await axios.post('/upload',formData);
       setImageUrl(data.url);
-      console.log(data);
     } catch(err){
       console.warn(err);
       alert('Error upload image')

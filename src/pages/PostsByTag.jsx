@@ -9,7 +9,7 @@ import { Post } from '../components/Post';
 import { TagsBlock } from '../components/TagsBlock';
 import { CommentsBlock } from '../components/CommentsBlock';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchTags } from '../redux/slices/posts';
+import { fetchComment, fetchTags } from '../redux/slices/posts';
 import { useParams } from 'react-router-dom';
 import axios from "../axios";
 
@@ -22,8 +22,9 @@ export const PostsByTag = () => {
   const userData = useSelector((state)=> state.auth.data);
   const [data,setData] = React.useState();
   const [isLoading,setLoading] = React.useState(true);
-  const {posts,tags} = useSelector((state) => state.posts);
+  const {posts,tags,comments} = useSelector((state) => state.posts);
   const isTagsLoading =tags.status==='loading';
+  const isCommentLoading =comments.status==='loading';
 
   console.log(backHost);
   React.useEffect(()=>{
@@ -31,6 +32,7 @@ export const PostsByTag = () => {
     axios.get(`/tags/${tag}`).then(res=>{
       setData(res.data);
       setLoading(false);
+      dispatch(fetchComment());
     }).catch((err)=>{
       console.warn(err);
       alert('Error in getting post');
@@ -67,23 +69,8 @@ export const PostsByTag = () => {
         <Grid xs={4} item>
           <TagsBlock items={tags.items} isLoading={isTagsLoading} />
           <CommentsBlock
-            items={[
-              {
-                user: {
-                  fullName: 'Вася Пупкин',
-                  avatarUrl: 'https://mui.com/static/images/avatar/1.jpg',
-                },
-                text: 'Это тестовый комментарий',
-              },
-              {
-                user: {
-                  fullName: 'Иван Иванов',
-                  avatarUrl: 'https://mui.com/static/images/avatar/2.jpg',
-                },
-                text: 'When displaying three lines or more, the avatar is not aligned at the top. You should set the prop to align the avatar at the top',
-              },
-            ]}
-            isLoading={false}
+            items={comments.items}
+            isLoading={isCommentLoading}
           />
         </Grid>
       </Grid>
