@@ -1,6 +1,6 @@
 import React from 'react';
 import clsx from 'clsx';
-import {Link} from 'react-router-dom';
+import {Link, useNavigate} from 'react-router-dom';
 import IconButton from '@mui/material/IconButton';
 import DeleteIcon from '@mui/icons-material/Clear';
 import EditIcon from '@mui/icons-material/Edit';
@@ -12,6 +12,7 @@ import { UserInfo } from '../UserInfo';
 import { PostSkeleton } from './Skeleton';
 import { useDispatch } from 'react-redux';
 import { fetchRemovePost } from '../../redux/slices/posts';
+
 
 
 export const Post = ({
@@ -29,13 +30,16 @@ export const Post = ({
   isEditable,
 }) => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   if (isLoading) {
     return <PostSkeleton />;
   }
-
+  
   const onClickRemove = () => {
     if(window.confirm('Do you sure want to remove post?')){
       dispatch(fetchRemovePost(id));
+      navigate(0);
+      
   }
     
   };

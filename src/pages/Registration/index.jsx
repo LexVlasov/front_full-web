@@ -93,8 +93,6 @@ export const Registration = () => {
         <Button 
         onClick={()=>inputAvatarRef.current.click()} 
         sx={{ width: 100, height: 100 }}
-        // name = 'image'
-        // {...register('avatarUrl')}
         >
         <input 
         ref={inputAvatarRef}     

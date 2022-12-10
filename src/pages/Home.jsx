@@ -1,15 +1,10 @@
 import React from 'react';
 import Tabs from '@mui/material/Tabs';
-import TabList from '@mui/lab/TabList';
-import TabPanel from '@mui/lab/TabPanel';
-import TabContext from '@mui/lab/TabContext';
 import Box from '@mui/material/Box';
 import Tab from '@mui/material/Tab';
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 import PropTypes from 'prop-types';
-
-// import axios from '../axios';
 
 import { Post } from '../components/Post';
 import { TagsBlock } from '../components/TagsBlock';
@@ -41,7 +36,6 @@ export const Home = () => {
   },[]);
   const handleChange = async(event, newValue)=>{
     try{
-      const formData = new FormData();
       const file = event.target.innerText;
       setValue(newValue);
       setOneValue(file);

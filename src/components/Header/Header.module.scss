@@ -11,8 +11,8 @@
 }
 
 .logo{
-    background-color: black;
-    color: #fff;
+    background-color: #ffdd2d;
+    color: #000;
     font-weight: 700;
     line-height: 35px;
     text-transform: uppercase;
@@ -22,11 +22,12 @@
     text-decoration: none;
     
 &:hover{
-    background-color: #4361ee;  
+    background-color: #fab619;  
 }
 }
 
 .buttons{
+    display: flex;
     button{
         margin-left: 10px;
     }
@@ -35,3 +36,17 @@
     }
 }
 
+.newpost{
+    color: #000;
+    opacity: 0.4;
+    font-weight: 700;
+    line-height: 35px;
+    letter-spacing: 0.15px;
+    border-radius: 5px;
+    padding: 0 10px;
+    text-decoration: none;
+    &:hover{
+        // background-color: #f8ea9c;
+        opacity: 0.9;  
+    }
+}

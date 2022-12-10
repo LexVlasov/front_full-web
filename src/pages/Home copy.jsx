@@ -1,9 +1,5 @@
 import React from 'react';
 import Tabs from '@mui/material/Tabs';
-import TabList from '@mui/lab/TabList';
-import TabPanel from '@mui/lab/TabPanel';
-import TabContext from '@mui/lab/TabContext';
-import Box from '@mui/material/Box';
 import Tab from '@mui/material/Tab';
 import Grid from '@mui/material/Grid';
 
@@ -15,38 +11,7 @@ import { CommentsBlock } from '../components/CommentsBlock';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchComment, fetchPosts, fetchTags } from '../redux/slices/posts';
 
-function TabPanel(props) {
-  const { children, value, index, ...other } = props;
 
-  return (
-    <div
-      role="tabpanel"
-      hidden={value !== index}
-      id={`vertical-tabpanel-${index}`}
-      aria-labelledby={`vertical-tab-${index}`}
-      {...other}
-    >
-      {value === index && (
-        <Box sx={{ p: 3 }}>
-          <Typography>{children}</Typography>
-        </Box>
-      )}
-    </div>
-  );
-}
-
-TabPanel.propTypes = {
-  children: PropTypes.node,
-  index: PropTypes.number.isRequired,
-  value: PropTypes.number.isRequired,
-};
-
-function a11yProps(index) {
-  return {
-    id: `vertical-tab-${index}`,
-    'aria-controls': `vertical-tabpanel-${index}`,
-  };
-}
 
 export const Home = () => {
   const backHost = 
@@ -85,7 +50,7 @@ export const Home = () => {
       </Tabs>
       <Grid container spacing={4}>
         <Grid xs={8} item>
-        <TabPanel value={value} >
+      
           {(isPostsLoading?[...Array(5)]:posts.items).map((obj,index) => isPostsLoading ? (
             <Post key={index} isLoading={true}/>
           ) : (
@@ -101,8 +66,6 @@ export const Home = () => {
               isEditable={userData?._id === obj.user._id}
             />
           ))}
-          </TabPanel>
-          <TabPanel value={value} ></TabPanel>
         </Grid>
         <Grid xs={4} item>
           <TagsBlock items={tags.items} isLoading={isTagsLoading} />

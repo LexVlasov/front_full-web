@@ -23,23 +23,23 @@ export const Header =()=>{
             <Container maxWidth="lg">
                 <div className={styles.inner}>
                     <Link className={styles.logo} to="/">
-                        <div>VLASOV BLOG</div>
+                        <div>PROFIT & LOSS</div>
                     </Link>
                     <div className={styles.buttons}>
                         {isAuth ? (
                             <>
-                                <Link to="/add-post">
-                                    <Button variant="contained">Написать статью</Button>
+                                <Link to="/add-post" className={styles.newpost}>
+                                    <div>Написать статью</div>
                                 </Link>
-                                <Button onClick={onClickLogout} variant="contained" color="error">Выйти</Button>
+                                <Button onClick={onClickLogout} className={styles.newpost}>Выйти</Button>
                             </>
                         ):(
                             <>
                                 <Link to="/login">
-                                    <Button variant="outlined">Войти</Button>
+                                    <Button  className={styles.newpost}>Войти</Button>
                                 </Link>
                                 <Link to="/register">
-                                    <Button variant="contained">Создать аккаунт</Button>
+                                    <Button  className={styles.newpost}>Создать аккаунт</Button>
                                 </Link>
                             </>
                         )}

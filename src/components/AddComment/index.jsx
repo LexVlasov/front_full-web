@@ -50,7 +50,7 @@ export const Index = () => {
                         value={text}
                         onChange={e=>setText(e.target.value)}
                         />
-                        <Button onClick={onSubmit} variant="contained">Отправить</Button>
+                        <Button onClick={onSubmit} className={styles.newcomment}>Отправить</Button>
                 </div>
             </div>):(null)}
         </>

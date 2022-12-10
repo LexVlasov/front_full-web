@@ -37,6 +37,17 @@ export const fetchPopularPosts = createAsyncThunk('posts/fetchPopularPosts', asy
     return data;
 })
 
+
+export const fetchPostbyUser = createAsyncThunk('posts/fetchPostbyUser', async (user)=>{
+    const {data} = await axios.get(`/account/posts/${user}`);
+    return data;
+})
+
+export const fetchUser = createAsyncThunk('user/fetchUser', async (user)=>{
+    const {data} = await axios.get(`/account/${user}`);
+    return data;
+})
+
 const initialState = {
     posts: {
         items: [],
@@ -53,6 +64,10 @@ const initialState = {
     popularPosts:{
         items: [],
         status: 'loading',
+    }
+    ,user:{
+        items:[],
+        status:'loading',
     }
 }
 
@@ -150,6 +165,34 @@ const postsSlice = createSlice({
         [fetchPopularPosts.rejected]:(state)=>{
             state.popularPosts.items = [];
             state.popularPosts.status='error';
+        },
+        //Получение статей по юзеру
+        [fetchPostbyUser.pending]:(state)=>{
+            state.posts.items = [];
+            state.posts.status='loading';
+        },
+        [fetchPostbyUser.fulfilled]:(state,action)=>{
+
+            state.posts.items = action.payload;
+            state.posts.status='loaded';
+        },
+        [fetchPostbyUser.rejected]:(state)=>{
+            state.posts.items = [];
+            state.posts.status='error';
+        },
+        //Получение статей по юзеру
+        [fetchUser.pending]:(state)=>{
+            state.user.items = [];
+            state.user.status='loading';
+        },
+        [fetchUser.fulfilled]:(state,action)=>{
+
+            state.user.items = action.payload;
+            state.user.status='loaded';
+        },
+        [fetchUser.rejected]:(state)=>{
+            state.user.items = [];
+            state.user.status='error';
         },
     }
 })
