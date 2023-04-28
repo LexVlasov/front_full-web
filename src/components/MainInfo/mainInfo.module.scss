@@ -1,0 +1,55 @@
+.root{
+    height: 150px;
+    
+}
+
+.name{
+    display: inline-block;
+    margin-left: 10px;
+    vertical-align: middle;
+    height: 100%;
+}
+
+.head{
+    font-size:60px; 
+    font-family:"Arial Black";
+    vertical-align: top;
+    line-height:1.0;
+    font-weight:700;
+	background: linear-gradient(to right, #316ab1 20%, #7EB5C2 100%);
+	-webkit-background-clip: text;
+	-webkit-text-fill-color: transparent;
+}
+.subhead{
+    font-size:16px; 
+    font-family:"Arial";
+    color:#30374c;
+    vertical-align: bottom;
+    text-align: center;
+    opacity: 80%;
+    }
+
+
+
+.phonenumber{
+    font-size:36px;
+    font-family:"Arial Black";
+    color:#30374c;
+    text-align:center;
+    min-height:70%;
+}
+
+.schedule{
+    text-align:center;
+    opacity:70%;
+    min-height:30%;
+}
+.deliver{
+    font-size:22px; 
+    color:#30374c;
+    text-align:right;
+    min-height:100%;
+    margin-top: 7px;
+    opacity:70%;
+    
+}

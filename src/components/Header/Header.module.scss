@@ -1,52 +1,31 @@
 .root{
-    background-color: #fff;
-    padding: 10px 0;
+    background-color: #30374c;
+    padding: 0 auto;
     border-bottom: 1px solid #e0e0e0;
     margin-bottom: 30px;
-}
-
-.inner{
-    display: flex;
-    justify-content: space-between;
-}
-
-.logo{
-    background-color: #ffdd2d;
-    color: #000;
-    font-weight: 700;
-    line-height: 35px;
-    text-transform: uppercase;
-    letter-spacing: 0.15px;
-    border-radius: 5px;
-    padding: 0 10px;
-    text-decoration: none;
-    
-&:hover{
-    background-color: #fab619;  
-}
+    height: 60px;   
 }
 
 .buttons{
     display: flex;
-    button{
-        margin-left: 10px;
-    }
+    justify-content: space-evenly;
+
     a{
         text-decoration: none;
     }
 }
 
 .newpost{
-    color: #000;
-    opacity: 0.4;
-    font-weight: 700;
-    line-height: 35px;
-    letter-spacing: 0.15px;
-    border-radius: 5px;
-    padding: 0 10px;
-    text-decoration: none;
+    color: #ffffff;
+    height: 60px;
+    vertical-align: middle;
+    opacity: 0.6;
     &:hover{
-        // background-color: #f8ea9c;
-        opacity: 0.9;  
+        opacity: 1;  
     }
+}
+.icon{
+    width:20px;
+    height:20px;
+    padding-right:3px;
 }

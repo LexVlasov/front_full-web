@@ -1,0 +1,35 @@
+.root{
+    background-color: #316bb136;
+    border-bottom: 1px solid #e0e0e0;
+    margin-bottom: 40px;
+    height: 35px;
+    width: 100%;
+}
+
+.main{
+    min-height: 35px;
+    text-align: left;
+    line-height: 35px;
+    width: 70%;
+}
+
+.maina{
+    height: 35px;
+    text-decoration: none;
+    margin-right: 15px;
+    margin-left: 25px;
+    vertical-align: middle;
+    color: #30374c;
+    opacity: 0.6;
+    &:hover{
+        color: #30374c;
+        text-decoration: underline;
+        opacity: 1;
+    }
+}
+
+.arrow{
+    height: 35px;
+    vertical-align: middle;
+    color: #30374cb0;
+}

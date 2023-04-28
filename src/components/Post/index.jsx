@@ -1,60 +1,70 @@
 import React from 'react';
+import { Rating,IconButton, Button} from '@mui/material';
 import clsx from 'clsx';
-import {Link, useNavigate} from 'react-router-dom';
-import IconButton from '@mui/material/IconButton';
-import DeleteIcon from '@mui/icons-material/Clear';
+import {Link} from 'react-router-dom';
+// import DeleteIcon from '@mui/icons-material/Clear';
 import EditIcon from '@mui/icons-material/Edit';
 import EyeIcon from '@mui/icons-material/RemoveRedEyeOutlined';
-import CommentIcon from '@mui/icons-material/ChatBubbleOutlineOutlined';
-
+import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import styles from './Post.module.scss';
-import { UserInfo } from '../UserInfo';
+// import { UserInfo } from '../UserInfo';
 import { PostSkeleton } from './Skeleton';
-import { useDispatch } from 'react-redux';
-import { fetchRemovePost } from '../../redux/slices/posts';
+
 
 
 
 export const Post = ({
   id,
   title,
-  createdAt,
   imageUrl,
   user,
   viewsCount,
-  commentsCount,
-  tags,
+  buysCount,
   children,
   isFullPost,
   isLoading,
   isEditable,
+  count,
+  setCount,
+  price,
+  maxPrice
 }) => {
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
+
   if (isLoading) {
     return <PostSkeleton />;
   }
+
+
   
-  const onClickRemove = () => {
-    if(window.confirm('Do you sure want to remove post?')){
-      dispatch(fetchRemovePost(id));
-      navigate(0);
-      
-  }
-    
+  const addToCart = async ()=> {
+    const items ={
+      id,
+      cnt:5,
+      maxPrice,
+      sum: 5*parseInt(maxPrice),
+    }
+    let newVal = [...count];
+    let prodIn = newVal.findIndex((p)=> p.id === items.id);
+    if(prodIn===-1){
+      newVal.push(items);
+    } else{
+      newVal[prodIn].cnt +=5;
+      newVal[prodIn].sum = newVal[prodIn].cnt * parseInt(maxPrice);
+      newVal[prodIn].maxPrice = maxPrice;
+    }
+    setCount(newVal);
   };
+  
   return (
     <div className={clsx(styles.root, { [styles.rootFull]: isFullPost })}>
       {isEditable && (
         <div className={styles.editButtons}>
-          <Link to={`/posts/${id}/edit`}>
+          <Link to={`/good/${id}/edit`}>
             <IconButton color="primary">
               <EditIcon />
             </IconButton>
           </Link>
-          <IconButton onClick={onClickRemove} color="secondary">
-            <DeleteIcon />
-          </IconButton>
         </div>
       )}
       {imageUrl && (
@@ -65,31 +75,47 @@ export const Post = ({
         />
       )}
       <div className={styles.wrapper}>
-        <UserInfo {...user} additionalText={createdAt} />
         <div className={styles.indention}>
           <h2 className={clsx(styles.title, { [styles.titleFull]: isFullPost })}>
-            {isFullPost ? title : <Link to={`/posts/${id}`}>{title}</Link>}
+            {isFullPost ? title : <Link to={`/good/${id}`}>{title}</Link>}
           </h2>
-          <ul className={styles.tags}>
-            {tags.map((name) => (
-              <li key={name}>
-                <Link to={`/tags/${name}`}>#{name}</Link>
-              </li>
-            ))}
-          </ul>
+          <div className={styles.ratingprice}>
+                <Rating 
+                    name="size-small"
+                    value={2.5}
+                    size="small"
+                    precision={0.5}
+                    readOnly 
+                  /> 
+                  <div className={styles.review}>12 отзывов</div>
+          </div>
+          <div className={styles.price}>от {price} руб.</div>
           {children && <div className={styles.content}>{children}</div>}
-          <ul className={styles.postDetails}>
-            <li>
-              <EyeIcon />
-              <span>{viewsCount}</span>
-            </li>
-            <li>
-              <CommentIcon />
-              <span>{commentsCount}</span>
-            </li>
-          </ul>
+          <div className={styles.postDetails}>
+                  <ul className={styles.postDetails}>
+                    <li>
+                      <EyeIcon />
+                      <span>{viewsCount}</span>
+                    </li>
+                    <li>
+                      <ShoppingCartOutlinedIcon />
+                      <span>{buysCount}</span>
+                    </li>
+                  </ul>
+
+                  <Button 
+                    className={styles.buy} 
+                    onClick={addToCart} 
+                    variant="contained" 
+                    endIcon={<ShoppingCartIcon  fontSize="small"/>}>
+                    <div className={styles.buytext}>Купить</div> 
+                  </Button>
+
+          </div>
         </div>
       </div>
     </div>
+
   );
 };
+

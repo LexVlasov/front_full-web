@@ -1,7 +1,11 @@
-export { PostsByTag } from "./PostsByTag";
-export { Home } from "./Home";
-export { FullPost } from "./FullPost";
+export { GoodsByType } from "./GoodByTypes";
+export { Home } from "./Home/Home";
+export { FullPost } from "./FullInfo/FullPost";
 export { AddPost } from "./AddPost";
 export { Registration } from "./Registration";
 export { Login } from "./Login";
-export { Account } from "./Account";
+export  {ShoppingCart} from "./Cart";
+export {PopularGoods} from "./Popular";
+export{Sale} from "./Sale";
+export {AboutCompany} from "./AboutCompany";
+export {Contact} from "./Contact";

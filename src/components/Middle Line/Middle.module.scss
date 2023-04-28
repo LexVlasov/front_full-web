@@ -1,0 +1,50 @@
+.root{
+    background-color: #30374c;
+    padding: 0 auto;
+    height: 60px;   
+}
+
+.cart{
+    text-align: right;
+    height: 100%;
+    a{
+        text-decoration: none;
+    }
+}
+.cstyle{
+    color: #ffffff ;
+    height: 100%;
+}
+
+.info{
+    margin-left: 10px;
+    color: #fff;
+    font-size: 16px;
+    display: inline-flex;
+    border-bottom: dashed 1px white;
+    padding-bottom: 1px;
+}
+
+.cnt{
+    display: inline-flex; 
+    margin-left: 5px;
+    margin-right: 5px; 
+    font-weight: 700; 
+    font-size: 16px;
+
+}
+
+.sum{
+    display: inline-flex; 
+    margin-left: 5px;
+    margin-right: 5px; 
+    font-weight: 700; 
+    font-size: 16px;
+
+}
+
+.sum:after{
+    content:  "\20BD";
+    font-weight: 700;
+    padding-left: 2px;
+}

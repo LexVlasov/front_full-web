@@ -1,0 +1,22 @@
+.activepage{
+    background-color: #316ab1;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    margin: 0 1em 0 1em;
+    width: 64px;
+    height: 35px;
+}
+
+.page{
+    // border: 1px solid #316bb162;
+    border: none;
+    background-color: #fff;
+    margin: 0 1em 0 1em;
+    width: 64px;
+    border-radius: 8px;
+    height: 30px;
+    &:hover{
+        background-color: #316bb162;
+    }
+}

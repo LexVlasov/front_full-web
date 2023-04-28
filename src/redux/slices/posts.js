@@ -1,59 +1,29 @@
 import {createSlice,createAsyncThunk} from '@reduxjs/toolkit';
 import axios from '../../axios';
 
-export const fetchPosts = createAsyncThunk('posts/fetchPosts', async ()=>{
-    const {data} = await axios.get('/posts');
+export const fetchGoods = createAsyncThunk('allgood/fetchGoods', async ()=>{
+    const {data} = await axios.get('/allgood');
     return data;
 })
 
-export const fetchTags = createAsyncThunk('posts/fetchTags', async ()=>{
-    const {data} = await axios.get('/tags');
+export const fetchTypes = createAsyncThunk('allgood/fetchTypes', async ()=>{
+    const {data} = await axios.get('/groups');
     return data;
 })
 
-export const fetchComment = createAsyncThunk('posts/fetchComment', async ()=>{
-    const {data} = await axios.get('/comment');
-    return data;
-})
-
-export const fetchCommentByPost = createAsyncThunk('posts/fetchCommentByPost', async (id)=>{
-    const {data} = await axios.get(`/posts/${id}/comment`);
-    return data;
-})
-
-export const fetchPostbyTag = createAsyncThunk('posts/fetchPostbyTag', async (tag)=>{
-    const {data} = await axios.get(`/tags/${tag}`);
+export const fetchGoodsbyType = createAsyncThunk('allgood/fetchGoodsbyType', async (type)=>{
+    const {data} = await axios.get(`/types/${type}`);
     return data;
 })
 
 
-export const fetchRemovePost = createAsyncThunk('posts/fetchRemovepost', async (id)=>
-    axios.delete(`/posts/${id}`)
-
-)
-
-export const fetchPopularPosts = createAsyncThunk('posts/fetchPopularPosts', async ()=>{
-    const {data} = await axios.get('/popular');
-    return data;
-})
-
-
-export const fetchPostbyUser = createAsyncThunk('posts/fetchPostbyUser', async (user)=>{
-    const {data} = await axios.get(`/account/posts/${user}`);
-    return data;
-})
-
-export const fetchUser = createAsyncThunk('user/fetchUser', async (user)=>{
-    const {data} = await axios.get(`/account/${user}`);
-    return data;
-})
 
 const initialState = {
-    posts: {
+    allgood: {
         items: [],
         status: 'loading',
     },
-    tags:{
+    types:{
         items:[],
         status:'loading',
     },
@@ -71,130 +41,61 @@ const initialState = {
     }
 }
 
-const postsSlice = createSlice({
-    name:'posts',
+const goodsSlice = createSlice({
+    name:'allgood',
     initialState,
     reducers:{
 
     },
     extraReducers:{
         // Получение статей
-        [fetchPosts.pending]:(state)=>{
-            state.posts.items = [];
-            state.posts.status='loading';
+        [fetchGoods.pending]:(state)=>{
+            state.allgood.items = [];
+            state.allgood.status='loading';
         },
-        [fetchPosts.fulfilled]:(state,action)=>{
+        [fetchGoods.fulfilled]:(state,action)=>{
 
-            state.posts.items = action.payload;
-            state.posts.status='loaded';
+            state.allgood.items = action.payload;
+            state.allgood.status='loaded';
         },
-        [fetchPosts.rejected]:(state)=>{
-            state.posts.items = [];
-            state.posts.status='error';
+        [fetchGoods.rejected]:(state)=>{
+            state.allgood.items = [];
+            state.allgood.status='error';
         },
-        // Получение тэгов
-        [fetchTags.pending]:(state)=>{
-            state.tags.items = [];
-            state.tags.status='loading';
+        // Получение типов
+        [fetchTypes.pending]:(state)=>{
+            state.types.items = [];
+            state.types.status='loading';
         },
-        [fetchTags.fulfilled]:(state,action)=>{
+        [fetchTypes.fulfilled]:(state,action)=>{
 
-            state.tags.items = action.payload;
-            state.tags.status='loaded';
+            state.types.items = action.payload;
+            state.types.status='loaded';
         },
-        [fetchTags.rejected]:(state)=>{
-            state.tags.items = [];
-            state.tags.status='error';
+        [fetchTypes.rejected]:(state)=>{
+            state.types.items = [];
+            state.types.status='error';
         },
-        // Удаление статей
-        [fetchRemovePost.pending]:(state, action)=>{
-            state.posts.items = state.posts.items.filter(obj => obj._id !== action.meta.arg);
-        },
+        // // Удаление статей
+        // [fetchRemovePost.pending]:(state, action)=>{
+        //     state.posts.items = state.posts.items.filter(obj => obj._id !== action.meta.arg);
+        // },
         //Получение статей по тэгу
-        [fetchPostbyTag.pending]:(state)=>{
-            state.posts.items = [];
-            state.posts.status='loading';
+        [fetchGoodsbyType.pending]:(state)=>{
+            state.allgood.items = [];
+            state.allgood.status='loading';
         },
-        [fetchPostbyTag.fulfilled]:(state,action)=>{
+        [fetchGoodsbyType.fulfilled]:(state,action)=>{
 
-            state.posts.items = action.payload;
-            state.posts.status='loaded';
+            state.allgood.items = action.payload;
+            state.allgood.status='loaded';
         },
-        [fetchPostbyTag.rejected]:(state)=>{
-            state.posts.items = [];
-            state.posts.status='error';
+        [fetchGoodsbyType.rejected]:(state)=>{
+            state.allgood.items = [];
+            state.allgood.status='error';
         },
-        //Получение комментариев
-        [fetchComment.pending]:(state)=>{
-            state.comments.items = [];
-            state.comments.status='loading';
-        },
-        [fetchComment.fulfilled]:(state,action)=>{
 
-            state.comments.items = action.payload;
-            state.comments.status='loaded';
-        },
-        [fetchComment.rejected]:(state)=>{
-            state.comments.items = [];
-            state.comments.status='error';
-        },
-        //Получение комментариев по посту
-        [fetchCommentByPost.pending]:(state)=>{
-            state.comments.items = [];
-            state.comments.status='loading';
-        },
-        [fetchCommentByPost.fulfilled]:(state,action)=>{
-
-            state.comments.items = action.payload;
-            state.comments.status='loaded';
-        },
-        [fetchCommentByPost.rejected]:(state)=>{
-            state.comments.items = [];
-            state.comments.status='error';
-        },
-        //Получение популярных статей
-        [fetchPopularPosts.pending]:(state)=>{
-            state.popularPosts.items = [];
-            state.popularPosts.status='loading';
-        },
-        [fetchPopularPosts.fulfilled]:(state,action)=>{
-
-            state.popularPosts.items = action.payload;
-            state.popularPosts.status='loaded';
-        },
-        [fetchPopularPosts.rejected]:(state)=>{
-            state.popularPosts.items = [];
-            state.popularPosts.status='error';
-        },
-        //Получение статей по юзеру
-        [fetchPostbyUser.pending]:(state)=>{
-            state.posts.items = [];
-            state.posts.status='loading';
-        },
-        [fetchPostbyUser.fulfilled]:(state,action)=>{
-
-            state.posts.items = action.payload;
-            state.posts.status='loaded';
-        },
-        [fetchPostbyUser.rejected]:(state)=>{
-            state.posts.items = [];
-            state.posts.status='error';
-        },
-        //Получение статей по юзеру
-        [fetchUser.pending]:(state)=>{
-            state.user.items = [];
-            state.user.status='loading';
-        },
-        [fetchUser.fulfilled]:(state,action)=>{
-
-            state.user.items = action.payload;
-            state.user.status='loaded';
-        },
-        [fetchUser.rejected]:(state)=>{
-            state.user.items = [];
-            state.user.status='error';
-        },
     }
 })
 
-export const postsReducer = postsSlice.reducer;
+export const goodsReducer = goodsSlice.reducer;

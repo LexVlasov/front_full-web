@@ -1,0 +1,64 @@
+main{
+    width: 100%;
+    height: 150px;
+    display: inline-block;
+}
+
+
+.image{
+    width: 120px;
+    height: 120px;
+    margin: 20px 10px 10px 20px;
+    border: 1px dashed rgba(56, 56, 56, 0.263);
+    display: inline-block;
+}
+
+.info{
+    margin: 30px 10px 10px 40px;
+    display: inline-block;
+    vertical-align: top;
+    width: 200px;
+}
+
+.name{
+    font-weight: 400;
+    font-size: 18px;
+}
+
+.type{
+    font-size: 12px;
+    opacity: 70%;
+}
+
+.undercount{
+    display: inline-block;
+    position: absolute;
+    margin-top: 30px;
+    vertical-align: bottom;
+    font-size: 12px;
+    text-align: center;
+    width: 110px;
+    opacity: 70%;
+}
+.price{
+    display: inline-block;
+    float: right;
+    margin: 22px 10px 0px 0px;
+    font-size: 30px;
+    font-weight: 500;
+    color: rgb(77 75 75);
+
+}
+.price:after{
+    content: "\20BD";
+    font-weight: 500;
+}
+
+.x{
+    display: inline-block;
+    float: right;
+    margin: 30px 15px 0px 0px;
+    font-size: 20px;
+    color: rgb(77 75 75);
+
+}
