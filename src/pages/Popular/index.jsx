@@ -42,6 +42,9 @@ export const PopularGoods = ({
     setCurrentPage(Number(event.target.value));
   };
     setUrl('popular(Популярное');
+
+
+
     return(
         <Box sx={{ flexGrow: 1 }}>
        <Grid container spacing={2} alignItems="flex-start" >
@@ -62,17 +65,17 @@ export const PopularGoods = ({
             {(isPostsLoading?[...Array(5)]:currentItems).map((obj,index) => isPostsLoading ? (
                 <Post key={index} isLoading={true}/>
               ) : (
-              
+
                 <Grid item xs={6} lg={4}> 
                 <Post 
                   key={index}
-                  id={obj.good._id}
-                  title={obj.good.name}
-                  imageUrl={obj.good.avatarUrl ? `${backHost}${obj.good.avatarUrl[0]}`:''} 
-                  price={obj.priceForOne[(obj.priceForOne.length)-1][1]}
-                  viewsCount={obj.viewsCount}
+                  id={obj.infoGood[0]._id}
+                  title={obj.name}
+                  imageUrl={obj.avatarUrl ? `${backHost}${obj.avatarUrl[0]}`:''} 
+                  price={obj.infoGood[0].priceForOne[(obj.infoGood[0].priceForOne.length)-1][1]}
+                  viewsCount={obj.infoGood[0].viewsCount}
                   count={count} setCount={setCount}
-                  maxPrice={obj.priceForOne[0][3]}
+                  maxPrice={obj.infoGood[0].priceForOne[0][3]}
                 />
                 </Grid> 
               ))}

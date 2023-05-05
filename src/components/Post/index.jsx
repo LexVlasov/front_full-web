@@ -102,14 +102,15 @@ export const Post = ({
                       <span>{buysCount}</span>
                     </li>
                   </ul>
-
+                  <Link to={`/good/${id}`}>
                   <Button 
                     className={styles.buy} 
-                    onClick={addToCart} 
+                    // onClick={addToCart} 
                     variant="contained" 
                     endIcon={<ShoppingCartIcon  fontSize="small"/>}>
                     <div className={styles.buytext}>Купить</div> 
                   </Button>
+                  </Link>
 
           </div>
         </div>

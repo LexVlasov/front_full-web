@@ -1,7 +1,5 @@
 import React from "react";
 
-
-
 import { fetchTypes } from '../redux/slices/posts';
 import { useDispatch, useSelector } from "react-redux";
 import { Box } from "@mui/system";
@@ -40,6 +38,9 @@ export const Contact = ({setUrl}) =>{
                 </p><p>
                 Для One Pill ценен каждый покупатель. Присоединяйтесь к числу наших постоянных клиентов. Вы приятно удивитесь высокому уровню обслуживания и выгодным ценам: <a href="/">перейти в каталог препаратов для потенции</a>
           </p>
+          </div>
+          <div id="map" style={{width: "600px", height: "400px"}}>
+
           </div>
           </Grid>            
        </Grid>
