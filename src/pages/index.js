@@ -9,3 +9,4 @@ export {PopularGoods} from "./Popular";
 export{Sale} from "./Sale";
 export {AboutCompany} from "./AboutCompany";
 export {Contact} from "./Contact";
+export {MakeOrder} from "./MakeOrder";

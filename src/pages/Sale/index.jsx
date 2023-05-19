@@ -66,13 +66,13 @@ export const Sale = ({
                 <Grid item xs={6} lg={4}> 
                 <Post 
                   key={index}
-                  id={obj.infoGood[0]._id}
+                  id={obj._id}
                   title={obj.name}
-                  imageUrl={obj.avatarUrl ? `${backHost}${obj.avatarUrl[0]}`:''} 
-                  price={obj.infoGood[0].priceForOne[(obj.infoGood[0].priceForOne.length)-1][1]}
-                  viewsCount={obj.infoGood[0].viewsCount}
+                  imageUrl={obj.info[0].avatarUrl ? `${backHost}${obj.info[0].avatarUrl[0]}`:''} 
+                  price={obj.price[(obj.price.length)-1].p}
+                  viewsCount={obj.viewsCount}
                   count={count} setCount={setCount}
-                  maxPrice={obj.infoGood[0].priceForOne[0][3]}
+                  maxPrice={obj.price[0].p}
                 />
                 </Grid> 
               ))}

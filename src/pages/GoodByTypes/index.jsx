@@ -41,7 +41,7 @@ export const GoodsByType = ({count, setCount,setUrl}) => {
   };
 
   setUrl(type+'('+type);
-
+  console.log(allgood);
   return (
      <Box sx={{ flexGrow: 1 }}>
        <Grid container spacing={2} alignItems="flex-start" >
@@ -66,10 +66,10 @@ export const GoodsByType = ({count, setCount,setUrl}) => {
                 <Grid item xs={6} lg={4}> 
                 <Post 
                   key={index}
-                  id={obj.infoGood[(obj.infoGood.length)-1]._id}
+                  id={obj._id}
                   title={obj.name}
-                  imageUrl={obj.avatarUrl ? `${backHost}${obj.avatarUrl[0]}`:''} 
-                  price={obj.infoGood[(obj.infoGood.length)-1].priceForOne[(obj.infoGood[(obj.infoGood.length)-1].priceForOne.length)-1][1]}
+                  imageUrl={obj.info[0].avatarUrl ? `${backHost}${obj.info[0].avatarUrl[0]}`:''} 
+                  price={obj.price[(obj.price.length)-1].p}
                   viewsCount={obj.viewsCount}
                   // commentsCount={obj.commentsCount}
                   // tags={obj.tags}

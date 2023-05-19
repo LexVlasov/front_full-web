@@ -17,45 +17,32 @@ export const ShoppingCart = ({count,setCount,setUrl}) =>{
     },[]);
   const totalSum = count ? count.map((obj,i)=> obj.sum):[];
   const totalCnt = count ? count.map((obj,i)=> obj.cnt):[];
-  const prcieByCnt = (obj,cnt) =>{
-  var priceNow = obj.priceForOne[0][3];
-  for (var i = 0; i < obj.priceForOne.length;i++){
-    if(parseInt(obj.priceForOne[i][0])<=cnt && parseInt(obj.priceForOne[i][2])>=cnt){
-      if(i === 0){
-        priceNow = obj.priceForOne[i][(obj.priceForOne[i].length-1)];
-      }
-       else {
-        priceNow = obj.priceForOne[i][(obj.priceForOne[i].length-2)];
-      }
-    }else if (parseInt(obj.priceForOne[i][0])<=cnt && i === (obj.priceForOne.length-1)){
-      priceNow = obj.priceForOne[i][1];
-    };
-  };
-  return priceNow;
-};
+    console.log();
 setUrl('cart(Корзина');
     return(
         <div style={{height:"100%"}}>
         <Grid container spacing={2}>
-            <Grid item lg={8.5} className={styles.maininfo}>
+            <Grid item lg={8.5} className={isPostsLoading ? styles.maininfoload:styles.maininfo}>
             {(count.length > 0 ? (isPostsLoading?[...Array(1)]:allgood.items).map((obj,index)=>isPostsLoading ? (
                 <><div class={styles.ldsroller}><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
                 
                 <div className={styles.loadcart}>загружаю товары</div> </>
               ) : (
                 
-                (count.map((ob,i)=> ob.id === obj.infoGood[0]._id?
+                (count.map((ob,i)=> ob.id === obj._id?
 
                 <ItemCart 
                     key={index} 
-                    id = {obj.infoGood[0]._id}
-                    avatarUrl = {obj.avatarUrl[0]}
+                    id = {obj._id}
+                    avatarUrl = {obj.info[0].avatarUrl[0]}
                     count ={ob.cnt}
                     name = {obj.name}
-                    type = {obj.type}
-                    price={obj.infoGood[0].priceForOne}
+                    type = {obj.info[0].type}
+                    price={obj.price}
                     setCount={setCount}
                     totalCart={count}
+                    step_q={parseInt(obj.step_q)}
+                    min_q={parseInt(obj.min_q)}
                     />
                                      
                  : null)

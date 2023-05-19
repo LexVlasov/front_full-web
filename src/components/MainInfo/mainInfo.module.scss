@@ -51,5 +51,16 @@
     min-height:100%;
     margin-top: 7px;
     opacity:70%;
-    
+}
+
+.checksum{
+    display: flex;
+    font-size:30px; 
+    color:#30374c;
+    text-align:right;
+    min-width: 100%;
+    min-height:80px;
+    justify-content: right;
+    align-items: center;
+    margin:0 auto;
 }

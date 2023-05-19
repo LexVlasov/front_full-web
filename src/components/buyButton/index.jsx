@@ -36,7 +36,7 @@ export const BuyButton = ({
         ? 
         (<>
             <button className={styles.buttonbuy} onClick={addToCart}><AutorenewIcon sx={{mr:1,color:"#fff"}}/>ОБНОВИТЬ</button>
-            <button className={styles.oneclick}><CreditScoreIcon sx={{mr:1,color:"#fff"}}/>ОФОРМИТЬ</button>
+            <a href="/checkout"><button className={styles.oneclick}><CreditScoreIcon sx={{mr:1,color:"#fff"}} />ОФОРМИТЬ</button></a>
             
         </>
         )

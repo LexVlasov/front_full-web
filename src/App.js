@@ -2,7 +2,7 @@
 import {Routes, Route} from 'react-router-dom';
 import Container from '@mui/material/Container';
 import { Header, MainInfo, Middle, Footer,PreFooter, UnderMiddle } from './components';
-import { Home, FullPost, GoodsByType,ShoppingCart,PopularGoods,Sale,AboutCompany,Contact } from './pages';
+import { Home, FullPost, GoodsByType,ShoppingCart,PopularGoods,Sale,AboutCompany,Contact,MakeOrder } from './pages';
 import React, { useState } from 'react';
 
 
@@ -11,17 +11,27 @@ import React, { useState } from 'react';
 
 
 function App() {
- 
-  const [count, setCount] = useState(JSON.parse(window.sessionStorage.getItem('countcart')) ? JSON.parse(window.sessionStorage.getItem('countcart'))  : []);
+  const currentPath = window.location.pathname;
+  console.log();
+  const [count, setCount] = useState(JSON.parse(window.localStorage.getItem('countcart')) ? JSON.parse(window.localStorage.getItem('countcart'))  : []);
   const [url,setUrl] = useState(null);
   React.useEffect(()=>{
     // dispatch(fetchAuthMe());
-    window.sessionStorage.setItem('countcart',JSON.stringify(count));
+    window.localStorage.setItem('countcart',JSON.stringify(count));
   },[count])
 
   return (
     <>
-      <Header/>
+   
+      {currentPath.substring(1)==='checkout' ? 
+      (<Container maxWidth="md">
+        <Routes>
+          <Route path='/checkout' element={<MakeOrder count={count}/>}/>
+        </Routes>
+      </Container>)
+      :
+      (
+      <><Header/>
       <Container maxWidth="lg">
       <MainInfo count={count}/>
       </Container>
@@ -41,6 +51,9 @@ function App() {
       </Container>
       <PreFooter/>
       <Footer/>
+      </>)}
+      
+      
     </>
   );
 }

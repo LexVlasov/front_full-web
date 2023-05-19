@@ -10,7 +10,7 @@ export const Sales = ({
     count,
     setCount,
 })=>{
-  const sortallGoods = [...allgood.items].sort((a, b) => parseInt(b.infoGood[0].buysCount) - parseInt(a.infoGood[0].buysCount)).slice(0,3);
+  const sortallGoods = [...allgood.items].sort((a, b) => parseInt(b.bougthCount) - parseInt(a.bougthCount)).slice(0,3);
     return(
         <>
         <div className={styles.head}>
@@ -26,14 +26,14 @@ export const Sales = ({
               <Grid item xs={6} lg={4} styles={{paddingBottom:"20px"}}> 
               <Post 
                key={index}
-               id={obj.infoGood[0]._id}
+               id={obj._id}
                title={obj.name}
-               imageUrl={obj.avatarUrl[0] ? `${backHost}${obj.avatarUrl[0]}`:''} 
-               price={obj.infoGood[0].priceForOne[(obj.infoGood[0].priceForOne.length)-1][1]}
-               viewsCount={obj.infoGood[0].viewsCount}
+               imageUrl={obj.info[0].avatarUrl[0] ? `${backHost}${obj.info[0].avatarUrl[0]}`:''} 
+               price={obj.price[sortallGoods[0].price.length-1].p}
+               viewsCount={obj.viewsCount}
                count={count} setCount={setCount}
-               maxPrice={obj.infoGood[0].priceForOne[0][3]}
-               buysCount={obj.infoGood[0].buysCount}
+               maxPrice={obj.price[0].p}
+               buysCount={obj.bougthCount}
               />
               </Grid> 
             ))}

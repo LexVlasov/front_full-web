@@ -6,7 +6,8 @@ import Image from "../../uploads/mainInfo/logo.png";
 import {Link} from 'react-router-dom';
 
 export const MainInfo = ({count,setCount}) => {
-
+  const currentPath = window.location.pathname;
+  console.log((count ? count.map((obj,i)=> obj.sum):[]).reduce((a,b)=>a+b,0));
     return (
    
       <Box sx={{ flexGrow: 1 }} className={styles.root}>
@@ -20,13 +21,18 @@ export const MainInfo = ({count,setCount}) => {
                 </div></Link>
           </Grid>
           <Grid item xs={12} md={6} lg={5} sx={{padding:2}} > 
-            <div className={styles.phonenumber}> +7 (495) 999-99-99 
+            {currentPath.substring(1)==='checkout'?(''):
+
+            (<><div className={styles.phonenumber}> +7 (495) 999-99-99 
             </div>
-            <div className={styles.schedule}>Ежедневно, с 10 до 21-го ч. Звонок бесплатный</div>
+            <div className={styles.schedule}>Ежедневно, с 10 до 21-го ч. Звонок бесплатный</div></>)}
           </Grid>
-          <Grid item xs={12} md={6} lg={3} sx={{padding:2}} > 
-            <div className={styles.deliver} > Доставляем за 2-3 часа в Москве. 
-            </div>
+          <Grid item xs={12} md={6} lg={3} sx={{padding:2}} >
+            {currentPath.substring(1)==='checkout'? 
+            (<><div className={styles.checksum}>{(count ? count.map((obj,i)=> obj.sum):[]).reduce((a,b)=>a+b,0)} 
+            </div></>)
+            : (<><div className={styles.deliver} > Доставляем за 2-3 часа в Москве. 
+            </div></>)}
           </Grid>
 
     </Grid>

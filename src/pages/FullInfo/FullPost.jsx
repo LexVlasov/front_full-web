@@ -26,16 +26,15 @@ export const FullPost = ({count,setCount, setUrl}) => {
   React.useEffect(()=>{
     axios.get(`/good/${id}`).then(res=>{
       setData(res.data);
-      setLoading(false);
-      dispatch(fetchTypes());   
+      setLoading(false);   
     }).catch((err)=>{
       console.warn(err);
       alert('Error in getting post');
-    })
+    });
+    dispatch(fetchTypes());
   },[]);
-  
   if(data)
-  {setUrl('types/'+data.good.group_type+'('+data.good.group_type + '|' + 'good/'+id +'('+data.good.name);}
+  {setUrl('types/'+data.info[0].group_type+'('+data.info[0].group_type + '|' + 'good/'+id +'('+data.name);}
   if(isLoading){
     return <Post isLoading={isLoading} isFullPost/>;
   }

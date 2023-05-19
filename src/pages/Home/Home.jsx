@@ -8,7 +8,7 @@ import { Box } from '@mui/system';
 import {Popular, Sales} from '../../components';
 import styles from "./home.module.scss"
 import { Post } from '../../components/Post';
-import axios from "../../axios";
+
 
 export const Home = ({count,setCount,setUrl}) => {
   const backHost = 
@@ -23,17 +23,11 @@ export const Home = ({count,setCount,setUrl}) => {
   React.useEffect(()=>{
     dispatch(fetchGoods());
     dispatch(fetchTypes());
-    axios.get('/test/').then(res=>{
-      SetTest(res.data);
-    }).catch((err)=>{
-      console.warn(err);
-      alert('Error in getting post');
-    });
-    
+   
    },[]);
   
    setUrl(null);
-   console.log(test.out);
+   console.log(types);
   return (
 
     <Box sx={{ flexGrow: 1 }}>
