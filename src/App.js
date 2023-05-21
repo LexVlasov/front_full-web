@@ -2,7 +2,7 @@
 import {Routes, Route} from 'react-router-dom';
 import Container from '@mui/material/Container';
 import { Header, MainInfo, Middle, Footer,PreFooter, UnderMiddle } from './components';
-import { Home, FullPost, GoodsByType,ShoppingCart,PopularGoods,Sale,AboutCompany,Contact,MakeOrder } from './pages';
+import { Home, FullPost, GoodsByType,ShoppingCart,PopularGoods,Sale,AboutCompany,Contact,MakeOrder, Registration } from './pages';
 import React, { useState } from 'react';
 
 
@@ -47,6 +47,7 @@ function App() {
         <Route path="/sale" element={<Sale count={count} setCount={setCount} setUrl={setUrl}/>}/>
         <Route path="/about" element={<AboutCompany setUrl={setUrl}/>}/>
         <Route path="/contact" element={<Contact setUrl={setUrl}/>}/>
+        <Route path="/test" element={<Registration/>}/>
         </Routes>
       </Container>
       <PreFooter/>
