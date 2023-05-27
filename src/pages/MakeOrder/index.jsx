@@ -6,7 +6,7 @@ import Image from "../../uploads/mainInfo/logo.png";
 import {Link} from 'react-router-dom';
 import { TextField } from '@mui/material';
 import {Place,Checkout,Customer,Delivery,Paymethod} from './components/index';
-import {Auth,ShopId} from "../../credetinals.js";
+import {Auth,ShopId} from "../../../credetinals/index.js";
 
 export const MakeOrder = ({count}) =>{
     const [city,setCity] = useState();
