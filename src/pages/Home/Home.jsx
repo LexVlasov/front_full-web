@@ -27,7 +27,7 @@ export const Home = ({count,setCount,setUrl}) => {
    },[]);
   
    setUrl(null);
-   console.log(types);
+
   return (
 
     <Box sx={{ flexGrow: 1 }}>

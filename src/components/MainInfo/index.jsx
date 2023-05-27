@@ -7,7 +7,6 @@ import {Link} from 'react-router-dom';
 
 export const MainInfo = ({count,setCount}) => {
   const currentPath = window.location.pathname;
-  console.log((count ? count.map((obj,i)=> obj.sum):[]).reduce((a,b)=>a+b,0));
     return (
    
       <Box sx={{ flexGrow: 1 }} className={styles.root}>

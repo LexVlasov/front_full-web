@@ -12,7 +12,6 @@ import React, { useState } from 'react';
 
 function App() {
   const currentPath = window.location.pathname;
-  console.log();
   const [count, setCount] = useState(JSON.parse(window.localStorage.getItem('countcart')) ? JSON.parse(window.localStorage.getItem('countcart'))  : []);
   const [url,setUrl] = useState(null);
   React.useEffect(()=>{

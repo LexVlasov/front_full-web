@@ -17,7 +17,7 @@ export const ShoppingCart = ({count,setCount,setUrl}) =>{
     },[]);
   const totalSum = count ? count.map((obj,i)=> obj.sum):[];
   const totalCnt = count ? count.map((obj,i)=> obj.cnt):[];
-    console.log();
+
 setUrl('cart(Корзина');
     return(
         <div style={{height:"100%"}}>

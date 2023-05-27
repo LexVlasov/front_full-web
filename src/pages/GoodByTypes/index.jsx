@@ -41,7 +41,7 @@ export const GoodsByType = ({count, setCount,setUrl}) => {
   };
 
   setUrl(type+'('+type);
-  console.log(allgood);
+
   return (
      <Box sx={{ flexGrow: 1 }}>
        <Grid container spacing={2} alignItems="flex-start" >

@@ -39,7 +39,7 @@ const initialState = {
         items:[],
         status:'loading',
     }
-}
+};
 
 const goodsSlice = createSlice({
     name:'allgood',

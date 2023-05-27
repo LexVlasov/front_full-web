@@ -25,7 +25,7 @@ export const Account = () => {
       dispatch(fetchPostbyUser(id));
       dispatch(fetchUser(id));
   },[]);
-  console.log(isUserloading);
+
   return (
     <Container sx={{ pl:10, pt:5 }} >
       <Grid container spacing={4} >
