@@ -17,7 +17,7 @@ export const Customer = ({
     const [move2,setMove2] = useState(!phone?0:2);
     
     const Move1  = (e)=>{
-        if(!e){
+        if(!e||(!e?'':e).length<10){
             setMove1(1);
         } else{
             setMove1(2);
@@ -25,7 +25,7 @@ export const Customer = ({
     };
 
     const Move2 = (e)=>{
-        if(!e){
+        if(!e||(!e?'':e).length<10){
             setMove2(1);
         } else{
             setMove2(2);
@@ -58,7 +58,7 @@ export const Customer = ({
                         color={move2===0?"":(move2===1?"error":"success")}
                         value={phone}
                         onChange={e=>setPhone(e.target.value)}
-                        helperText={!phone ? "Это поле необходимо заполнить":"74991234567"}
+                        helperText={(!phone||(!phone?'':phone).length<10) ? "Это поле необходимо заполнить в формате 4951234567":"74991234567"}
                         size="small" />
                         <TextField
                         label="E-mail"
@@ -73,6 +73,7 @@ export const Customer = ({
                         <TextField
                             label="Улица, дом (квартира)*"
                             className={styles.customerfieldadd}
+                            helperText={"Можно указать 'До востребования'"}
                             onBlur={e=>Move1(e.target.value)}
                             focused={move1!==0?true:false}
                             color={move1===0?"":(move1===1?"error":"success")}

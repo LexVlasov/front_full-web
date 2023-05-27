@@ -48,24 +48,31 @@ export const Delivery = ({
           })
 
     },[]);
-    const deliveryType = (id) => {
-        if(delMeth!==id){
-            setDelMeth(id);
+    const deliveryType = (obj) => {
+        let delArr =[];
+        if(delMeth[0].id!==obj.id){
+            delArr.push({
+                id:obj.id,
+                price:obj.price,
+                free_delivery:obj.free_delivery_system,
+            })
+            setDelMeth(delArr);
         };
     };
     const orderDelivery = delivery.sort((a, b) => parseInt(a.place) - parseInt(b.place))
+
     return(
     <>
                 <div className={styles.wayorderhead}>Способ доставки</div>
                 <div className={styles.way}>
                 {!isLoading? (orderDelivery.map((obj,ind)=>(
-                        <button className={delMeth===obj.id?styles.buttondeliveractive:styles.buttondeliver} onClick={()=>deliveryType(obj.id)}>
+                        <button className={delMeth[0].id===obj.id?styles.buttondeliveractive:styles.buttondeliver} onClick={()=>deliveryType(obj)}>
                         <div key={ind} className={styles.deliverybox}>
                             
                             <img src={obj.name.includes('Почт') ? RP :(obj.name.includes('Курьер') ? Logo : Ems)} className={styles.deliveryimg}/>
                             
                             <div className={styles.divdescript}>
-                                <div className={styles.namedelivery}>{obj.name} {(obj.name.includes('Курьер') ? 'OnePill' : '')}</div>
+                                <div className={styles.namedelivery}>{obj.name} {(obj.name.includes('Курьер') ? ' OnePill' : '')}</div>
                                 <div className={styles.descript}><span>Стоимость: </span>{obj.price}</div> 
                             </div>
                             

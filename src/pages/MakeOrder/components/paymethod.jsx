@@ -72,7 +72,7 @@ export const Paymethod = ({
                             
                             <div className={styles.divdescript}>
                                 <div className={styles.namedelivery}>{obj.id === 3?'Банковской картой':obj.name}</div>
-                                <div className={styles.descriptpayment}><span>Скидка: </span>{obj.sale}%</div> 
+                                <div className={styles.descriptpayment}><span>Скидка: </span><span className={obj.sale==0?'':styles.discountpay}> {obj.sale}% </span></div> 
                             </div>
                             
                         </div>

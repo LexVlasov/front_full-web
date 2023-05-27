@@ -47,6 +47,7 @@ export const ItemCart = ({
 
   const removeFromCart = async () =>{
     let newVal = [...totalCart];
+
     let prodIn = newVal.findIndex((p)=> p.id === id);
     if(parseInt(newVal[prodIn].cnt) === step_q){
       setCount(newVal.filter(item=>item.id !== newVal[prodIn].id));
@@ -78,6 +79,10 @@ export const ItemCart = ({
     
   };
 
+  const deleteItem = async ()=>{
+
+  };
+
     return (
         <div className={styles.main}>
           <a href={`/good/${id}`}><img src={`${backHost}${avatarUrl}`} className={styles.image}></img></a>
@@ -94,7 +99,7 @@ export const ItemCart = ({
                 
               </ButtonGroup>
             </div>
-            <div className={styles.divdelete}><button className={styles.delete}>удалить</button></div>
+            <div className={styles.divdelete}><button className={styles.delete} onClick={removeFromCart}>удалить</button></div>
           </div>
           
         </div>

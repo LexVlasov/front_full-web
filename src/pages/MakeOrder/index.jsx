@@ -6,19 +6,34 @@ import Image from "../../uploads/mainInfo/logo.png";
 import {Link} from 'react-router-dom';
 import { TextField } from '@mui/material';
 import {Place,Checkout,Customer,Delivery,Paymethod} from './components/index';
+import {Auth,ShopId} from "../../credetinals.js";
 
 export const MakeOrder = ({count}) =>{
     const [city,setCity] = useState();
     const [page,setPage] = useState(1);
     const [order,setOrder] = useState([]);
-    const [delivery, setDelivery] = useState(1);
-    const [pay, setPay] = useState(0);
-    const [fio,setFio] = useState();
-    const [email,setEmail] = useState();
+    const [delivery, setDelivery] = useState([0]);
+    const [returnData, setReturnData] = useState();
+    const [fio,setFio] = useState('');
+    const [zip,setZip] = useState(111111);
+    const [email,setEmail] = useState('');
     const [address,setAddress] = useState();
     const [phone,setPhone] = useState();
     const [paymentId,setPaymentId] = useState();
-    // const [delMeth,setDelMeth] = React.useState(0);
+    const backHost = 
+    process.env.REACT_APP_API_URL?process.env.REACT_APP_API_URL:
+    'http://localhost:4444';
+    let product_id_count = '';
+    let quantity = '';
+    count.map((obj,ind)=>{
+    if(ind===0){
+        quantity= quantity+obj.cnt;
+        product_id_count=product_id_count+obj.product_id;
+    }else{
+        quantity= quantity+':'+obj.cnt;
+        product_id_count=product_id_count+':'+obj.product_id;
+    }});
+
     const renderSwitch = (page)=>{
         switch(page){
             case 1:
@@ -62,28 +77,50 @@ export const MakeOrder = ({count}) =>{
     };
 
 
-    const nextPage = ()=>{
-        if(page !==5){
+    const nextPage = async ()=>{
+        if(page !==4){
+
         const oldPage = page + 1;
         setPage(oldPage);
         const newData = {
+            auth:Auth(),
+            shop_id:ShopId(),
             shop_id:31,
-            address_1:city,
-            pay_id:pay,
-            delivery_id:delivery,
+            delivery_id:delivery ? delivery[0].id: '',
+            pay_id:paymentId,
+            product_id:product_id_count,
+            quantity:quantity,
+            promocode_id:'',
             name:fio,
-            email:email,
             phone:phone,
-            paymentId:paymentId,
+            email:email,
+            address_1:city,
             address_2:address,
+            zip:zip,
+            ip:'0.0.0.0',
         }
         let newOrder = [];
         newOrder.push(newData);
         setOrder(newOrder)
+        } else {
+     
+            const url = 'http://api.pharma-money.net/v3/order/create';
+            const api = {
+                method: 'POST',
+                body: new URLSearchParams(order[0])
+                };
+             fetch(url,api)
+             .then(response=>{setReturnData([response.json()])})
+             .then(data=>{
+                console.log(data);
+             })
+             .catch(error=>{
+                console.log('Error:',error);
+             });
         }
         
     };
-    const backPage = ()=>{
+    const backPage = async ()=>{
         const oldPage = page - 1;
         setPage(oldPage);
     };
@@ -95,7 +132,8 @@ export const MakeOrder = ({count}) =>{
     } else if(page===3){
         flgDisable = (phone&&address) ? false : true
     };
-    console.log(order);
+    
+
     return(
     <div>
         <div>
@@ -136,6 +174,35 @@ export const MakeOrder = ({count}) =>{
             <div className={styles.nextbutton}><button className={flgDisable ?styles.nextdisabled :styles.next} onClick={nextPage} disabled={flgDisable}>Далее</button></div>
         </div>
         <div className={styles.wayorderhead}>Информация о заказе</div>
+        <div className={styles.detailmainorder}>
+            {count.map((obj,ind)=>(
+                <>
+            <div className={styles.mainorder}>
+                <a href={`/good/${obj.id}`}><img src={`${obj.kda}`} className={styles.imagekda}></img></a>
+                <div className={styles.infoorder}><h7 className={styles.nameorder}>{obj.name}</h7></div>
+                <div className={styles.priceorder}>
+                    <div className={styles.priceorder}>
+                        <div className={styles.totalpriceorder}>{obj.sum}</div>
+                        <div className={styles.calculorder}>{obj.cnt}шт. х {obj.maxPrice}</div>
+                    </div>
+                </div>
+                
+              </div>
+              <div className={styles.totalsumcnt}> 
+              <div className={styles.ts}>
+                <div className={styles.descripttotal}>Стоимость доставки:</div> <div 
+                className={ (!delivery||delivery[0].free_delivery<(count ? count.map((obj,i)=> obj.sum):[]).reduce((a,b)=>a+b,0)) ? styles.costdel :styles.costdelcost }>{!delivery ? 'Не выбрано':(delivery[0].free_delivery<(count ? count.map((obj,i)=> obj.sum):[]).reduce((a,b)=>a+b,0)?'Бесплатно':delivery[0].price)}</div>
+              </div>
+              <div className={styles.ts}>
+                <div className={styles.descripttotal}>Общая скидка: </div><div className={styles.costdel}>0</div>
+                </div>
+                <div className={styles.ts}>
+                <div className={styles.descripttotal}>К оплате: </div> <div className={styles.totalpay}>{(count ? count.map((obj,i)=> obj.sum):[]).reduce((a,b)=>a+b,0)} </div>
+                </div>
+              </div>
+              </>
+            ))}
+        </div>
     </div>
     );
 };

@@ -11,6 +11,7 @@ main{
     margin: 20px 10px 10px 20px;
     border: 1px dashed rgba(56, 56, 56, 0.263);
     display: inline-block;
+    object-fit:contain;
 }
 
 .info{

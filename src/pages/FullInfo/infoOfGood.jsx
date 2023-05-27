@@ -73,6 +73,16 @@ export const InfoOfGood = ({
         cnt:value,
         "maxPrice":currentPrice,
         sum: value*parseInt(currentPrice),
+        product_id:data.id,
+        discount:data.discount,
+        kda:data.kda,
+        price:data.price,
+        step_q:data.step_q,
+        min_q:data.min_q,
+        avatar:data.info[0].avatarUrl[0],
+        type:data.info[0].type,
+        name:data.name,
+
       };
       
       let oldCount = [...count];

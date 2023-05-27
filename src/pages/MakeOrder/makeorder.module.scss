@@ -21,9 +21,9 @@
     vertical-align: top;
     line-height:1.0;
     font-weight:700;
-	background: linear-gradient(to right, #316ab1 20%, #7EB5C2 100%);
-	-webkit-background-clip: text;
-	-webkit-text-fill-color: transparent;
+    background: linear-gradient(to right, #316ab1 20%, #7EB5C2 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
 }
 .subhead{
     font-size:16px; 
@@ -263,5 +263,131 @@
 
 .descriptpayment{
   font-size: 14px;
+  min-width: 200px;
+}
+.discountpay{
+  font-size: 14px;
   letter-spacing: 0px;
+  max-width: 50px;
+  font-weight: bold;
+  color:#fff;
+  background-color: #2b90a7;
+}
+.mainorder{
+  width: 70%;
+  height: 90px;
+  display: flex;
+  border-bottom: 1px dashed #00000044;
+}
+.imagekda{
+    width: 55%;
+    height: 80px;
+    align-items: center;
+    margin: 0px 10px 0px 10px;
+    display:flex;
+    object-fit:contain;
+}
+
+.infoorder{
+  // margin: 30px 10px 10px 40px;
+
+  align-items: center;
+  vertical-align: middle;
+  height: 100%;
+  display: flex;
+  vertical-align: top;
+  width: 70%;
+}
+.detailmainorder{
+  margin-bottom: 150px;
+  display: flex;
+}
+.nameorder{
+  font-weight: 400;
+  font-size: 18px;
+  
+}
+
+.priceorder{
+  
+  width: 25%;
+  align-items: center;
+  vertical-align: middle;
+  display: grid;
+  vertical-align: top;
+ 
+}
+.totalpriceorder{
+  display: flex;
+  font-weight: 700;
+  &:after{
+    content:  "\20BD";
+    font-weight: 700;
+    padding-left: 2px;
+}
+}
+.calculorder{
+  display: flex;
+  font-size: 12px;
+  white-space: nowrap;
+  &:after{
+    content:  "\20BD";
+    font-size: 12px;
+    padding-left: 2px;
+}
+}
+.ts{
+  display: flex;
+}
+.totalsumcnt{
+  width: 30%;
+  height: 90px;
+  // padding: 10px 20px 10px 20px;
+}
+.descripttotal{
+  font-size: 14px;
+  height: 24px;
+  width: 60%;
+  font-weight: bold;
+  color:#00000073;
+  text-align: right;
+  padding-top: 5px;
+}
+
+
+.costdel{
+  font-size: 14px;
+  height: 24px;
+  width: 40%;
+  font-weight: bold;
+  color:#000000;
+  text-align: left;
+  padding: 5px 0px 0px 10px;
+  
+}
+.costdelcost{
+  font-size: 14px;
+  height: 24px;
+  width: 40%;
+  font-weight: bold;
+  color:#000000;
+  text-align: left;
+  padding: 5px 0px 0px 10px;
+  &:after{
+    content: "\20BD";
+    font-size: 14px;
+}
+}
+.totalpay{
+  font-size: 20px;
+  height: 24px;
+  width: 30%;
+  font-weight: bold;
+  color: #2b90a7;
+  text-align: left;
+  padding: 2px 0px 0px 10px;
+  &:after{
+    content: "\20BD";
+    font-size: 20px;
+}
 }
