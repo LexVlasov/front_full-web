@@ -84,8 +84,8 @@ export const MakeOrder = ({count}) =>{
         const oldPage = page + 1;
         setPage(oldPage);
         const newData = {
-            auth:process.env.API_KEY ? process.env.API_KEY : Auth(),
-            shop_id:process.env.SHOP_ID ? process.env.SHOP_ID :ShopId(),
+            auth:process.env.API_KEY ? process.env.API_KEY : '', //Auth(),
+            shop_id:process.env.SHOP_ID ? process.env.SHOP_ID : '',//ShopId(),
             delivery_id:delivery ? delivery[0].id: '',
             pay_id:paymentId,
             product_id:product_id_count,
