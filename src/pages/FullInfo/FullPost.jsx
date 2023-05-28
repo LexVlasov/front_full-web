@@ -33,6 +33,7 @@ export const FullPost = ({count,setCount, setUrl}) => {
     });
     dispatch(fetchTypes());
   },[]);
+
   if(data)
   {setUrl('types/'+data.info[0].group_type+'('+data.info[0].group_type + '|' + 'good/'+id +'('+data.name);}
   if(isLoading){

@@ -27,7 +27,7 @@ export const InfoOfGood = ({
       const [flgCart,setFlgCart] = React.useState(false);
       const [selectBut,setSelectBut] = React.useState('discription');
       const [image,setImage] = React.useState(0);
-      
+
       let currentPrice = data.price[0].p;
       
       for (var i = 0; i < data.price.length;i++){
@@ -40,7 +40,7 @@ export const InfoOfGood = ({
     if(count){
       count.some(obj => obj.id === id ? catValue = obj.cnt : catValue = 0);
     }
-  
+    
     const increaseItem = async ()=> {
         let oldVal = value;
         setValue(oldVal+=data.step_q);

@@ -6,7 +6,8 @@ import Image from "../../uploads/mainInfo/logo.png";
 import {Link} from 'react-router-dom';
 import { TextField } from '@mui/material';
 import {Place,Checkout,Customer,Delivery,Paymethod} from './components/index';
-import {Auth,ShopId} from "../../../credetinals/index.js";
+import {Auth,ShopId} from "../../credetinals/index.js";
+
 
 export const MakeOrder = ({count}) =>{
     const [city,setCity] = useState();
@@ -83,9 +84,8 @@ export const MakeOrder = ({count}) =>{
         const oldPage = page + 1;
         setPage(oldPage);
         const newData = {
-            auth:Auth(),
-            shop_id:ShopId(),
-            shop_id:31,
+            auth:process.env.API_KEY ? process.env.API_KEY : Auth(),
+            shop_id:process.env.SHOP_ID ? process.env.SHOP_ID :ShopId(),
             delivery_id:delivery ? delivery[0].id: '',
             pay_id:paymentId,
             product_id:product_id_count,
@@ -104,19 +104,19 @@ export const MakeOrder = ({count}) =>{
         setOrder(newOrder)
         } else {
      
-            const url = 'http://api.pharma-money.net/v3/order/create';
-            const api = {
-                method: 'POST',
-                body: new URLSearchParams(order[0])
-                };
-             fetch(url,api)
-             .then(response=>{setReturnData([response.json()])})
-             .then(data=>{
-                console.log(data);
-             })
-             .catch(error=>{
-                console.log('Error:',error);
-             });
+            // const url = 'http://api.pharma-money.net/v3/order/create';
+            // const api = {
+            //     method: 'POST',
+            //     body: new URLSearchParams(order[0])
+            //     };
+            //  fetch(url,api)
+            //  .then(response=>{setReturnData([response.json()])})
+            //  .then(data=>{
+            //     console.log(data);
+            //  })
+            //  .catch(error=>{
+            //     console.log('Error:',error);
+            //  });
         }
         
     };
@@ -175,6 +175,7 @@ export const MakeOrder = ({count}) =>{
         </div>
         <div className={styles.wayorderhead}>Информация о заказе</div>
         <div className={styles.detailmainorder}>
+            <div className={styles.productlist}>
             {count.map((obj,ind)=>(
                 <>
             <div className={styles.mainorder}>
@@ -188,7 +189,11 @@ export const MakeOrder = ({count}) =>{
                 </div>
                 
               </div>
-              <div className={styles.totalsumcnt}> 
+
+              </>
+            ))}
+            </div>
+            <div className={styles.totalsumcnt}> 
               <div className={styles.ts}>
                 <div className={styles.descripttotal}>Стоимость доставки:</div> <div 
                 className={ (!delivery||delivery[0].free_delivery<(count ? count.map((obj,i)=> obj.sum):[]).reduce((a,b)=>a+b,0)) ? styles.costdel :styles.costdelcost }>{!delivery ? 'Не выбрано':(delivery[0].free_delivery<(count ? count.map((obj,i)=> obj.sum):[]).reduce((a,b)=>a+b,0)?'Бесплатно':delivery[0].price)}</div>
@@ -200,8 +205,6 @@ export const MakeOrder = ({count}) =>{
                 <div className={styles.descripttotal}>К оплате: </div> <div className={styles.totalpay}>{(count ? count.map((obj,i)=> obj.sum):[]).reduce((a,b)=>a+b,0)} </div>
                 </div>
               </div>
-              </>
-            ))}
         </div>
     </div>
     );
