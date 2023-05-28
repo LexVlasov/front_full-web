@@ -179,7 +179,7 @@ export const MakeOrder = ({count}) =>{
             {count.map((obj,ind)=>(
                 <>
             <div className={styles.mainorder}>
-                <a href={`/good/${obj.id}`}><img src={`${obj.kda}`} className={styles.imagekda}></img></a>
+                <a href={`/good/${obj.id}`}><img src={`${obj.avatar}`} className={styles.imagekda}></img></a>
                 <div className={styles.infoorder}><h7 className={styles.nameorder}>{obj.name}</h7></div>
                 <div className={styles.priceorder}>
                     <div className={styles.priceorder}>
