@@ -7,38 +7,40 @@ import Qiwi from "../../../uploads/icons/qiwi.png";
 import Card from "../../../uploads/icons/card.png";
 import Cash from "../../../uploads/icons/cash.png";
 import RP from "../../../uploads/icons/Russian_Post_logo.png";
+import { useDispatch,useSelector } from 'react-redux';
+import {fetchPayment} from "../../../redux/slices/payment";
+
+
 export const Paymethod = ({
     paymentId,
     setPaymentId,
     delMeth
 }) =>{
-
-    const [payment,setPayment] = React.useState([]);
+    const dispatch = useDispatch();
+    const {payment} = useSelector((state) => state.payment);
+    const isPaymentLoading =payment.status==='loading';
+    // const [payment,setPayment] = React.useState([]);
     const [isLoading,setLoading] = React.useState(true);
     React.useEffect(()=>{
-        axios.get('/payment/').then(res=>{
-            let newArr = [];
-            for (const key in res.data){
-                if(delMeth===3||delMeth===2||delMeth===1){
-                    if(key==='1'||key==='3'||key==='5'||key==='6'){
-                        newArr.push(res.data[key]);
-                    }
-                }else if(delMeth!==3&&delMeth!==2&&delMeth!==1){
-                    if(key==='2'||key==='3'||key==='5'||key==='6'){
-                        newArr.push(res.data[key]);
-                    }
-                }
-                
-            };
-            setPayment(newArr);
-            setLoading(false);
-          }).catch((err)=>{
-            console.warn(err);
-            alert('Error in getting delivery method');
-          })
-
+            dispatch(fetchPayment());
     },[]);
-    const orderPayment = payment.sort((a, b) => parseInt(a.price) - parseInt(b.price))
+    let paymentviaDelivery = [];
+    if (!isPaymentLoading){
+        for (const key in payment.items){
+            if(delMeth===3||delMeth===2||delMeth===1){
+                if(key==='1'||key==='3'||key==='5'||key==='6'){
+                    paymentviaDelivery.push(payment.items[key]);
+                }
+            }else if(delMeth!==3&&delMeth!==2&&delMeth!==1){
+                if(key==='2'||key==='3'||key==='5'||key==='6'){
+                    paymentviaDelivery.push(payment.items[key]);
+                }
+            }
+            
+        };
+    };
+    
+    const orderPayment = paymentviaDelivery.sort((a, b) => parseInt(a.id) - parseInt(b.id))
     const paymentType = (id) => {
         if(paymentId!==id){
             setPaymentId(id);
@@ -58,12 +60,11 @@ export const Paymethod = ({
                 return RP
         };
     };
-
     return(
     <>
                 <div className={styles.wayorderhead}>Оплата</div>
                 <div className={styles.way}>
-                {!isLoading? (orderPayment.map((obj,ind)=>(
+                {!isPaymentLoading? (orderPayment.map((obj,ind)=>(
                         obj.id!==4 ? (
                             <button className={paymentId===obj.id?styles.buttondeliveractive:styles.buttondeliver} onClick={()=>paymentType(obj.id)}>
                         <div key={ind} className={styles.deliverybox}>

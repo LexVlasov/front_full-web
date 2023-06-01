@@ -6,8 +6,10 @@ import Image from "../../uploads/mainInfo/logo.png";
 import {Link} from 'react-router-dom';
 import { TextField } from '@mui/material';
 import {Place,Checkout,Customer,Delivery,Paymethod} from './components/index';
-// import {Auth,ShopId} from "../../credetinals/index.js";
+import {Auth,ShopId} from "../../credetinals/index.js";
+import { useDispatch, useSelector } from 'react-redux';
 
+import {  fetchReturnData } from '../../redux/slices/makeorder';
 
 export const MakeOrder = ({count}) =>{
     const [city,setCity] = useState();
@@ -21,6 +23,8 @@ export const MakeOrder = ({count}) =>{
     const [address,setAddress] = useState();
     const [phone,setPhone] = useState();
     const [paymentId,setPaymentId] = useState();
+
+    const dispatch = useDispatch();
     const backHost = 
     process.env.REACT_APP_API_URL?process.env.REACT_APP_API_URL:
     'http://localhost:4444';
@@ -84,8 +88,8 @@ export const MakeOrder = ({count}) =>{
         const oldPage = page + 1;
         setPage(oldPage);
         const newData = {
-            auth:process.env.API_KEY ? process.env.API_KEY : '', //Auth(),
-            shop_id:process.env.SHOP_ID ? process.env.SHOP_ID : '',//ShopId(),
+            auth:process.env.API_KEY ? process.env.API_KEY : Auth(),
+            shop_id:process.env.SHOP_ID ? process.env.SHOP_ID : ShopId(),
             delivery_id:delivery ? delivery[0].id: '',
             pay_id:paymentId,
             product_id:product_id_count,
@@ -103,23 +107,21 @@ export const MakeOrder = ({count}) =>{
         newOrder.push(newData);
         setOrder(newOrder)
         } else {
-     
-            // const url = 'http://api.pharma-money.net/v3/order/create';
-            // const api = {
-            //     method: 'POST',
-            //     body: new URLSearchParams(order[0])
-            //     };
-            //  fetch(url,api)
-            //  .then(response=>{setReturnData([response.json()])})
-            //  .then(data=>{
-            //     console.log(data);
-            //  })
-            //  .catch(error=>{
-            //     console.log('Error:',error);
-            //  });
+
+            try{
+                const data = await dispatch(fetchReturnData(order));
+                if(!data.payload){
+                  alert('Error in make order!');
+                }
+                setReturnData(data.payload);
+              }catch(err){
+                console.warn(err);
+                alert('Error create order')
+              }
         }
         
     };
+
     const backPage = async ()=>{
         const oldPage = page - 1;
         setPage(oldPage);
@@ -133,7 +135,7 @@ export const MakeOrder = ({count}) =>{
         flgDisable = (phone&&address) ? false : true
     };
     
-
+    console.log(returnData);
     return(
     <div>
         <div>

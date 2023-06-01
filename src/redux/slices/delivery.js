@@ -8,14 +8,14 @@ export const fetchDelivery = createAsyncThunk('delivery/fetchDelivery', async ()
 
 
 const initialState = {
-    deliveryMethod: {
+    delivery: {
         items: [],
         status: 'loading',
     },
 };
 
 const deliverySlice = createSlice({
-    name:'deliveryMethod',
+    name:'delivery',
     initialState,
     reducers:{
 
@@ -23,17 +23,17 @@ const deliverySlice = createSlice({
     extraReducers:{
         // Получение статей
         [fetchDelivery.pending]:(state)=>{
-            state.deliveryMethod.items = [];
-            state.deliveryMethod.status='loading';
+            state.delivery.items = [];
+            state.delivery.status='loading';
         },
         [fetchDelivery.fulfilled]:(state,action)=>{
 
-            state.deliveryMethod.items = action;
-            state.deliveryMethod.status='loaded';
+            state.delivery.items = action.payload;
+            state.delivery.status='loaded';
         },
         [fetchDelivery.rejected]:(state)=>{
-            state.deliveryMethod.items = [];
-            state.deliveryMethod.status='error';
+            state.delivery.items = [];
+            state.delivery.status='error';
         },
     }
 })
