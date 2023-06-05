@@ -60,7 +60,7 @@ export const Post = ({
     <div className={clsx(styles.root, { [styles.rootFull]: isFullPost })}>
       {isEditable && (
         <div className={styles.editButtons}>
-          <Link to={`/good/${id}/edit`}>
+          <Link to={`/good/${id}/edit`} target="_blank">
             <IconButton color="primary">
               <EditIcon />
             </IconButton>
@@ -77,7 +77,7 @@ export const Post = ({
       <div className={styles.wrapper}>
         <div className={styles.indention}>
           <h2 className={clsx(styles.title, { [styles.titleFull]: isFullPost })}>
-            {isFullPost ? title : <Link to={`/good/${id}`}>{title}</Link>}
+            {isFullPost ? title : <Link to={`/good/${id}`} target="_blank">{title}</Link>}
           </h2>
           <div className={styles.ratingprice}>
                 <Rating 

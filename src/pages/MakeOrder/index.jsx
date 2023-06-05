@@ -1,27 +1,19 @@
-import React , { useState,useForm } from 'react';
+import React , { useState } from 'react';
 import Grid from '@mui/material/Unstable_Grid2';
 import { Box } from '@mui/system';
 import styles from "./makeorder.module.scss";
 import Image from "../../uploads/mainInfo/logo.png";
 import {Link} from 'react-router-dom';
-import { TextField } from '@mui/material';
 import {Place,Checkout,Customer,Delivery,Paymethod} from './components/index';
-
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 
 import {  fetchReturnData } from '../../redux/slices/makeorder';
 
-export const MakeOrder = ({count}) =>{
-    const [city,setCity] = useState();
+export const MakeOrder = ({count,setCount,setCurrentPath}) =>{
     const [page,setPage] = useState(1);
     const [order,setOrder] = useState([]);
     const [delivery, setDelivery] = useState([0]);
     const [returnData, setReturnData] = useState();
-    const [fio,setFio] = useState('');
-    const [zip,setZip] = useState(111111);
-    const [email,setEmail] = useState('');
-    const [address,setAddress] = useState();
-    const [phone,setPhone] = useState();
     const [paymentId,setPaymentId] = useState();
 
     const dispatch = useDispatch();
@@ -39,73 +31,12 @@ export const MakeOrder = ({count}) =>{
         product_id_count=product_id_count+':'+obj.product_id;
     }});
 
-    const renderSwitch = (page)=>{
-        switch(page){
-            case 1:
-               return( 
-                <Place city={city} setCity={setCity}/>
-                )
-            case 2:
-                return( 
-                    <Delivery 
-                    delMeth={delivery}
-                    setDelMeth={setDelivery}/>
-                    )
-            case 3:
-                return( 
-                    <Customer 
-                    fio={fio}
-                    email={email}
-                    address={address}
-                    phone={phone}
-                    setFio={setFio}
-                    setEmail={setEmail}
-                    setAddress={setAddress}
-                    setPhone={setPhone}
-                      />
-                    )
-            case 4:
-                return( 
-                    <Paymethod
-                    paymentId = {paymentId}
-                    setPaymentId ={setPaymentId}
-                    delMeth={delivery}
-                    />
-                    )
-            case 5:
-                return( 
-                    <Checkout/>
-                    )
-            default:
-                return ''
-        }
-    };
-
 
     const nextPage = async ()=>{
         if(page !==4){
 
         const oldPage = page + 1;
         setPage(oldPage);
-        const newData = {
-            auth:process.env.API_KEY ,
-            shop_id:process.env.SHOP_ID ,
-            delivery_id:delivery ? delivery[0].id: '',
-            pay_id:paymentId,
-            product_id:product_id_count,
-            quantity:quantity,
-            promocode_id:'',
-            name:fio,
-            phone:phone,
-            email:email,
-            address_1:city,
-            address_2:address,
-            zip:zip,
-            ip:'0.0.0.0',
-        }
-        let newOrder = [];
-        newOrder.push(newData);
-        setOrder(newOrder)
         } else {
 
             try{
@@ -114,6 +45,10 @@ export const MakeOrder = ({count}) =>{
                   alert('Error in make order!');
                 }
                 setReturnData(data.payload);
+                const oldPage = page + 1;
+                setPage(oldPage);
+                setCount([]);
+                ;
               }catch(err){
                 console.warn(err);
                 alert('Error create order')
@@ -130,19 +65,83 @@ export const MakeOrder = ({count}) =>{
     let flgDisable = false;
 
     if(page===1){
-        flgDisable = !city ? true : false
+        flgDisable = order.length===0 ? true : false
     } else if(page===3){
-        flgDisable = (phone&&address) ? false : true
+        flgDisable = (order[0].phone.length>0&&order[0].address_2.length>0) ? false : true
     };
     
-    console.log(order);
+    const MakeOrderButton = ((returnData,page)=>{
+        if(returnData&&page===4){
+            return(
+                <Link to={`${returnData&&page===4?returnData.pay_link:''}`} target="_blank" disabled><button className={flgDisable ?styles.nextdisabled :styles.next} onClick={nextPage} disabled={flgDisable}>Далее</button></Link>
+            );
+        } else if (page===5){
+            return(
+                <Link to='/' ><button className={styles.returninshop} onClick={()=>setCurrentPath('/')}>Вернутся в магазин</button></Link>
+            );
+        }
+        else{
+            return(
+                <button className={flgDisable ?styles.nextdisabled :styles.next} onClick={nextPage} disabled={flgDisable}>Далее</button>
+                );
+        }
+    });
+
+    const renderSwitch = (page)=>{
+        switch(page){
+            case 1:
+               return( 
+                <Place 
+                order={order} 
+                setOrder={setOrder}
+                count={count}/>
+                )
+            case 2:
+                return( 
+                    <Delivery 
+                    order={order} 
+                    setOrder={setOrder}
+                    setDelivery={setDelivery}
+                    />
+                    )
+            case 3:
+                return( 
+                    <Customer 
+                    order={order} 
+                    setOrder={setOrder}
+                      />
+                    )
+            case 4:
+                return( 
+                    <Paymethod
+                    paymentId = {paymentId}
+                    setPaymentId ={setPaymentId}
+                    order={order} 
+                    setOrder={setOrder}
+                    />
+                    )
+            case 5:
+                return( 
+                    <Checkout
+                    order={order}
+                    count={count}
+                    delivery={delivery}
+                    returnData={returnData}
+                    paymentId = {paymentId}
+                    />
+                    )
+            default:
+                return ''
+        }
+    };
+
     return(
     <div>
         <div>
         <Box sx={{ flexGrow: 1 }} className={styles.root}>
             <Grid container spacing={1} direction="row">
             <Grid item xs={12} md={8} sx={{padding:2}} style={{minHeight:"100%", margin:"0 auto"}}>
-                <Link to={'/'}><img src={Image} alt='One Pill' style={{width:"90px",height:"90px", margin:"0 auto", verticalAlign:"middle",display:"inline-block"}}/>
+                <Link to={'/'} onClick={()=>setCurrentPath('/')}><img src={Image} alt='One Pill' style={{width:"90px",height:"90px", margin:"0 auto", verticalAlign:"middle",display:"inline-block"}} />
                     <div className={styles.name}>
                     <div className={styles.head}>One Pill
                     </div>
@@ -172,16 +171,19 @@ export const MakeOrder = ({count}) =>{
             {renderSwitch(page)}
             
         <div className={styles.buttonall}> 
-            <div className={styles.backbutton}>{page!==1 ? <button className={styles.back} onClick={backPage}>Назад</button>:''}</div>
-            <div className={styles.nextbutton}><button className={flgDisable ?styles.nextdisabled :styles.next} onClick={nextPage} disabled={flgDisable}>Далее</button></div>
+            <div className={styles.backbutton}>{page!==1&&page!==5 ? <button className={styles.back} onClick={backPage}>Назад</button>:''}</div>
+             <div className={styles.nextbutton}>{MakeOrderButton(returnData,page)}</div>
         </div>
-        <div className={styles.wayorderhead}>Информация о заказе</div>
+        {page!==5?
+        (
+            <>
+            <div className={styles.wayorderhead}>Информация о заказе</div>
         <div className={styles.detailmainorder}>
             <div className={styles.productlist}>
             {count.map((obj,ind)=>(
                 <>
             <div className={styles.mainorder}>
-                <a href={`/good/${obj.id}`}><img src={`${backHost}${obj.avatar}`} className={styles.imagekda}></img></a>
+                <a href={`/good/${obj.id}`}><img src={`${backHost}${obj.avatar}`} className={styles.imagekda} alt='img'></img></a>
                 <div className={styles.infoorder}><h7 className={styles.nameorder}>{obj.name}</h7></div>
                 <div className={styles.priceorder}>
                     <div className={styles.priceorder}>
@@ -207,7 +209,12 @@ export const MakeOrder = ({count}) =>{
                 <div className={styles.descripttotal}>К оплате: </div> <div className={styles.totalpay}>{(count ? count.map((obj,i)=> obj.sum):[]).reduce((a,b)=>a+b,0)} </div>
                 </div>
               </div>
-        </div>
+        </div></>
+        )
+        : ''    
+    }
+        
     </div>
     );
+    
 };

@@ -14,24 +14,24 @@ import {fetchPayment} from "../../../redux/slices/payment";
 export const Paymethod = ({
     paymentId,
     setPaymentId,
-    delMeth
+    order,
+    setOrder
 }) =>{
     const dispatch = useDispatch();
     const {payment} = useSelector((state) => state.payment);
     const isPaymentLoading =payment.status==='loading';
-    // const [payment,setPayment] = React.useState([]);
-    const [isLoading,setLoading] = React.useState(true);
+
     React.useEffect(()=>{
             dispatch(fetchPayment());
     },[]);
     let paymentviaDelivery = [];
     if (!isPaymentLoading){
         for (const key in payment.items){
-            if(delMeth===3||delMeth===2||delMeth===1){
+            if(order[0].delivery_id===3||order[0].delivery_id===2||order[0].delivery_id===1){
                 if(key==='1'||key==='3'||key==='5'||key==='6'){
                     paymentviaDelivery.push(payment.items[key]);
                 }
-            }else if(delMeth!==3&&delMeth!==2&&delMeth!==1){
+            }else if(order[0].delivery_id!==3&&order[0].delivery_id!==2&&order[0].delivery_id!==1){
                 if(key==='2'||key==='3'||key==='5'||key==='6'){
                     paymentviaDelivery.push(payment.items[key]);
                 }
@@ -41,9 +41,31 @@ export const Paymethod = ({
     };
     
     const orderPayment = paymentviaDelivery.sort((a, b) => parseInt(a.id) - parseInt(b.id))
-    const paymentType = (id) => {
-        if(paymentId!==id){
-            setPaymentId(id);
+    const paymentType = (obj) => {
+        let payemntMethod = [];
+        let newOrder=[...order];
+        if(order[0].pay_id.length===0){
+            payemntMethod.push(
+                {
+                    id:obj.id,
+                    name:obj.name
+                }
+            )
+            newOrder[0].pay_id = obj.id;
+            setPaymentId(payemntMethod);
+            setOrder(newOrder);
+        }
+        else if(order[0].pay_id!==obj.id){
+
+            payemntMethod.push(
+                {
+                    id:obj.id,
+                    name:obj.name
+                }
+            )
+            newOrder[0].pay_id = obj.id;
+            setPaymentId(payemntMethod);
+            setOrder(newOrder);
         };
     };
     const LogoPayments =(id)=>{
@@ -60,13 +82,15 @@ export const Paymethod = ({
                 return RP
         };
     };
+
+
     return(
     <>
                 <div className={styles.wayorderhead}>Оплата</div>
                 <div className={styles.way}>
                 {!isPaymentLoading? (orderPayment.map((obj,ind)=>(
                         obj.id!==4 ? (
-                            <button className={paymentId===obj.id?styles.buttondeliveractive:styles.buttondeliver} onClick={()=>paymentType(obj.id)}>
+                            <button className={order[0].pay_id===obj.id?styles.buttondeliveractive:styles.buttondeliver} onClick={()=>paymentType(obj)}>
                         <div key={ind} className={styles.deliverybox}>
                             
                             <img src={LogoPayments(obj.id)} className={styles.deliveryimg}/>

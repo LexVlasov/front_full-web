@@ -58,6 +58,7 @@
     font-size: 20px;
     font-weight: 700;
     opacity: 85%;
+    margin-top: 30px;
 }
 
 .wayorder{
@@ -174,6 +175,20 @@
     background-color: #2b90a7;
   }
 }
+
+.returninshop{
+  font-size: 18px;
+  border: none;
+  border-radius: 8px;
+  width:320px;
+  height: 40px;
+  background-color: #2b90a7c3;
+  color: #fff;
+  &:hover{
+    background-color: #2b90a7;
+  }
+}
+
 
 .nextdisabled{
   font-size: 18px;
@@ -299,13 +314,18 @@
   width: 70%;
 }
 .detailmainorder{
-  margin-bottom: 150px;
   display: flex;
   width:100%
 }
 .productlist{
   min-width: 70%;
-  margin-bottom: 150px;
+  // margin-bottom: 150px;
+  display: grid;
+}
+
+.productlistcheckout{
+  min-width: 100%;
+  // margin-bottom: 150px;
   display: grid;
 }
 .nameorder{
@@ -396,3 +416,16 @@
     font-size: 20px;
 }
 }
+
+.endsumorder{
+
+  color:#30374c;
+  min-width: 100%;
+  font-weight: 700;
+  &:after{
+    content:  "\20BD";
+    font-weight: 700;
+    padding-left: 2px;
+  }
+}
+

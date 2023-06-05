@@ -11,23 +11,25 @@ import React, { useState } from 'react';
 
 
 function App() {
-  const currentPath = window.location.pathname;
+  const [currentPath,setCurrentPath] = useState(window.location.pathname);
   const [count, setCount] = useState(JSON.parse(window.localStorage.getItem('countcart')) ? JSON.parse(window.localStorage.getItem('countcart'))  : []);
   const [url,setUrl] = useState(null);
   React.useEffect(()=>{
     // dispatch(fetchAuthMe());
     window.localStorage.setItem('countcart',JSON.stringify(count));
   },[count])
-
+  console.log(currentPath);
   return (
     <>
    
       {currentPath.substring(1)==='checkout' ? 
-      (<Container maxWidth="md">
+      (
+      <Container maxWidth="md">
         <Routes>
-          <Route path='/checkout' element={<MakeOrder count={count}/>}/>
+          <Route path='/checkout' element={<MakeOrder count={count} setCount={setCount} setCurrentPath={setCurrentPath}/>}/>
         </Routes>
-      </Container>)
+      </Container>
+      )
       :
       (
       <><Header/>
@@ -51,7 +53,8 @@ function App() {
       </Container>
       <PreFooter/>
       <Footer/>
-      </>)}
+      </>
+      )}
       
       
     </>
