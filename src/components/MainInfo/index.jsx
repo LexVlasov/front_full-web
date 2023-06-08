@@ -22,7 +22,7 @@ export const MainInfo = ({count,setCount}) => {
           <Grid item xs={12} md={6} lg={5} sx={{padding:2}} > 
             {currentPath.substring(1)==='checkout'?(''):
 
-            (<><div className={styles.phonenumber}> +7 (495) 999-99-99 
+            (<><div className={styles.phonenumber}> +7 (800) 511-31-02
             </div>
             <div className={styles.schedule}>Ежедневно, с 10 до 21-го ч. Звонок бесплатный</div></>)}
           </Grid>
