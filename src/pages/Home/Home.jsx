@@ -7,7 +7,6 @@ import { fetchGoods, fetchTypes } from '../../redux/slices/posts';
 import { Box } from '@mui/system';
 import {Popular, Sales} from '../../components';
 import styles from "./home.module.scss"
-import { Post } from '../../components/Post';
 
 
 export const Home = ({count,setCount,setUrl}) => {

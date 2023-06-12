@@ -2,7 +2,7 @@
 import {Routes, Route} from 'react-router-dom';
 import Container from '@mui/material/Container';
 import { Header, MainInfo, Middle, Footer,PreFooter, UnderMiddle } from './components';
-import { Home, FullPost, GoodsByType,ShoppingCart,PopularGoods,Sale,AboutCompany,Contact,MakeOrder, Registration } from './pages';
+import { Home, FullPost, GoodsByType,ShoppingCart,PopularGoods,Sale,AboutCompany,Contact,MakeOrder, Registration,SiteMap } from './pages';
 import React, { useState } from 'react';
 
 
@@ -22,11 +22,12 @@ function App() {
   return (
     <>
    
-      {currentPath.substring(1)==='checkout' ? 
+      {currentPath.substring(1)==='checkout'|| currentPath.substring(1)==='sitemaponepill'? 
       (
       <Container maxWidth="md">
         <Routes>
           <Route path='/checkout' element={<MakeOrder count={count} setCount={setCount} setCurrentPath={setCurrentPath}/>}/>
+          <Route path='/sitemaponepill' element={<SiteMap />}/>
         </Routes>
       </Container>
       )
