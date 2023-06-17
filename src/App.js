@@ -2,7 +2,7 @@
 import {Routes, Route} from 'react-router-dom';
 import Container from '@mui/material/Container';
 import { Header, MainInfo, Middle, Footer,PreFooter, UnderMiddle } from './components';
-import { Home, FullPost, GoodsByType,ShoppingCart,PopularGoods,Sale,AboutCompany,Contact,MakeOrder, Registration,SiteMap } from './pages';
+import { Home, FullPost, GoodsByType,ShoppingCart,PopularGoods,Sale,AboutCompany,Contact,MakeOrder, Registration } from './pages';
 import React, { useState } from 'react';
 
 
@@ -22,16 +22,8 @@ function App() {
     window.localStorage.setItem('countcart',JSON.stringify(count));
   },[count])
 
-  const dispatch = useDispatch();
   
-  const {allgood,types} = useSelector((state) => state.goods);
-  const isPostsLoading =allgood.status==='loading';
-  const isTagsLoading =types.status==='loading';
-  React.useEffect(()=>{
-    dispatch(fetchGoods());
-    dispatch(fetchTypes());
-    
-    },[]);
+
 
   return (
     <>

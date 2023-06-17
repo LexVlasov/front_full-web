@@ -10,4 +10,3 @@ export{Sale} from "./Sale";
 export {AboutCompany} from "./AboutCompany";
 export {Contact} from "./Contact";
 export {MakeOrder} from "./MakeOrder";
-export {SiteMap} from "./siteMap";
