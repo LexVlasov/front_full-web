@@ -6,6 +6,9 @@ import { Home, FullPost, GoodsByType,ShoppingCart,PopularGoods,Sale,AboutCompany
 import React, { useState } from 'react';
 
 
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchGoods, fetchTypes } from './redux/slices/posts';
+
 
 
 
@@ -18,16 +21,27 @@ function App() {
     // dispatch(fetchAuthMe());
     window.localStorage.setItem('countcart',JSON.stringify(count));
   },[count])
-  console.log(currentPath);
+
+  const dispatch = useDispatch();
+  
+  const {allgood,types} = useSelector((state) => state.goods);
+  const isPostsLoading =allgood.status==='loading';
+  const isTagsLoading =types.status==='loading';
+  React.useEffect(()=>{
+    dispatch(fetchGoods());
+    dispatch(fetchTypes());
+    
+    },[]);
+
   return (
     <>
    
-      {currentPath.substring(1)==='checkout'|| currentPath.substring(1)==='sitemaponepill'? 
+      {currentPath.substring(1)==='checkout'|| currentPath.substring(1)==='sitemap.xml'? 
       (
       <Container maxWidth="md">
         <Routes>
           <Route path='/checkout' element={<MakeOrder count={count} setCount={setCount} setCurrentPath={setCurrentPath}/>}/>
-          <Route path='/sitemaponepill' element={<SiteMap />}/>
+          <Route path='/sitemap.xml' element={<SiteMap/>}/>
         </Routes>
       </Container>
       )
