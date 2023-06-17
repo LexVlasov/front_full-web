@@ -36,12 +36,11 @@ function App() {
   return (
     <>
    
-      {currentPath.substring(1)==='checkout'|| currentPath.substring(1)==='sitemap.xml'? 
+      {currentPath.substring(1)==='checkout'? 
       (
       <Container maxWidth="md">
         <Routes>
           <Route path='/checkout' element={<MakeOrder count={count} setCount={setCount} setCurrentPath={setCurrentPath}/>}/>
-          <Route path='/sitemap.xml' element={<SiteMap/>}/>
         </Routes>
       </Container>
       )
