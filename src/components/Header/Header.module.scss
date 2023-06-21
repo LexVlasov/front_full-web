@@ -6,6 +6,15 @@
     height: 60px;   
 }
 
+.rootmobile{
+    background-color: #30374c;
+    padding: 0 auto;
+    border-bottom: 1px solid #e0e0e0;
+    margin-bottom: 10px;
+    height: 20px;
+    width: 300px;   
+}
+
 .buttons{
     display: flex;
     justify-content: space-evenly;
@@ -14,6 +23,15 @@
         text-decoration: none;
     }
 }
+
+// .buttonsmobile{
+//     display: flex;
+//     // justify-content: space-evenly;
+
+//     a{
+//         text-decoration: none;
+//     }
+// }
 
 .newpost{
     color: #ffffff;
@@ -24,8 +42,25 @@
         opacity: 1;  
     }
 }
+
+// .newpostmobile{
+//     color: #000000;
+//     width: 10%;
+//     vertical-align: middle;
+//     font-size: 6px;
+//     opacity: 0.6;
+//     &:hover{
+//         opacity: 1;  
+//     }
+// }
+
 .icon{
     width:20px;
     height:20px;
     padding-right:3px;
+}
+
+.iconmobile{
+    width:5px;
+    height:5px;
 }

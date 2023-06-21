@@ -31,7 +31,9 @@ export const MakeOrder = ({count,setCount,setCurrentPath}) =>{
         product_id_count=product_id_count+':'+obj.product_id;
     }});
 
-
+    const discount = order.length>0?order[0].discount:0;
+    const totalSum = (count ? count.map((obj,i)=> obj.sum):[]).reduce((a,b)=>a+b,0);
+    
     const nextPage = async ()=>{
         if(page !==4){
 
@@ -134,7 +136,7 @@ export const MakeOrder = ({count,setCount,setCurrentPath}) =>{
                 return ''
         }
     };
-
+    console.log(returnData);
     return(
     <div>
         <div>
@@ -206,7 +208,7 @@ export const MakeOrder = ({count,setCount,setCurrentPath}) =>{
                 <div className={styles.descripttotal}>Общая скидка: </div><div className={styles.costdel}>0</div>
                 </div>
                 <div className={styles.ts}>
-                <div className={styles.descripttotal}>К оплате: </div> <div className={styles.totalpay}>{(count ? count.map((obj,i)=> obj.sum):[]).reduce((a,b)=>a+b,0)} </div>
+                <div className={styles.descripttotal}>К оплате: </div> <div className={styles.totalpay}>{Math.ceil(parseInt(totalSum)*((100-parseInt(discount))/100))} </div>
                 </div>
               </div>
         </div></>

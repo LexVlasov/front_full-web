@@ -1,13 +1,14 @@
 
 import {Routes, Route} from 'react-router-dom';
 import Container from '@mui/material/Container';
-import { Header, MainInfo, Middle, Footer,PreFooter, UnderMiddle } from './components';
+import { Header, MainInfo, Middle, Footer,PreFooter, UnderMiddle,HeaderMobile } from './components';
 import { Home, FullPost, GoodsByType,ShoppingCart,PopularGoods,Sale,AboutCompany,Contact,MakeOrder, Registration } from './pages';
 import React, { useState } from 'react';
 
 
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchGoods, fetchTypes } from './redux/slices/posts';
+import MobileDetect from 'mobile-detect';
 
 
 
@@ -21,14 +22,15 @@ function App() {
     // dispatch(fetchAuthMe());
     window.localStorage.setItem('countcart',JSON.stringify(count));
   },[count])
+  let md = new MobileDetect(window.navigator.userAgent);
 
-  
 
 
   return (
     <>
-   
-      {currentPath.substring(1)==='checkout'? 
+
+      {md.os()!=='AndroidOS'&&md.os()!=='iOS' ?
+      (currentPath.substring(1)==='checkout'? 
       (
       <Container maxWidth="md">
         <Routes>
@@ -54,13 +56,46 @@ function App() {
         <Route path="/sale" element={<Sale count={count} setCount={setCount} setUrl={setUrl}/>}/>
         <Route path="/about" element={<AboutCompany setUrl={setUrl}/>}/>
         <Route path="/contact" element={<Contact setUrl={setUrl}/>}/>
-        <Route path="/test" element={<Registration/>}/>
         </Routes>
       </Container>
       <PreFooter/>
       <Footer/>
       </>
-      )}
+      ))
+      :
+      (currentPath.substring(1)==='checkout'? 
+      (
+      <Container maxWidth="md">
+        <Routes>
+          <Route path='/checkout' element={<MakeOrder count={count} setCount={setCount} setCurrentPath={setCurrentPath}/>}/>
+        </Routes>
+      </Container>
+      )
+      :
+      ( 
+      <><HeaderMobile/>
+      {/* <Container sm={6}>
+      <MainInfo count={count}/>
+      </Container>
+      <Middle count={count}/>
+      <UnderMiddle count={count} url={url}/>
+      <Container sm={6}>
+        <Routes>
+        <Route path="/" element={<Home count={count} setCount={setCount} setUrl={setUrl}/>} /> 
+        <Route path="/good/:id" element={<FullPost count={count} setCount={setCount} setUrl={setUrl} url={url}/>} />
+        <Route path="/types/:type" element={<GoodsByType count={count} setCount={setCount} setUrl={setUrl}/>} />
+        <Route path="/cart/" element={<ShoppingCart count={count} setCount={setCount} setUrl={setUrl}/>} />
+        <Route path="/popular" element={<PopularGoods count={count} setCount={setCount} setUrl={setUrl}/>}/>
+        <Route path="/sale" element={<Sale count={count} setCount={setCount} setUrl={setUrl}/>}/>
+        <Route path="/about" element={<AboutCompany setUrl={setUrl}/>}/>
+        <Route path="/contact" element={<Contact setUrl={setUrl}/>}/>
+        </Routes>
+      </Container>
+      <PreFooter/>
+      <Footer/> */}
+      </>
+      ))
+      }
       
       
     </>

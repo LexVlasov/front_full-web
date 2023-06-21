@@ -10,6 +10,7 @@ export const Sales = ({
     count,
     setCount,
 })=>{
+  
   const sortallGoods = [...allgood.items].sort((a, b) => parseInt(b.bougthCount) - parseInt(a.bougthCount)).slice(0,3);
     return(
         <>

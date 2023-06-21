@@ -77,7 +77,7 @@ export const Post = ({
       <div className={styles.wrapper}>
         <div className={styles.indention}>
           <h2 className={clsx(styles.title, { [styles.titleFull]: isFullPost })}>
-            {isFullPost ? title : <Link to={`/good/${id}`} target="_blank">{title}</Link>}
+            {isFullPost ? title : <Link to={`/good/${id}`} >{title}</Link>}
           </h2>
           <div className={styles.ratingprice}>
                 <Rating 

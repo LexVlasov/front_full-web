@@ -32,6 +32,7 @@ export const Place = ({order,setOrder,count}) =>{
             shop_id:31 ,
             delivery_id:'',
             pay_id:'',
+            discount:0,
             product_id:product_id_count,
             quantity:quantity,
             promocode_id:'',

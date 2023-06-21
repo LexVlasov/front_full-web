@@ -13,6 +13,7 @@ import QuestionMarkIcon from '@mui/icons-material/QuestionMark';
 import GppGoodIcon from '@mui/icons-material/GppGood';
 import RateReviewIcon from '@mui/icons-material/RateReview';
 import CallIcon from '@mui/icons-material/Call';
+import { Grid } from "@mui/material";
 
 export const Header = ()=>{
 
@@ -62,6 +63,27 @@ export const Header = ()=>{
                     </div>
 
             </Container>
+        </div>
+    );
+};
+
+
+export const HeaderMobile = ()=>{
+
+    const dispatch = useDispatch();
+    const onClickLogout = () =>{
+        if(window.confirm('Are you sure want to logout?')){
+            dispatch(logout());
+            window.localStorage.removeItem('token');
+        }
+        
+    };
+
+
+
+    return (
+        <div className={styles.rootmobile}>
+
         </div>
     );
 };
