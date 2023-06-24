@@ -15,6 +15,9 @@ export const MakeOrder = ({count,setCount,setCurrentPath}) =>{
     const [delivery, setDelivery] = useState([0]);
     const [returnData, setReturnData] = useState();
     const [paymentId,setPaymentId] = useState();
+    const [newCount,setNewCount] = useState();
+    const [sumTotal,setSumTotal] = useState();
+
 
     const dispatch = useDispatch();
     const backHost = 
@@ -30,9 +33,17 @@ export const MakeOrder = ({count,setCount,setCurrentPath}) =>{
         quantity= quantity+':'+obj.cnt;
         product_id_count=product_id_count+':'+obj.product_id;
     }});
+    
+    const discount = order.length>0?(order[0].pay_id===5||order[0].pay_id===6||order[0].pay_id===3?0.05:0):0;
+    let totalSum = (count ? count.map((obj,i)=> Math.ceil(obj.maxPrice*(1-discount)*obj.cnt)):[]).reduce((a,b)=>a+b,0);
 
-    const discount = order.length>0?order[0].discount:0;
-    const totalSum = (count ? count.map((obj,i)=> obj.sum):[]).reduce((a,b)=>a+b,0);
+    if(delivery[0]!==0){
+        if(totalSum>delivery[0].free_delivery&&(delivery[0].id!==5&&delivery[0].id!==4)){
+            totalSum = totalSum + delivery[0].price;
+        } 
+        
+    }
+  
     
     const nextPage = async ()=>{
         if(page !==4){
@@ -49,16 +60,19 @@ export const MakeOrder = ({count,setCount,setCurrentPath}) =>{
                 setReturnData(data.payload);
                 const oldPage = page + 1;
                 setPage(oldPage);
+                setSumTotal(totalSum);
+                setNewCount(count);
                 setCount([]);
-                ;
+                window.open(data.payload.pay_link,'_blank');
               }catch(err){
                 console.warn(err);
                 alert('Error create order')
               }
+
         }
         
     };
-
+    console.log(sumTotal);
     const backPage = async ()=>{
         const oldPage = page - 1;
         setPage(oldPage);
@@ -72,12 +86,8 @@ export const MakeOrder = ({count,setCount,setCurrentPath}) =>{
         flgDisable = (order[0].phone.length>0&&order[0].address_2.length>0) ? false : true
     };
     
-    const MakeOrderButton = ((returnData,page)=>{
-        if(returnData&&page===4){
-            return(
-                <Link to={`${returnData&&page===4?returnData.pay_link:''}`} target="_blank" disabled><button className={flgDisable ?styles.nextdisabled :styles.next} onClick={nextPage} disabled={flgDisable}>Далее</button></Link>
-            );
-        } else if (page===5){
+    const MakeOrderButton = ((page)=>{
+        if (page===5){
             return(
                 <Link to='/' ><button className={styles.returninshop} onClick={()=>setCurrentPath('/')}>Вернутся в магазин</button></Link>
             );
@@ -126,17 +136,17 @@ export const MakeOrder = ({count,setCount,setCurrentPath}) =>{
                 return( 
                     <Checkout
                     order={order}
-                    count={count}
                     delivery={delivery}
                     returnData={returnData}
                     paymentId = {paymentId}
+                    totalSum = {sumTotal}
+                    newCount={newCount}
                     />
                     )
             default:
                 return ''
         }
     };
-    console.log(returnData);
     return(
     <div>
         <div>
@@ -174,7 +184,7 @@ export const MakeOrder = ({count,setCount,setCurrentPath}) =>{
             
         <div className={styles.buttonall}> 
             <div className={styles.backbutton}>{page!==1&&page!==5 ? <button className={styles.back} onClick={backPage}>Назад</button>:''}</div>
-             <div className={styles.nextbutton}>{MakeOrderButton(returnData,page)}</div>
+             <div className={styles.nextbutton}>{MakeOrderButton(page)}</div>
         </div>
         {page!==5?
         (
@@ -202,13 +212,13 @@ export const MakeOrder = ({count,setCount,setCurrentPath}) =>{
             <div className={styles.totalsumcnt}> 
               <div className={styles.ts}>
                 <div className={styles.descripttotal}>Стоимость доставки:</div> <div 
-                className={ (!delivery||delivery[0].free_delivery<(count ? count.map((obj,i)=> obj.sum):[]).reduce((a,b)=>a+b,0)) ? styles.costdel :styles.costdelcost }>{!delivery ? 'Не выбрано':(delivery[0].free_delivery<(count ? count.map((obj,i)=> obj.sum):[]).reduce((a,b)=>a+b,0)?'Бесплатно':delivery[0].price)}</div>
+                className={ delivery[0]===0||(delivery[0].free_delivery<(count ? count.map((obj,i)=> obj.sum):[]).reduce((a,b)=>a+b,0)&&(delivery[0].id===5||delivery[0].id===4)) ? styles.costdel :styles.costdelcost }>{delivery[0]===0 ? 'Не выбрано':(delivery[0].free_delivery<(count ? count.map((obj,i)=> obj.sum):[]).reduce((a,b)=>a+b,0)&&(delivery[0].id===5||delivery[0].id===4)?'Бесплатно':delivery[0].price)}</div>
               </div>
               <div className={styles.ts}>
-                <div className={styles.descripttotal}>Общая скидка: </div><div className={styles.costdel}>0</div>
+                <div className={styles.descripttotal}>Общая скидка: </div><div className={discount ===0 ?styles.costdel:styles.costdelcost}>{(count ? count.map((obj,i)=> Math.floor(obj.maxPrice*(discount)*obj.cnt)):[]).reduce((a,b)=>a+b,0)}</div>
                 </div>
                 <div className={styles.ts}>
-                <div className={styles.descripttotal}>К оплате: </div> <div className={styles.totalpay}>{Math.ceil(parseInt(totalSum)*((100-parseInt(discount))/100))} </div>
+                <div className={styles.descripttotal}>К оплате: </div> <div className={styles.totalpay}>{totalSum} </div>
                 </div>
               </div>
         </div></>

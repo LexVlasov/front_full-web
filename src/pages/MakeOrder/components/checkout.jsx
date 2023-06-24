@@ -1,7 +1,7 @@
 import { TextField } from '@mui/material';
 import styles from "../makeorder.module.scss";
 
-export const Checkout = ({order,count,delivery,returnData,paymentId}) =>{
+export const Checkout = ({order,totalSum,delivery,returnData,paymentId,newCount}) =>{
 
     const backHost = 
     process.env.REACT_APP_API_URL?process.env.REACT_APP_API_URL:
@@ -11,10 +11,10 @@ export const Checkout = ({order,count,delivery,returnData,paymentId}) =>{
     <>
                 <h3 className={styles.wayorderhead}>Заказ <b>№{returnData?returnData.id:''}</b> успешно оформлен</h3>
                 <div className={styles.way}>
-                    <p>Заказ <b>№{returnData?returnData.id:''}</b> на сумму <span className={styles.endsumorder}>{(count ? count.map((obj,i)=> obj.sum):[]).reduce((a,b)=>a+b,0)}</span> успешно создан. В ближайшее время с Вами свяжется наш менеджер для подтверждения заказа и уточнения деталей  </p>
+                    <p>Заказ <b>№{returnData?returnData.id:''}</b> на сумму <span className={styles.endsumorder}>{totalSum}</span> успешно создан. В ближайшее время с Вами свяжется наш менеджер для подтверждения заказа и уточнения деталей  </p>
 
                     <h3 className={styles.wayorderhead}>Детали заказа</h3> 
-                    <p><i>Доставка:</i><b> {delivery[0].name} ({(delivery[0].free_delivery<(count ? count.map((obj,i)=> obj.sum):[]).reduce((a,b)=>a+b,0)?'Бесплатно':delivery[0].price)})</b></p>
+                    <p><i>Доставка:</i><b> {delivery[0].name} ({(delivery[0].free_delivery<totalSum?'Бесплатно':delivery[0].price)})</b></p>
                     <p><i>Способ оплаты:</i><b> {paymentId[0].name}</b></p>
                     <p><i>Контактный номер:</i><b> {order[0].phone}</b></p>      
                     <p><i>Адрес доставки:</i><b> {order[0].address_1 + ', ' + order[0].address_2}</b></p>
@@ -22,7 +22,7 @@ export const Checkout = ({order,count,delivery,returnData,paymentId}) =>{
                     <h3 className={styles.wayorderhead}>Заказ</h3> 
                     <div className={styles.detailmainorder}>
                         <div className={styles.productlistcheckout}>
-                        {count.map((obj,ind)=>(
+                        {newCount.map((obj,ind)=>(
                             <>
                         <div className={styles.mainorder}>
                             <a href={`/good/${obj.id}`}><img src={`${backHost}${obj.avatar}`} className={styles.imagekda}></img></a>

@@ -24,14 +24,6 @@
     }
 }
 
-// .buttonsmobile{
-//     display: flex;
-//     // justify-content: space-evenly;
-
-//     a{
-//         text-decoration: none;
-//     }
-// }
 
 .newpost{
     color: #ffffff;
@@ -43,16 +35,6 @@
     }
 }
 
-// .newpostmobile{
-//     color: #000000;
-//     width: 10%;
-//     vertical-align: middle;
-//     font-size: 6px;
-//     opacity: 0.6;
-//     &:hover{
-//         opacity: 1;  
-//     }
-// }
 
 .icon{
     width:20px;
@@ -61,6 +43,22 @@
 }
 
 .iconmobile{
-    width:5px;
-    height:5px;
+    height: 100%;
+    width: 60px;
+    background-color: #30374c;
+    color: #ffffff;
+    border: none;
+    font-size: 30px;
 }
+
+.textheadmobile{
+    font-size: 30px;
+    color: #ffffff;
+    text-align: right;
+    width: 80%;
+    height: 60px;
+    display: inline-block;
+} 
+ .limobile{
+    color: #000;
+ }

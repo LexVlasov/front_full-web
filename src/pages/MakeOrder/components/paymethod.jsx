@@ -52,9 +52,7 @@ export const Paymethod = ({
                 }
             )
             newOrder[0].pay_id = obj.id;
-            if(obj.id===5||obj.id===6||obj.id===3){
-                newOrder[0].discount = 5;
-            }
+
             setPaymentId(payemntMethod);
             setOrder(newOrder);
         }
@@ -67,9 +65,6 @@ export const Paymethod = ({
                 }
             )
             newOrder[0].pay_id = obj.id;
-            if(obj.id===5||obj.id===6||obj.id===3){
-                newOrder[0].discount = 5;
-            }
             setPaymentId(payemntMethod);
             setOrder(newOrder);
         };
