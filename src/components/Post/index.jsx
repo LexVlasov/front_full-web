@@ -82,7 +82,7 @@ export const Post = ({
           <div className={styles.ratingprice}>
                 <Rating 
                     name="size-small"
-                    value={2.5}
+                    value={5}
                     size="small"
                     precision={0.5}
                     readOnly 

@@ -73,7 +73,7 @@ export const HeaderMobile = ()=>{
     const [menu,setMenu] = useState(1);
     const dispatch = useDispatch();
     const {types} = useSelector((state)=>state.goods);
-    const isTypesLoading = types.status === 'loading';
+    const isTypesLoading = types.status === 'loaded';
     React.useEffect(()=>{
         dispatch(fetchTypes());
     },[]);
@@ -84,7 +84,7 @@ export const HeaderMobile = ()=>{
             setMenu(1);
         }
     }
-    console.log(types);
+
     return (
         <>
         <div className={styles.rootmobile}>
@@ -95,11 +95,12 @@ export const HeaderMobile = ()=>{
             <span className={styles.textheadmobile}><b>One Pill</b></span>
         </div>
         {menu ===2 ? 
-            <ul>
-                {(!isTypesLoading ? types.items:[...Array(5)]).map((obj,ind)=>(
-                    (!isTypesLoading ? 
+            <ul className={styles.ulmobile}>
+                {(isTypesLoading ? types.items:[...Array(5)]).map((obj,ind)=>(
+                    (isTypesLoading ? 
                         <li className={styles.limobile} key={ind}>{obj.lvl1_type}</li>
-                        : '')
+                        : <li className={styles.limobile}>1</li>
+                        )
                 ))}
             </ul>
         :''}
