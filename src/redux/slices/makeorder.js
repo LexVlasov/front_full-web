@@ -19,20 +19,20 @@ const paymentSlice = createSlice({
     reducers:{
 
     },
-    extraReducers:{
-        // Получение статей
-        [fetchReturnData.pending]:(state)=>{
+    extraReducers:(builder)=>{
+        builder
+        .addCase(fetchReturnData.pending,(state)=>{
             state.data = null;
             state.status='loading';
-        },
-        [fetchReturnData.fulfilled]:(state,action)=>{
+        })
+        .addCase(fetchReturnData.fulfilled,(state,action)=>{
             state.data = action.payload;
             state.status='loaded';
-        },
-        [fetchReturnData.rejected]:(state)=>{
+        })
+        .addCase(fetchReturnData.rejected,(state)=>{
             state.data = null;
             state.status='error';
-        },
-    }
+        });
+    },
 });
 export const orderReducer = paymentSlice.reducer;

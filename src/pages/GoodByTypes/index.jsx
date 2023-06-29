@@ -1,7 +1,7 @@
 import React from 'react';
 import Grid from '@mui/material/Grid';
 
-import { Post } from "../../components/Post";
+import { Post,PostMobile } from "../../components/Post";
 import { TypesBlock } from '../../components/BlockTypes';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchGoodsbyType, fetchTypes } from '../../redux/slices/posts';
@@ -92,3 +92,79 @@ export const GoodsByType = ({count, setCount,setUrl}) => {
 
   );
 };
+
+
+
+export const GoodsByTypeMobile = ({count, setCount}) => {
+  const backHost = 
+  process.env.REACT_APP_API_URL
+  const dispatch = useDispatch();
+  const {type} = useParams();
+  const {allgood} = useSelector((state) => state.goods);
+  const isPostsLoading =allgood.status==='loading';
+
+  const [currentPage, setCurrentPage] = React.useState(1);
+  const [itemsPerPage, setItemsPerPage] = React.useState(12);
+
+  const indexOfLastItem = currentPage * itemsPerPage;
+  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+  const currentItems = [...allgood.items].slice(indexOfFirstItem, indexOfLastItem);
+
+  const pageNumbers = [];
+  for (let i = 1; i <= Math.ceil(allgood.items.length / itemsPerPage); i++) {
+    pageNumbers.push(i);
+  }
+
+  React.useEffect(()=>{
+    dispatch(fetchGoodsbyType(type));
+  },[type]);
+
+  const handleClick = (event) => {
+    setCurrentPage(Number(event.target.value));
+  };
+
+
+
+
+  return (
+
+
+    <>
+    <div className={styles.rootmobile}>
+          {pageNumbers.map((number) => (
+            <button key={number} value={number} onClick={handleClick} className={currentPage===number ? styles.activepagemobile : styles.pagemobile}>
+            {number}
+          </button> 
+          ))}      
+            </div><div className={styles.rootmobile}>                 
+            {(isPostsLoading?[...Array(5)]:currentItems).map((obj,index) => isPostsLoading ? (
+                <Post key={index} isLoading={true}/>
+              ) : (
+              
+
+                <PostMobile 
+                  key={index}
+                  id={obj._id}
+                  title={obj.name}
+                  imageUrl={obj.info[0].avatarUrl ? `${backHost}${obj.info[0].avatarUrl[0]}`:''} 
+                  price={obj.price[(obj.price.length)-1].p}
+                  viewsCount={obj.viewsCount}
+                  // commentsCount={obj.commentsCount}
+                  // tags={obj.tags}
+                  // isEditable={userData?._id === obj.user._id}
+                  count={count} setCount={setCount}
+                />
+
+              ))}</div> 
+              <Grid item container justifyContent="center" alignItems="center" sx={{ mt: 2 ,mb:4}} xs={12} md={12} lg={12} >
+          {pageNumbers.map((number) => (
+            <button key={number} value={number} onClick={handleClick} className={currentPage===number ? styles.activepage : styles.page}>
+              {number}
+            </button> 
+          ))}      
+            </Grid>   
+
+            </>
+  );
+};
+

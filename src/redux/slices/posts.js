@@ -47,55 +47,45 @@ const goodsSlice = createSlice({
     reducers:{
 
     },
-    extraReducers:{
-        // Получение статей
-        [fetchGoods.pending]:(state)=>{
+    extraReducers: (builder) => {
+        builder
+          .addCase(fetchGoods.pending, (state) => {
             state.allgood.items = [];
-            state.allgood.status='loading';
-        },
-        [fetchGoods.fulfilled]:(state,action)=>{
-
+            state.allgood.status = 'loading';
+          })
+          .addCase(fetchGoods.fulfilled, (state, action) => {
             state.allgood.items = action.payload;
-            state.allgood.status='loaded';
-        },
-        [fetchGoods.rejected]:(state)=>{
+            state.allgood.status = 'loaded';
+          })
+          .addCase(fetchGoods.rejected, (state) => {
             state.allgood.items = [];
-            state.allgood.status='error';
-        },
-        // Получение типов
-        [fetchTypes.pending]:(state)=>{
+            state.allgood.status = 'error';
+          })
+          .addCase(fetchTypes.pending, (state) => {
             state.types.items = [];
-            state.types.status='loading';
-        },
-        [fetchTypes.fulfilled]:(state,action)=>{
-
+            state.types.status = 'loading';
+          })
+          .addCase(fetchTypes.fulfilled, (state, action) => {
             state.types.items = action.payload;
-            state.types.status='loaded';
-        },
-        [fetchTypes.rejected]:(state)=>{
+            state.types.status = 'loaded';
+          })
+          .addCase(fetchTypes.rejected, (state) => {
             state.types.items = [];
-            state.types.status='error';
-        },
-        // // Удаление статей
-        // [fetchRemovePost.pending]:(state, action)=>{
-        //     state.posts.items = state.posts.items.filter(obj => obj._id !== action.meta.arg);
-        // },
-        //Получение статей по тэгу
-        [fetchGoodsbyType.pending]:(state)=>{
+            state.types.status = 'error';
+          })
+          .addCase(fetchGoodsbyType.pending, (state) => {
             state.allgood.items = [];
-            state.allgood.status='loading';
-        },
-        [fetchGoodsbyType.fulfilled]:(state,action)=>{
-
+            state.allgood.status = 'loading';
+          })
+          .addCase(fetchGoodsbyType.fulfilled, (state, action) => {
             state.allgood.items = action.payload;
-            state.allgood.status='loaded';
-        },
-        [fetchGoodsbyType.rejected]:(state)=>{
+            state.allgood.status = 'loaded';
+          })
+          .addCase(fetchGoodsbyType.rejected, (state) => {
             state.allgood.items = [];
-            state.allgood.status='error';
-        },
-
-    }
-})
-
-export const goodsReducer = goodsSlice.reducer;
+            state.allgood.status = 'error';
+          });
+      },
+    });
+    
+    export const goodsReducer = goodsSlice.reducer;

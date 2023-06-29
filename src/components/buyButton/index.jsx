@@ -48,3 +48,50 @@ export const BuyButton = ({
         </>
     );
 };
+
+
+export const BuyButtonMobile = ({
+    totalSum,
+    value,
+    flgCart,
+    addToCart,
+    catValue
+}) =>{
+    
+
+    let nameCnt = 'таблеток';
+    if(catValue > 1 && catValue <5){
+        nameCnt = 'таблетки'
+    } else if (catValue>=5) {
+        nameCnt = 'таблеток'
+    } 
+    console.log(catValue);
+    return(
+        <>
+        <div className={styles.maininfomobile}>
+        <div className={styles.totaltitlemob}>Итого:</div>
+        <div className={styles.infototalmob}>
+          <div className={styles.pricetotalmobile}><b>{totalSum}</b></div>
+          <div className={styles.undertotalmobile}>за {value} табл.</div>
+        </div>
+        
+        {<div className={styles.divtablecell}>
+        <TableCell className={styles.infoabcartmobile}> В корзине уже {catValue} {nameCnt} этого препарата</TableCell> </div>
+        }
+        {/* {flgCart 
+        ? 
+        ( */}
+        <>
+             <button className={styles.buttonbuy} onClick={addToCart}><ShoppingCart sx={{mr:1,color:"#fff"}}/>В КОРЗИНУ</button>
+            <a href="/checkout"><button className={styles.oneclick}><CreditScoreIcon sx={{mr:1,color:"#fff"}} />ОФОРМИТЬ</button></a>
+            
+        </>
+        {/* )
+         :
+        (<><button className={styles.buttonbuy} onClick={addToCart}><AutorenewIcon sx={{mr:1,color:"#fff"}}/>ОБНОВИТЬ</button>
+        <button className={styles.oneclick}>Купить в 1 клик</button> </>)
+        } */}
+        </div>
+        </>
+    );
+};

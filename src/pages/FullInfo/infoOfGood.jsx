@@ -1,5 +1,5 @@
 import React from "react";
-import styles from "./fullInfo.module.scss"
+import styles from "./fullInfo.module.scss";
 import RemoveIcon from '@mui/icons-material/Remove';
 import AddIcon from '@mui/icons-material/Add';
 import { Box } from "@mui/system";
@@ -10,8 +10,9 @@ import TableCell from '@mui/material/TableCell';
 import TableRow from '@mui/material/TableRow';
 import TableContainer from '@mui/material/TableContainer';
 import { Button, ButtonGroup, TableHead, TextField } from "@mui/material";
-import { BuyButton } from "../../components";
+import { BuyButton,BuyButtonMobile } from "../../components";
 import {useParams} from 'react-router-dom';
+import {TopInfo, BuyButtonAndTable} from "./topinfo";
 
 
 
@@ -134,6 +135,11 @@ export const InfoOfGood = ({
                           <div className={styles.undercount}>Кол-во шт.</div>
                         </ButtonGroup>
                       </Box>
+                      <div className={styles.totaltitle}>Итого:</div>
+                      <div className={styles.infototal}>
+                        <div className={styles.pricetotal}>{value*currentPrice}</div>
+                        <div className={styles.undertotal}>за {value} табл.</div>
+                      </div>
                       <TableContainer  sx={{ m:"0 auto",minHeight:"10px",padding:0, pt:5 }}>
                       <Table aria-label="customized table">
                       
@@ -164,6 +170,7 @@ export const InfoOfGood = ({
                       </Table>
                       </TableContainer>
                   </Grid>
+                    
                   <Grid item lg={4.2} sx={{pl:2,pr:2}}>
                   <BuyButton 
                       value={value} 
@@ -173,6 +180,174 @@ export const InfoOfGood = ({
                       id={id}
                       catValue={catValue}/>
                   </Grid>
+                 <Grid item lg={12} sx={{pt:5}}>
+                  <ul class="nav nav-tabs nav-justified" id="myTab" role="tablist">
+                    <li class="nav-item" role="presentation">
+                      <button  className={selectBut === 'discription' ? styles.headselection:styles.headdisable} onClick={()=>setSelectBut("discription")}>Описание</button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                      <button  className={selectBut === 'annotation' ? styles.headselection:styles.headdisable} onClick={()=>setSelectBut("annotation")}>Аннотация</button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                      <button  className={selectBut === 'instruction' ? styles.headselection:styles.headdisable} onClick={()=>setSelectBut("instruction")}>Инструкция</button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                      <button className={selectBut === 'rewiev' ? styles.headselection:styles.headdisable} onClick={()=>setSelectBut("rewiev")}>Отзывы</button>
+                    </li>
+                  </ul>
+                  <div className={styles.maindiv}>
+                    {selectBut === 'discription' && <div >
+                      <button onClick={()=>setSelectBut("annotation")} className={styles.anotherannotation}>Показать аннотацию и оновную информацию по препарату "{data.info[0].name}"</button>
+                      {data.info[0].about.map((obj,key)=>(
+                        <div>
+                        <h5 className={styles.h5title}>{obj.title}</h5>
+                      {obj.info.map((item,index)=>(
+                          ( item.includes(';') ? 
+                          ( <ul >{
+                            item.split(';').map((li,lik)=>
+                              <li>{li}</li>)}
+                              </ul>)
+                          
+                          :     
+                          (<p>{item}</p>))
+                          
+                      ))}
+                      </div>
+                      ))}
+
+                    </div>}
+                  {selectBut === 'annotation' &&  <div>
+                      {data.f.map((obj,ind)=>(
+                        <><h5 className={styles.h5annotation}>{obj.title}</h5>
+                        <p> - {obj.text}</p></>
+
+                      ))}
+                      
+                    </div>}
+                    {selectBut === 'instruction' && <div >
+                      <object  type="application/pdf" data={`${backHost}${data.info[0].description}`} style={{width:"100%",height:"800px"}}></object> 
+                    </div>}
+                    {selectBut === 'rewiev' && <div >Пока нет отзывов</div>}
+                  </div>
+                  </Grid>       
+                  </>
+    )
+  };
+
+
+
+
+
+  export const InfoOfGoodMobile = ({
+    data,
+    count,
+    setCount,
+    backHost
+    }) => {
+
+      const {id} = useParams();
+      const [value,setValue] = React.useState(parseInt(data.default_q));
+      const [flgCart,setFlgCart] = React.useState(false);
+      const [selectBut,setSelectBut] = React.useState('discription');
+      const [image,setImage] = React.useState(0);
+
+      let currentPrice = data.price[0].p;
+      
+      for (var i = 0; i < data.price.length;i++){
+        if(parseInt(data.price[i].n)<=value){
+          currentPrice = data.price[i].p;
+        }
+      };
+
+    let catValue = 0;
+    if(count){
+      count.some(obj => obj.id === id ? catValue = obj.cnt : catValue = 0);
+    }
+    
+    const increaseItem = async ()=> {
+        let oldVal = value;
+        setValue(oldVal+=data.step_q);
+    };
+
+    const dicreaseItem = async () =>{
+      if(value<=data.min_q){
+        setValue(parseInt(data.min_q));
+      } else{
+        let oldVal = value;
+        setValue(oldVal-=data.step_q);
+      }
+    };
+
+    const getText = async (e) =>{
+
+         if((parseInt(e)<=0)||(!e)){
+          setValue(parseInt(data.min_q));
+        }
+        else{
+          setValue(parseInt(e));
+        }
+        
+        
+    };
+    const addGoodToCart = async ()=>{
+
+      const items ={
+        id,
+        cnt:value,
+        "maxPrice":currentPrice,
+        sum: value*parseInt(currentPrice),
+        product_id:data.id,
+        discount:data.discount,
+        kda:data.kda,
+        price:data.price,
+        step_q:data.step_q,
+        min_q:data.min_q,
+        avatar:data.info[0].avatarUrl[0],
+        type:data.info[0].type,
+        name:data.name,
+
+      };
+      
+      let oldCount = [...count];
+      let prodIn = oldCount.findIndex((p)=> p.id === items.id);
+      if (prodIn===-1 && value!==0){
+        
+        oldCount.push(items);
+        setCount(oldCount);
+        setFlgCart(true)
+      } else if (value!==0){
+
+        oldCount[prodIn].cnt =value;
+        oldCount[prodIn].sum = value* parseInt(currentPrice);
+        oldCount[prodIn].maxPrice = currentPrice;
+        setCount(oldCount);
+      } else{
+        setFlgCart(false)
+        setCount(oldCount.filter(item=>item.id !== oldCount[prodIn].id));
+      }
+      catValue = value;
+    };
+
+    return(
+        <>  
+        <TopInfo data={data} backHost={backHost} setImage={setImage} image={image}/>
+                   <BuyButtonAndTable 
+                    data={data}
+                    currentPrice={currentPrice}
+                    dicreaseItem={dicreaseItem}
+                    value={value}
+                    getText={getText}
+                    increaseItem={increaseItem}
+                   />
+
+                  <BuyButtonMobile 
+                      value={value} 
+                      totalSum={value*currentPrice} 
+                      flgCart={flgCart} 
+                      addToCart={addGoodToCart} 
+                      id={id}
+                      catValue={catValue}/>
+
                  <Grid item lg={12} sx={{pt:5}}>
                   <ul class="nav nav-tabs nav-justified" id="myTab" role="tablist">
                     <li class="nav-item" role="presentation">

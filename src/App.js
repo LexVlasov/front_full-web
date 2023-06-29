@@ -2,7 +2,7 @@
 import {Routes, Route} from 'react-router-dom';
 import Container from '@mui/material/Container';
 import { Header, MainInfo, Middle, Footer,PreFooter, UnderMiddle,HeaderMobile } from './components';
-import { Home, FullPost, GoodsByType,ShoppingCart,PopularGoods,Sale,AboutCompany,Contact,MakeOrder, Registration } from './pages';
+import { Home, FullPost, GoodsByType,ShoppingCart,PopularGoods,Sale,AboutCompany,Contact,MakeOrder, GoodsByTypeMobile,FullPostMobile } from './pages';
 import React, { useState } from 'react';
 
 
@@ -74,25 +74,20 @@ function App() {
       :
       ( 
       <><HeaderMobile/>
-      {/* <Container sm={6}>
-      <MainInfo count={count}/>
-      </Container>
-      <Middle count={count}/>
-      <UnderMiddle count={count} url={url}/>
-      <Container sm={6}>
+      <Container>
         <Routes>
-        <Route path="/" element={<Home count={count} setCount={setCount} setUrl={setUrl}/>} /> 
-        <Route path="/good/:id" element={<FullPost count={count} setCount={setCount} setUrl={setUrl} url={url}/>} />
-        <Route path="/types/:type" element={<GoodsByType count={count} setCount={setCount} setUrl={setUrl}/>} />
-        <Route path="/cart/" element={<ShoppingCart count={count} setCount={setCount} setUrl={setUrl}/>} />
-        <Route path="/popular" element={<PopularGoods count={count} setCount={setCount} setUrl={setUrl}/>}/>
-        <Route path="/sale" element={<Sale count={count} setCount={setCount} setUrl={setUrl}/>}/>
-        <Route path="/about" element={<AboutCompany setUrl={setUrl}/>}/>
-        <Route path="/contact" element={<Contact setUrl={setUrl}/>}/>
+        {/* <Route path="/" element={<Home count={count} setCount={setCount} />} />  */}
+        <Route path="/good/:id" element={<FullPostMobile count={count} setCount={setCount}  />} />
+        <Route path="/types/:type" element={<GoodsByTypeMobile count={count} setCount={setCount} />} />
+        <Route path="/cart/" element={<ShoppingCart count={count} setCount={setCount} />} />
+        <Route path="/popular" element={<PopularGoods count={count} setCount={setCount} />}/>
+        <Route path="/sale" element={<Sale count={count} setCount={setCount} />}/>
+        <Route path="/about" element={<AboutCompany />}/>
+        <Route path="/contact" element={<Contact />}/>
         </Routes>
       </Container>
       <PreFooter/>
-      <Footer/> */}
+      <Footer/>
       </>
       ))
       }

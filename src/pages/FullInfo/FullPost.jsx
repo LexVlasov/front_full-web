@@ -8,7 +8,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Box } from "@mui/system";
 import  Grid  from "@mui/material/Grid";
 import { TypesBlock } from "../../components/BlockTypes";
-import {InfoOfGood} from "./infoOfGood";
+import {InfoOfGood,InfoOfGoodMobile} from "./infoOfGood";
 
 export const FullPost = ({count,setCount, setUrl}) => {
 
@@ -68,3 +68,56 @@ export const FullPost = ({count,setCount, setUrl}) => {
   );
 };
 
+
+
+export const FullPostMobile = ({count,setCount}) => {
+
+  const {types} = useSelector((state) => state.goods);
+  const backHost = 
+  process.env.REACT_APP_API_URL?process.env.REACT_APP_API_URL:
+  'http://localhost:4444';
+  const [data,setData] = React.useState();
+  
+  const [isLoading,setLoading] = React.useState(true);
+  const {id} = useParams();
+  const dispatch = useDispatch();
+  const isTagsLoading =types.status==='loading';
+  
+  React.useEffect(()=>{
+    axios.get(`/good/${id}`).then(res=>{
+      setData(res.data);
+      setLoading(false);   
+    }).catch((err)=>{
+      console.warn(err);
+      alert('Error in getting post');
+    });
+    dispatch(fetchTypes());
+  },[]);
+
+
+  if(isLoading){
+    return <Post isLoading={isLoading} isFullPost/>;
+  }
+ 
+
+  return (
+
+
+    <Box sx={{ flexGrow: 1 }}>
+       <Grid container spacing={1} alignItems="flex-start">
+
+          <div  className={styles.root}>
+          <InfoOfGoodMobile 
+            data={data}
+            count={count}
+            setCount={setCount}
+            backHost={backHost}
+          />
+          </div>            
+       </Grid>
+                      
+      </Box>
+      
+
+  );
+};

@@ -20,3 +20,33 @@
         background-color: #316bb162;
     }
 }
+
+
+.activepagemobile{
+    background-color: #316ab1;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    margin: 0 1em 0 1em;
+    width: 20%;
+    height: 20%;
+}
+
+.pagemobile{
+    // border: 1px solid #316bb162;
+    border: none;
+    background-color: #fff;
+    margin: 0 1em 0 1em;
+    width: 20%;
+    border-radius: 8px;
+    height: 20%;
+    &:hover{
+        background-color: #316bb162;
+    }
+}
+
+.rootmobile{
+    width: 100%;
+    text-align: center;
+    margin-top: 10px;
+}

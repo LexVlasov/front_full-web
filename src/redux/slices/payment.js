@@ -21,22 +21,22 @@ const paymentSlice = createSlice({
     reducers:{
 
     },
-    extraReducers:{
-        // Получение статей
-        [fetchPayment.pending]:(state)=>{
+    extraReducers:(builder)=>{
+        builder
+        .addCase(fetchPayment.pending,(state)=>{
             state.payment.items = [];
             state.payment.status='loading';
-        },
-        [fetchPayment.fulfilled]:(state,action)=>{
+        })
+        .addCase(fetchPayment.fulfilled,(state,action)=>{
 
             state.payment.items = action.payload;
             state.payment.status='loaded';
-        },
-        [fetchPayment.rejected]:(state)=>{
+        })
+        .addCase(fetchPayment.rejected,(state)=>{
             state.payment.items = [];
             state.payment.status='error';
-        },
-    }
-})
+        });
+    },
+});
 
 export const paymentReducer = paymentSlice.reducer;

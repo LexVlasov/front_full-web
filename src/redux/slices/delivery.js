@@ -20,22 +20,22 @@ const deliverySlice = createSlice({
     reducers:{
 
     },
-    extraReducers:{
-        // Получение статей
-        [fetchDelivery.pending]:(state)=>{
+    extraReducers:(builder)=>{
+        builder
+        .addCase(fetchDelivery.pending,(state)=>{
             state.delivery.items = [];
             state.delivery.status='loading';
-        },
-        [fetchDelivery.fulfilled]:(state,action)=>{
+        })
+        .addCase(fetchDelivery.fulfilled,(state,action)=>{
 
             state.delivery.items = action.payload;
             state.delivery.status='loaded';
-        },
-        [fetchDelivery.rejected]:(state)=>{
+        })
+        .addCase(fetchDelivery.rejected,(state)=>{
             state.delivery.items = [];
             state.delivery.status='error';
-        },
-    }
+        });
+    },
 })
 
 export const deliveryReducer = deliverySlice.reducer;

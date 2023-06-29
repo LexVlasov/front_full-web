@@ -3,6 +3,7 @@ $blue: #316ab1;
 .root {
   background-color: #fff;
   border: 1px solid #dedede;
+ 
   border-radius: 6px;
   overflow: hidden;
   margin: 5px;
@@ -194,4 +195,12 @@ $blue: #316ab1;
   border-radius: 10px;
   opacity: 0;
   transition: all 0.15s ease-in-out;
+}
+
+
+
+.rootmobile {
+  background-color: #fff;
+  border: 1px solid #dedede;
+  margin-bottom: 10px;
 }

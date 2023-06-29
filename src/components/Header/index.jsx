@@ -74,16 +74,30 @@ export const HeaderMobile = ()=>{
     const dispatch = useDispatch();
     const {types} = useSelector((state)=>state.goods);
     const isTypesLoading = types.status === 'loaded';
+    const [group,setGroup] = useState(1);
+
     React.useEffect(()=>{
         dispatch(fetchTypes());
     },[]);
+    const ChooseType = (lvl1)=>{
+        if(group!==lvl1){
+            setGroup(lvl1);
+        }
+    };
     const ClickMenu = () =>{
         if(menu === 1){
             setMenu(2);
         }else {
             setMenu(1);
+            setGroup(1);
         }
-    }
+    };
+
+    const LinkTo = () =>{
+        setMenu(1);
+        setGroup(1);
+    };
+
 
     return (
         <>
@@ -92,18 +106,29 @@ export const HeaderMobile = ()=>{
                 <button className={styles.iconmobile} onClick={ClickMenu}>&#9776;</button>
             : <button className={styles.iconmobile} onClick={ClickMenu}>&#10006;</button>
             }
-            <span className={styles.textheadmobile}><b>One Pill</b></span>
+            <Link to='/'><span className={styles.textheadmobile}><b>One Pill</b></span></Link>
         </div>
-        {menu ===2 ? 
+        <div>
+        {menu === 2 ? 
             <ul className={styles.ulmobile}>
                 {(isTypesLoading ? types.items:[...Array(5)]).map((obj,ind)=>(
                     (isTypesLoading ? 
-                        <li className={styles.limobile} key={ind}>{obj.lvl1_type}</li>
-                        : <li className={styles.limobile}>1</li>
+                        (
+                            group === 1 ? <li className={styles.limobile} key={ind} onClick={()=>ChooseType(obj.lvl1_type)}>{obj.lvl1_type}</li>
+                        :
+                          (group===obj.lvl1_type?
+                            obj.group_type.map((gr,i)=>(<li className={styles.limobile} key={i}>
+                                <Link to={`/types/${gr}`} onClick={LinkTo}>
+                                    <button className={styles.typemobilet}>{gr}</button>
+                                    </Link>
+                            </li>)) : '')
+                        )
+                        : ''
                         )
                 ))}
             </ul>
         :''}
+        </div>
         </>
     );
 };

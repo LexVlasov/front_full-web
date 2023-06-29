@@ -1,6 +1,6 @@
-export { GoodsByType } from "./GoodByTypes";
+export { GoodsByType,GoodsByTypeMobile } from "./GoodByTypes";
 export { Home } from "./Home/Home";
-export { FullPost } from "./FullInfo/FullPost";
+export { FullPost,FullPostMobile } from "./FullInfo/FullPost";
 export { AddPost } from "./AddPost";
 export { Registration } from "./Registration";
 export { Login } from "./Login";

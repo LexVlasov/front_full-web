@@ -62,11 +62,28 @@
 
 .ulmobile{
     list-style-type:none;
-
+    margin: 0;
+    padding: 0;
+    
 }
 
  .limobile{
     color: #000;
     height: 70px;
-    vertical-align: middle;
+    display: block;
+    line-height: 70px;
+    font-size: 20px;
+    padding-left: 5%;
+    border-bottom: 1px solid #b4b4b484;
+    &:hover{
+        background-color: #c4dedd; 
+    }
+
  }
+
+ .typemobilet{
+    color: #000000;
+    height: 70px;
+    background: transparent;
+    border: 0px;
+}
