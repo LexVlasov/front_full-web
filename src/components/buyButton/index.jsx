@@ -65,7 +65,7 @@ export const BuyButtonMobile = ({
     } else if (catValue>=5) {
         nameCnt = 'таблеток'
     } 
-    console.log(catValue);
+
     return(
         <>
         <div className={styles.maininfomobile}>

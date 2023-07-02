@@ -126,7 +126,7 @@ export const InfoOfGood = ({
                    <Grid item lg={3.4} comtainer alignItems="stretch" direction="column"> 
                       <Box sx={{fontSize:"12px", fontWeight:"900", opacity:"60%", letterSpacing:"0px"}}>Цена за шт:</Box>
                       <Box  className={styles.price}>{currentPrice}</Box>
-                      <Box sx={{display:"inline-block", verticalAlign:"middle", ml:"15px", mr:"15px", fontSize:"10px"}}>X</Box>  
+                      <Box sx={{display:"inline-block", verticalAlign:"middle", ml:"10px", mr:"10px", fontSize:"10px"}}>X</Box>  
                       <Box sx={{display:"inline-block", m:"0 auto",minHeight:"28px"}}>
                         <ButtonGroup sx={{verticalAlign:"middle", margin:"0 auto"}}>
                           <Button aria-label="reduce" style={{height:"28px", padding:0, minWidth:"30px",borderColor:"#2b91a7",backgroundColor:"#2b91a7",opacity:"70%"}} onClick={dicreaseItem}><RemoveIcon style={{height:"10px",width:"10px",color:"#fff"}}/> </Button>
@@ -135,11 +135,6 @@ export const InfoOfGood = ({
                           <div className={styles.undercount}>Кол-во шт.</div>
                         </ButtonGroup>
                       </Box>
-                      <div className={styles.totaltitle}>Итого:</div>
-                      <div className={styles.infototal}>
-                        <div className={styles.pricetotal}>{value*currentPrice}</div>
-                        <div className={styles.undertotal}>за {value} табл.</div>
-                      </div>
                       <TableContainer  sx={{ m:"0 auto",minHeight:"10px",padding:0, pt:5 }}>
                       <Table aria-label="customized table">
                       

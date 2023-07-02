@@ -12,7 +12,8 @@
     border-bottom: 1px solid #e0e0e0;
     margin-bottom: 10px;
     height: 60px;
-    width: 100%;   
+    width: 100%;
+    display: inline-block;   
 }
 
 .buttons{
@@ -54,12 +55,29 @@
 .textheadmobile{
     font-size: 30px;
     color: #ffffff;
-    text-align: right;
-    width: 80%;
-    height: 60px;
+    text-align: left;
+    width: 65%;
     display: inline-block;
 } 
 
+.cart{
+    color: #ffffff;
+    width: 10%;
+    height: 60px;
+    vertical-align: top;
+    text-align: right;
+} 
+.countitems{
+    color: #000;
+    border-radius: 10px;
+    width: 20px;
+    height: 20px;
+    margin-left: -5px;
+    text-align: center;
+    vertical-align: top;
+    background-color: #fff;
+    position: absolute;
+}
 .ulmobile{
     list-style-type:none;
     margin: 0;
@@ -87,3 +105,4 @@
     background: transparent;
     border: 0px;
 }
+

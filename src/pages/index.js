@@ -4,7 +4,7 @@ export { FullPost,FullPostMobile } from "./FullInfo/FullPost";
 export { AddPost } from "./AddPost";
 export { Registration } from "./Registration";
 export { Login } from "./Login";
-export  {ShoppingCart} from "./Cart";
+export  {ShoppingCart, ShoppingCartMobile} from "./Cart";
 export {PopularGoods} from "./Popular";
 export{Sale} from "./Sale";
 export {AboutCompany} from "./AboutCompany";

@@ -13,8 +13,11 @@ import QuestionMarkIcon from '@mui/icons-material/QuestionMark';
 import GppGoodIcon from '@mui/icons-material/GppGood';
 import RateReviewIcon from '@mui/icons-material/RateReview';
 import CallIcon from '@mui/icons-material/Call';
-import { Grid } from "@mui/material";
 import { fetchTypes } from "../../redux/slices/posts";
+import ShoppingCart from "@mui/icons-material/ShoppingCart";
+import Badge from '@mui/material/Badge';
+import { styled } from '@mui/material/styles';
+import IconButton from '@mui/material/IconButton';
 
 export const Header = ()=>{
 
@@ -69,7 +72,7 @@ export const Header = ()=>{
 };
 
 
-export const HeaderMobile = ()=>{
+export const HeaderMobile = ({count})=>{
     const [menu,setMenu] = useState(1);
     const dispatch = useDispatch();
     const {types} = useSelector((state)=>state.goods);
@@ -99,6 +102,8 @@ export const HeaderMobile = ()=>{
     };
 
 
+
+    console.log(count.length);
     return (
         <>
         <div className={styles.rootmobile}>
@@ -107,7 +112,8 @@ export const HeaderMobile = ()=>{
             : <button className={styles.iconmobile} onClick={ClickMenu}>&#10006;</button>
             }
             <Link to='/'><span className={styles.textheadmobile}><b>One Pill</b></span></Link>
-        </div>
+            <Link to='/cart'><span><ShoppingCart className={styles.cart}/> <span className={styles.countitems}><b>{count.length}</b></span> </span></Link>
+        </div> 
         <div>
         {menu === 2 ? 
             <ul className={styles.ulmobile}>

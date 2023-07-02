@@ -72,7 +72,7 @@ export const MakeOrder = ({count,setCount,setCurrentPath}) =>{
         }
         
     };
-    console.log(sumTotal);
+
     const backPage = async ()=>{
         const oldPage = page - 1;
         setPage(oldPage);
