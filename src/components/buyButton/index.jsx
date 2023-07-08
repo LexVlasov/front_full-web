@@ -53,18 +53,20 @@ export const BuyButton = ({
 export const BuyButtonMobile = ({
     totalSum,
     value,
-    flgCart,
     addToCart,
-    catValue
+    catValue,
+    am
 }) =>{
     
-
-    let nameCnt = 'таблеток';
+    const [cp,setCp] = React.useState(window.location.pathname);
+    let nameCnt = cp.substring(1)!=='cart'?'таблеток':'препаратов';
     if(catValue > 1 && catValue <5){
-        nameCnt = 'таблетки'
+        nameCnt = cp.substring(1)!=='cart'?'таблетки':'препарата';
     } else if (catValue>=5) {
-        nameCnt = 'таблеток'
-    } 
+        nameCnt = cp.substring(1)!=='cart'?'таблеток':'препаратов';
+    } else{
+        nameCnt = cp.substring(1)!=='cart'?'таблетка':'препарат';
+    }
 
     return(
         <>
@@ -76,21 +78,16 @@ export const BuyButtonMobile = ({
         </div>
         
         {<div className={styles.divtablecell}>
-        <TableCell className={styles.infoabcartmobile}> В корзине уже {catValue} {nameCnt} этого препарата</TableCell> </div>
-        }
-        {/* {flgCart 
-        ? 
-        ( */}
+        {cp.substring(1)!=='cart'?
+        <TableCell className={styles.infoabcartmobile}> В корзине уже {catValue} {nameCnt} этого препарата</TableCell> 
+        :
+        <TableCell className={styles.infoabcartmobile}> В корзине {am?am.length:0} {nameCnt}</TableCell> 
+        }</div>}
         <>
              <button className={styles.buttonbuy} onClick={addToCart}><ShoppingCart sx={{mr:1,color:"#fff"}}/>В КОРЗИНУ</button>
             <a href="/checkout"><button className={styles.oneclick}><CreditScoreIcon sx={{mr:1,color:"#fff"}} />ОФОРМИТЬ</button></a>
             
         </>
-        {/* )
-         :
-        (<><button className={styles.buttonbuy} onClick={addToCart}><AutorenewIcon sx={{mr:1,color:"#fff"}}/>ОБНОВИТЬ</button>
-        <button className={styles.oneclick}>Купить в 1 клик</button> </>)
-        } */}
         </div>
         </>
     );

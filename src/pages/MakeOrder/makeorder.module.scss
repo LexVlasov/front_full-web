@@ -154,6 +154,11 @@
   width: 50%;
   text-align: end;
 }
+
+.nextbuttonm{
+  width: 100%;
+  text-align: end;
+}
 .back{
   border: none;
   text-decoration: underline ;
@@ -189,7 +194,18 @@
   }
 }
 
-
+.returninshopm{
+  font-size: 18px;
+  border: none;
+  border-radius: 8px;
+  width:320px;
+  height: 40px;
+  background-color: #2b90a7c3;
+  color: #fff;
+  &:hover{
+    background-color: #2b90a7;
+  }
+}
 .nextdisabled{
   font-size: 18px;
   border: none;
@@ -213,6 +229,15 @@
   padding: 5px 0px 5px 0px;
   object-fit:contain;
 }
+
+.deliveryimgm{
+  width: 80px;
+  height: 80px;
+  margin: 0px 20px 0px 10px;
+  padding: 5px 0px 5px 0px;
+  object-fit:contain;
+}
+
 .divdescript{
   display: grid;
   text-align: left;
@@ -224,6 +249,16 @@
   color: #515050;
   height: 10px;
 }
+
+.namedeliverym{
+  padding-top: 10px;
+  font-style: italic ;
+  font-size: 14px;
+  font-weight: 600;
+  color: #515050;
+  height: 35px;
+}
+
 .descript{
   font-size: 14px;
   letter-spacing: 0px;
@@ -323,6 +358,12 @@
   display: grid;
 }
 
+.productlistm{
+  width: 50%;
+  // margin-bottom: 150px;
+  display: grid;
+}
+
 .productlistcheckout{
   min-width: 100%;
   // margin-bottom: 150px;
@@ -331,6 +372,10 @@
 .nameorder{
   font-weight: 400;
   font-size: 18px;
+}
+
+.nameorderm{
+  font-size: 14px;
 }
 
 .priceorder{
@@ -351,6 +396,11 @@
     padding-left: 2px;
 }
 }
+.totalpriceorderm{
+  display: flex;
+  font-weight: 700;
+  font-size: 12px;
+}
 .calculorder{
   display: flex;
   font-size: 12px;
@@ -361,6 +411,17 @@
     padding-left: 2px;
 }
 }
+
+.calculorderm{
+  display: flex;
+  font-size: 10px;
+  white-space: nowrap;
+  &:after{
+    content:  "\20BD";
+    font-size: 10px;
+}
+}
+
 .ts{
   display: flex;
 }
@@ -369,6 +430,13 @@
   height: 90px;
   // padding: 10px 20px 10px 20px;
 }
+
+.totalsumcntm{
+  width: 50%;
+  height: 90px;
+  // padding: 10px 20px 10px 20px;
+}
+
 .descripttotal{
   font-size: 14px;
   height: 24px;
@@ -415,6 +483,20 @@
   &:after{
     content: "\20BD";
     font-size: 20px;
+}
+}
+
+.totalpaym{
+  font-size: 18px;
+  height: 24px;
+  width: 40%;
+  font-weight: bold;
+  color: #2b90a7;
+  text-align: left;
+  padding: 2px 0px 0px 10px;
+  &:after{
+    content: "\20BD";
+    font-size: 18px;
 }
 }
 

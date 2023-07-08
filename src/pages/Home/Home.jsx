@@ -5,7 +5,7 @@ import { TypesBlock } from '../../components/BlockTypes';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchGoods, fetchTypes } from '../../redux/slices/posts';
 import { Box } from '@mui/system';
-import {Popular, Sales} from '../../components';
+import {Popular, Sales,PopularM,SalesM} from '../../components';
 import styles from "./home.module.scss"
 
 
@@ -16,7 +16,6 @@ export const Home = ({count,setCount,setUrl}) => {
   const dispatch = useDispatch();
   
   const {allgood,types} = useSelector((state) => state.goods);
-  const [test,SetTest] = React.useState();
   const isPostsLoading =allgood.status==='loading';
   const isTagsLoading =types.status==='loading';
   React.useEffect(()=>{
@@ -55,5 +54,42 @@ export const Home = ({count,setCount,setUrl}) => {
                            
       </Grid>                        
 </Box>
+  );
+};
+
+
+export const HomeMob = ({count,setCount}) => {
+  const backHost = 
+  process.env.REACT_APP_API_URL?process.env.REACT_APP_API_URL:
+  'http://localhost:4444';
+  const dispatch = useDispatch();
+  
+  const {allgood} = useSelector((state) => state.goods);
+  const isPostsLoading =allgood.status==='loading';
+  React.useEffect(()=>{
+    dispatch(fetchGoods());  
+   },[]);
+   console.log(allgood);
+  return (
+
+
+                    
+        <Grid item container xs={12} md={9} lg={9} spacing={4} style={{paddingLeft:"20px"}}>
+            <PopularM
+              isPostsLoading={isPostsLoading} 
+              allgood={allgood} 
+              backHost={backHost}
+              count={count}
+              setCount={setCount}/> 
+              <SalesM 
+              isPostsLoading={isPostsLoading} 
+              allgood={allgood} 
+              backHost={backHost}
+              count={count}
+              setCount={setCount}/>
+    
+            </Grid> 
+              
+
   );
 };

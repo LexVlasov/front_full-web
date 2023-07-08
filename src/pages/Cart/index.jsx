@@ -80,7 +80,7 @@ export const ShoppingCartMobile = ({count,setCount}) =>{
                   : <div className={styles.emptycart}>В корзине пока что пусто....</div>)}
               </div>
               <div>
-                  <BuyButtonMobile totalSum={totalSum.reduce((a,b)=>a+b,0)} value={totalCnt.reduce((a,b)=>a+b,0)} flgCart={true}/>
+                  <BuyButtonMobile totalSum={totalSum.reduce((a,b)=>a+b,0)} value={totalCnt.reduce((a,b)=>a+b,0)} am={count}/>
 
 
           </div>

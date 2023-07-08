@@ -2,12 +2,9 @@
 import {Routes, Route} from 'react-router-dom';
 import Container from '@mui/material/Container';
 import { Header, MainInfo, Middle, Footer,PreFooter, UnderMiddle,HeaderMobile } from './components';
-import { Home, FullPost, GoodsByType,ShoppingCart,PopularGoods,Sale,AboutCompany,Contact,MakeOrder, GoodsByTypeMobile,FullPostMobile,ShoppingCartMobile } from './pages';
+import { Home, HomeMob, FullPost, GoodsByType,ShoppingCart,PopularGoods,Sale,AboutCompany,Contact,MakeOrder,MakeOrderM, GoodsByTypeMobile,FullPostMobile,ShoppingCartMobile } from './pages';
 import React, { useState } from 'react';
 
-
-import { useDispatch, useSelector } from 'react-redux';
-import { fetchGoods, fetchTypes } from './redux/slices/posts';
 import MobileDetect from 'mobile-detect';
 
 
@@ -67,7 +64,7 @@ function App() {
       (
       <Container maxWidth="md">
         <Routes>
-          <Route path='/checkout' element={<MakeOrder count={count} setCount={setCount} setCurrentPath={setCurrentPath}/>}/>
+          <Route path='/checkout' element={<MakeOrderM count={count} setCount={setCount} setCurrentPath={setCurrentPath}/>}/>
         </Routes>
       </Container>
       )
@@ -76,7 +73,7 @@ function App() {
       <><HeaderMobile count={count}/>
       <Container>
         <Routes>
-        {/* <Route path="/" element={<Home count={count} setCount={setCount} />} />  */}
+        <Route path="/" element={<HomeMob count={count} setCount={setCount} />} /> 
         <Route path="/good/:id" element={<FullPostMobile count={count} setCount={setCount}  />} />
         <Route path="/types/:type" element={<GoodsByTypeMobile count={count} setCount={setCount} />} />
         <Route path="/cart/" element={<ShoppingCartMobile count={count} setCount={setCount} />} />

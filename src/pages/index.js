@@ -1,5 +1,5 @@
 export { GoodsByType,GoodsByTypeMobile } from "./GoodByTypes";
-export { Home } from "./Home/Home";
+export { Home, HomeMob } from "./Home/Home";
 export { FullPost,FullPostMobile } from "./FullInfo/FullPost";
 export { AddPost } from "./AddPost";
 export { Registration } from "./Registration";
@@ -9,4 +9,4 @@ export {PopularGoods} from "./Popular";
 export{Sale} from "./Sale";
 export {AboutCompany} from "./AboutCompany";
 export {Contact} from "./Contact";
-export {MakeOrder} from "./MakeOrder";
+export {MakeOrder,MakeOrderM} from "./MakeOrder";
