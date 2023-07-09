@@ -69,7 +69,7 @@ export const HomeMob = ({count,setCount}) => {
   React.useEffect(()=>{
     dispatch(fetchGoods());  
    },[]);
-   console.log(allgood);
+   
   return (
 
 

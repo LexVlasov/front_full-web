@@ -98,14 +98,13 @@ export const PopularM = ({
             <Post key={index} isLoading={true}/>
             </Grid> 
           ) : (
-            
-
+              console.log(obj.price[obj.price.length-1].p),
             <PostMobile
               key={index}
               id={obj._id}
               title={obj.name}
               imageUrl={obj.info[0].avatarUrl[0] ? `${backHost}${obj.info[0].avatarUrl[0]}`:''} 
-              price={obj.price[sortallGoods[0].price.length-1].p}
+              price={obj.price[obj.price.length-1].p}
               viewsCount={obj.viewsCount}
               count={count} setCount={setCount}
               maxPrice={obj.price[0].p}

@@ -87,7 +87,7 @@ export const HeaderMobile = ({count})=>{
 
 
 
-    console.log(count.length);
+
     return (
         <>
         <div className={styles.rootmobile}>
