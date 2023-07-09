@@ -74,7 +74,7 @@ export const HomeMob = ({count,setCount}) => {
 
 
                     
-        <Grid item container xs={12} md={9} lg={9} spacing={4} style={{paddingLeft:"20px"}}>
+        <div >
             <PopularM
               isPostsLoading={isPostsLoading} 
               allgood={allgood} 
@@ -88,7 +88,7 @@ export const HomeMob = ({count,setCount}) => {
               count={count}
               setCount={setCount}/>
     
-            </Grid> 
+            </div> 
               
 
   );
