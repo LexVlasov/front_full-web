@@ -21,7 +21,7 @@ export const Sale = ({
     const isTypesLoading =types.status==='loading';
     const isPostsLoading =allgood.status==='loading';
     const [currentPage, setCurrentPage] = React.useState(1);
-    const [itemsPerPage, setItemsPerPage] = React.useState(12);
+    const itemsPerPage = 12;
     
 
     const sortallGoods = (isPostsLoading ? Array(5): [...allgood.items]).sort((a, b) => parseInt(b.buysCount) - parseInt(a.buysCount)).slice(0,12);

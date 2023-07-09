@@ -21,7 +21,7 @@ export const PopularGoods = ({
     const isTypesLoading =types.status==='loading';
     const isPostsLoading =allgood.status==='loading';
     const [currentPage, setCurrentPage] = React.useState(1);
-    const [itemsPerPage, setItemsPerPage] = React.useState(12);
+    const itemsPerPage = 12;
     
 
     const sortallGoods = (isPostsLoading ? Array(5): [...allgood.items]).sort((a, b) => parseInt(b.buysCount) - parseInt(a.buysCount)).slice(0,12);
@@ -42,9 +42,6 @@ export const PopularGoods = ({
     setCurrentPage(Number(event.target.value));
   };
     setUrl('popular(Популярное');
-
-
-
     return(
         <Box sx={{ flexGrow: 1 }}>
        <Grid container spacing={2} alignItems="flex-start" >

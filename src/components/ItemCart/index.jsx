@@ -1,4 +1,4 @@
-import { Button, ButtonGroup, Link, TextField } from "@mui/material";
+import { Button, ButtonGroup, TextField } from "@mui/material";
 import React from "react";
 import styles from "./itemcart.module.scss";
 import RemoveIcon from '@mui/icons-material/Remove';
@@ -21,8 +21,6 @@ export const ItemCart = ({
   const backHost = 
   process.env.REACT_APP_API_URL?process.env.REACT_APP_API_URL:
   'http://localhost:4444';
-  const [value,setValue] = React.useState(5);
-
 
   var priceNow = price[0].p;
   for (var i = 0; i < price.length;i++){

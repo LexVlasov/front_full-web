@@ -3,7 +3,6 @@ import {Link} from 'react-router-dom';
 import styles from "./Header.module.scss";
 import Button from "@mui/material/Button";
 import Container from '@mui/material/Container';
-import { logout } from "../../redux/slices/auth";
 import { useDispatch, useSelector } from "react-redux";
 import InfoIcon from '@mui/icons-material/Info';
 import LocalShippingIcon from '@mui/icons-material/LocalShipping';
@@ -15,23 +14,8 @@ import RateReviewIcon from '@mui/icons-material/RateReview';
 import CallIcon from '@mui/icons-material/Call';
 import { fetchTypes } from "../../redux/slices/posts";
 import ShoppingCart from "@mui/icons-material/ShoppingCart";
-import Badge from '@mui/material/Badge';
-import { styled } from '@mui/material/styles';
-import IconButton from '@mui/material/IconButton';
 
 export const Header = ()=>{
-
-    const dispatch = useDispatch();
-    const onClickLogout = () =>{
-        if(window.confirm('Are you sure want to logout?')){
-            dispatch(logout());
-            window.localStorage.removeItem('token');
-        }
-        
-    };
-
-
-
     return (
         <div className={styles.root}>
             <Container maxWidth="lg">
