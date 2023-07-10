@@ -98,7 +98,6 @@ export const PopularM = ({
             <Post key={index} isLoading={true}/>
             </Grid> 
           ) : (
-              console.log(obj.price[obj.price.length-1].p),
             <PostMobile
               key={index}
               id={obj._id}
