@@ -28,7 +28,8 @@ export const Post = ({
   count,
   setCount,
   price,
-  maxPrice
+  maxPrice,
+  metacontent
 }) => {
 
   if (isLoading) {
@@ -76,6 +77,7 @@ export const Post = ({
       )}
       <div className={styles.wrapper}>
         <div className={styles.indention}>
+          <meta name="keywords" content={`${metacontent} купить, москва, санкт-петербург, волгоград`}></meta>
           <h2 className={clsx(styles.title, { [styles.titleFull]: isFullPost })}>
             {isFullPost ? title : <Link to={`/good/${title}`} >{title}</Link>}
           </h2>
@@ -137,7 +139,8 @@ export const PostMobile = ({
   count,
   setCount,
   price,
-  maxPrice
+  maxPrice,
+  metacontent
 }) => {
 
   if (isLoading) {
@@ -165,6 +168,7 @@ export const PostMobile = ({
       )}
       <div className={styles.wrapper}>
         <div className={styles.indention}>
+        <meta name="keywords" content={`${metacontent} купить, москва, санкт-петербург, волгоград`}></meta>
           <h2 className={clsx(styles.title, { [styles.titleFull]: isFullPost })}>
             {isFullPost ? title : <Link to={`/good/${title}`} >{title}</Link>}
           </h2>

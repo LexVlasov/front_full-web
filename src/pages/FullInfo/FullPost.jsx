@@ -39,7 +39,7 @@ export const FullPost = ({count,setCount, setUrl}) => {
     return <Post isLoading={isLoading} isFullPost/>;
   }
  
-
+  console.log(data)
   return (
 
 
@@ -52,6 +52,7 @@ export const FullPost = ({count,setCount, setUrl}) => {
   
           </Grid> 
           <Grid item container xs={12} md={9} lg={9} className={styles.root}>
+          <meta name="keywords" content={`${data.ie_search} купить, москва, санкт-петербург, волгоград`}></meta>
           <InfoOfGood 
             data={data}
             count={count}
