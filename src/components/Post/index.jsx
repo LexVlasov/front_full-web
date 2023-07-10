@@ -77,7 +77,7 @@ export const Post = ({
       <div className={styles.wrapper}>
         <div className={styles.indention}>
           <h2 className={clsx(styles.title, { [styles.titleFull]: isFullPost })}>
-            {isFullPost ? title : <Link to={`/good/${id}`} >{title}</Link>}
+            {isFullPost ? title : <Link to={`/good/${title}`} >{title}</Link>}
           </h2>
           <div className={styles.ratingprice}>
                 <Rating 
@@ -102,7 +102,7 @@ export const Post = ({
                       <span>{buysCount}</span>
                     </li>
                   </ul>
-                  <Link to={`/good/${id}`}>
+                  <Link to={`/good/${title}`}>
                   <Button 
                     className={styles.buy} 
                     // onClick={addToCart} 
@@ -166,7 +166,7 @@ export const PostMobile = ({
       <div className={styles.wrapper}>
         <div className={styles.indention}>
           <h2 className={clsx(styles.title, { [styles.titleFull]: isFullPost })}>
-            {isFullPost ? title : <Link to={`/good/${id}`} >{title}</Link>}
+            {isFullPost ? title : <Link to={`/good/${title}`} >{title}</Link>}
           </h2>
           <div className={styles.ratingprice}>
                 <Rating 
@@ -191,7 +191,7 @@ export const PostMobile = ({
                       <span>{buysCount}</span>
                     </li>
                   </ul>
-                  <Link to={`/good/${id}`}>
+                  <Link to={`/good/${title}`}>
                   <Button 
                     className={styles.buy} 
                     // onClick={addToCart} 
