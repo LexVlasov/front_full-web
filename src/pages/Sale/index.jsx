@@ -1,6 +1,6 @@
 import React from "react";
 import Grid from '@mui/material/Unstable_Grid2';
-import { Post } from '../../components/Post';
+import { Post,PostMobile } from '../../components/Post';
 import styles from './sale.module.scss';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchGoods, fetchTypes } from '../../redux/slices/posts';
@@ -89,4 +89,76 @@ export const Sale = ({
  </Box>
 
     )
+};
+
+export const SaleM = ({
+  count,
+  setCount,
+})=>{
+
+  const backHost = 
+   process.env.REACT_APP_API_URL?process.env.REACT_APP_API_URL:
+  'http://localhost:4444';
+  const dispatch = useDispatch();
+  const {allgood} = useSelector((state) => state.goods);
+  const isPostsLoading =allgood.status==='loading';
+  const [currentPage, setCurrentPage] = React.useState(1);
+  const itemsPerPage = 12;
+  
+
+  const sortallGoods = (isPostsLoading ? Array(5): [...allgood.items]).sort((a, b) => parseInt(b.buysCount) - parseInt(a.buysCount)).slice(0,12);
+  const indexOfLastItem = currentPage * itemsPerPage;
+  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+  const currentItems = [...sortallGoods].slice(indexOfFirstItem, indexOfLastItem);
+  const pageNumbers = [];
+for (let i = 1; i <= Math.ceil(sortallGoods.length / itemsPerPage); i++) {
+  pageNumbers.push(i);
+}
+
+React.useEffect(()=>{
+  dispatch(fetchGoods());
+
+},[]);
+
+const handleClick = (event) => {
+  setCurrentPage(Number(event.target.value));
+};
+
+  return(
+      <>
+                  
+        <Grid item container justifyContent="center" alignItems="center" sx={{ mt: 2 ,mb:4}} xs={12} md={12} lg={12}>
+        {pageNumbers.map((number) => (
+          <button key={number} value={number} onClick={handleClick} className={currentPage===number ? styles.activepage : styles.page}>
+          {number}
+        </button> 
+        ))}      
+          </Grid><div>                  
+          {(isPostsLoading?[...Array(5)]:currentItems).map((obj,index) => isPostsLoading ? (
+              <Post key={index} isLoading={true}/>
+            ) : (
+            
+              <Grid item xs={6} lg={4}> 
+              <PostMobile 
+                key={index}
+                id={obj._id}
+                title={obj.name}
+                imageUrl={obj.info[0].avatarUrl ? `${backHost}${obj.info[0].avatarUrl[0]}`:''} 
+                price={obj.price[(obj.price.length)-1].p}
+                viewsCount={obj.viewsCount}
+                count={count} setCount={setCount}
+                maxPrice={obj.price[0].p}
+              />
+              </Grid> 
+            ))}</div>
+            <Grid item container justifyContent="center" alignItems="center" sx={{ mt: 2 ,mb:4}} xs={12} md={12} lg={12} >
+        {pageNumbers.map((number) => (
+          <button key={number} value={number} onClick={handleClick} className={currentPage===number ? styles.activepage : styles.page}>
+            {number}
+          </button> 
+        ))} 
+        </Grid>     
+
+        </>
+  )
 }
