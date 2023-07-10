@@ -195,7 +195,7 @@ export const MakeOrder = ({count,setCount,setCurrentPath}) =>{
             {count.map((obj,ind)=>(
                 <>
             <div className={styles.mainorder}>
-                <a href={`/good/${obj.id}`}><img src={`${backHost}${obj.avatar}`} className={styles.imagekda} alt='img'></img></a>
+                <a href={`/good/${obj.name}`}><img src={`${backHost}${obj.avatar}`} className={styles.imagekda} alt='img'></img></a>
                 <div className={styles.infoorder}><h7 className={styles.nameorder}>{obj.name}</h7></div>
                 <div className={styles.priceorder}>
                     <div className={styles.priceorder}>
@@ -417,7 +417,7 @@ export const MakeOrderM = ({count,setCount,setCurrentPath}) =>{
             {count.map((obj,ind)=>(
                 <>
             <div className={styles.mainorder}>
-                <a href={`/good/${obj.id}`}><img src={`${backHost}${obj.avatar}`} className={styles.imagekda} alt='img'></img></a>
+                <a href={`/good/${obj.name}`}><img src={`${backHost}${obj.avatar}`} className={styles.imagekda} alt='img'></img></a>
                 <div className={styles.infoorder}><h7 className={styles.nameorderm}>{obj.name}</h7></div>
                 <div className={styles.priceorder}>
                     <div className={styles.priceorder}>

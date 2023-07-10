@@ -23,7 +23,7 @@ export const Sales = ({
     return(
         <>
         <div className={styles.head}>
-        <h4>Распродажа</h4>
+        <h4 className={styles.h4}>Распродажа</h4>
         <a className={styles.atext} href="/sale">Каталог препаратов</a>
         </div>
         {(isPostsLoading?[...Array(5)]:sortallGoods).map((obj,index) => isPostsLoading ? (
@@ -81,8 +81,8 @@ const handleStepChange = (obj) => {
   return(
       <>
       <div className={styles.head}>
-      <h4>Распродажа</h4>
-      <a className={styles.atext} href="/sale">Каталог препаратов</a>
+      <h4 className={styles.h4m}>Распродажа</h4>
+      <a className={styles.atextm} href="/sale">Каталог препаратов</a>
       </div>
       <Box sx={{ maxWidth: 360, flexGrow: 1 }}>
       <AutoPlaySwipeableViews

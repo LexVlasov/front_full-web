@@ -22,7 +22,6 @@ export const FullPost = ({count,setCount, setUrl}) => {
   const {id} = useParams();
   const dispatch = useDispatch();
   const isTagsLoading =types.status==='loading';
-  console.log(id);
   React.useEffect(()=>{
     axios.get(`/good/${id}`).then(res=>{
       setData(res.data);

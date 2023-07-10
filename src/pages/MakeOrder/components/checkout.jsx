@@ -25,7 +25,7 @@ export const Checkout = ({order,totalSum,delivery,returnData,paymentId,newCount}
                         {newCount.map((obj,ind)=>(
                             <>
                         <div className={styles.mainorder}>
-                            <a href={`/good/${obj.id}`}><img src={`${backHost}${obj.avatar}`} className={styles.imagekda}></img></a>
+                            <a href={`/good/${obj.name}`}><img src={`${backHost}${obj.avatar}`} className={styles.imagekda}></img></a>
                             <div className={styles.infoorder}><h7 className={styles.nameorder}>{obj.name}</h7></div>
                             <div className={styles.priceorder}>
                                 <div className={styles.priceorder}>

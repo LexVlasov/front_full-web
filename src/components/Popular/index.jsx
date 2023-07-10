@@ -24,7 +24,7 @@ export const Popular = ({
         <>
 
         <div className={styles.head}>
-        <h4>Популярное</h4>
+        <h4 className={styles.h4}>Популярное</h4>
         <a className={styles.atext} href="/popular">Каталог препаратов</a>
         </div>
         {(isPostsLoading?[...Array(5)]:sortallGoods).map((obj,index) => isPostsLoading ? (
@@ -82,8 +82,8 @@ export const PopularM = ({
       <>
 
       <div className={styles.head}>
-      <h4>Популярное</h4>
-      <a className={styles.atext} href="/popular">Каталог препаратов</a>
+      <h4 className={styles.h4m}>Популярное</h4>
+      <a className={styles.atextm} href="/popular">Каталог препаратов</a>
       </div>
       <div className={styles.rootmobile}>
       <Box sx={{ maxWidth: 360, flexGrow: 1 }}>
