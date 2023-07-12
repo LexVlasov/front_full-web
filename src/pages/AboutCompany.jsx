@@ -1,7 +1,4 @@
 import React from "react";
-
-
-
 import { fetchTypes } from '../redux/slices/posts';
 import { useDispatch, useSelector } from "react-redux";
 import { Box } from "@mui/system";

@@ -2,7 +2,25 @@
 import {Routes, Route} from 'react-router-dom';
 import Container from '@mui/material/Container';
 import { Header, MainInfo, Middle, Footer,PreFooter, UnderMiddle,HeaderMobile } from './components';
-import { Home, HomeMob, FullPost, GoodsByType,ShoppingCart,PopularGoods,Sale,AboutCompany,Contact,MakeOrder,MakeOrderM, GoodsByTypeMobile,FullPostMobile,ShoppingCartMobile,SaleM,PopularGoodsM } from './pages';
+import { Home
+  , HomeMob
+  , FullPost
+  , GoodsByType
+  ,ShoppingCart
+  ,PopularGoods
+  ,Sale
+  ,AboutCompany
+  ,Contact
+  ,MakeOrder
+  ,MakeOrderM
+  , GoodsByTypeMobile
+  ,FullPostMobile
+  ,ShoppingCartMobile
+  ,SaleM
+  ,PopularGoodsM
+  ,Refund
+  ,Delivery
+   } from './pages';
 import React, { useState } from 'react';
 
 import MobileDetect from 'mobile-detect';
@@ -21,7 +39,7 @@ function App() {
   },[count])
   let md = new MobileDetect(window.navigator.userAgent);
 
-
+  console.log(process.env.REACT_APP_API_URL);
 
   return (
     <>
@@ -51,8 +69,10 @@ function App() {
         <Route path="/cart/" element={<ShoppingCart count={count} setCount={setCount} setUrl={setUrl}/>} />
         <Route path="/popular" element={<PopularGoods count={count} setCount={setCount} setUrl={setUrl}/>}/>
         <Route path="/sale" element={<Sale count={count} setCount={setCount} setUrl={setUrl}/>}/>
+        <Route path="/refund" element={<Refund setUrl={setUrl}/>}/>
         <Route path="/about" element={<AboutCompany setUrl={setUrl}/>}/>
         <Route path="/contact" element={<Contact setUrl={setUrl}/>}/>
+        <Route path="/deliveryinfo" element={<Delivery setUrl={setUrl}/>}/>
         </Routes>
       </Container>
       <PreFooter/>

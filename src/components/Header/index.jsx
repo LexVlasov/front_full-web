@@ -26,11 +26,13 @@ export const Header = ()=>{
                                 <Link to="/about" >
                                     <Button className={styles.newpost}> <InfoIcon className={styles.icon}/> О нас</Button>
                                 </Link>
+                                <Link to="/deliveryinfo">
                                 <Button className={styles.newpost}><LocalShippingIcon className={styles.icon}/>Доставка</Button>
+                                </Link>
                                 <Link to="/login">
                                     <Button  className={styles.newpost}><PaymentIcon className={styles.icon}/>Оплата</Button>
                                 </Link>
-                                <Link to="/register">
+                                <Link to="/refund">
                                     <Button  className={styles.newpost}> <HistoryIcon className={styles.icon}/>Возврат</Button>
                                 </Link>
                                 <Link to="/register">
