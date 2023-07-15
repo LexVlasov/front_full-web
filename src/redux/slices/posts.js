@@ -6,6 +6,16 @@ export const fetchGoods = createAsyncThunk('allgood/fetchGoods', async ()=>{
     return data;
 })
 
+export const fetchPopular = createAsyncThunk('allgood/fetchPopular', async ()=>{
+  const {data} = await axios.get('/popular');
+  return data;
+})
+
+export const fetchSale = createAsyncThunk('sale/fetchSale', async ()=>{
+  const {data} = await axios.get('/sale');
+  return data;
+})
+
 export const fetchTypes = createAsyncThunk('allgood/fetchTypes', async ()=>{
     const {data} = await axios.get('/groups');
     return data;
@@ -22,6 +32,10 @@ const initialState = {
     allgood: {
         items: [],
         status: 'loading',
+    },
+    sale: {
+      items: [],
+      status: 'loading',
     },
     types:{
         items:[],
@@ -84,6 +98,30 @@ const goodsSlice = createSlice({
           .addCase(fetchGoodsbyType.rejected, (state) => {
             state.allgood.items = [];
             state.allgood.status = 'error';
+          })
+          .addCase(fetchPopular.pending, (state) => {
+            state.allgood.items = [];
+            state.allgood.status = 'loading';
+          })
+          .addCase(fetchPopular.fulfilled, (state, action) => {
+            state.allgood.items = action.payload;
+            state.allgood.status = 'loaded';
+          })
+          .addCase(fetchPopular.rejected, (state) => {
+            state.allgood.items = [];
+            state.allgood.status = 'error';
+          })
+          .addCase(fetchSale.pending, (state) => {
+            state.sale.items = [];
+            state.sale.status = 'loading';
+          })
+          .addCase(fetchSale.fulfilled, (state, action) => {
+            state.sale.items = action.payload;
+            state.sale.status = 'loaded';
+          })
+          .addCase(fetchSale.rejected, (state) => {
+            state.sale.items = [];
+            state.sale.status = 'error';
           });
       },
     });

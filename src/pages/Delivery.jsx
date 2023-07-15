@@ -4,18 +4,21 @@ import { useDispatch, useSelector } from "react-redux";
 import { Box } from "@mui/system";
 import  Grid  from "@mui/material/Grid";
 import { TypesBlock } from "../components/BlockTypes";
-import { Height } from "@mui/icons-material";
+import Post1 from "../uploads/deliverypost/packaging_1.jpg";
+import Post2 from "../uploads/deliverypost/packaging_3.jpg";
+import Post3 from "../uploads/deliverypost/packaging_4.jpg";
 
 
 export const Delivery = ({setUrl}) =>{
-    const {types} = useSelector((state) => state.goods);
+    // const {types} = useSelector((state) => state.goods);
     const dispatch = useDispatch();
-    const isTagsLoading =types.status==='loading';
-
-    React.useEffect(()=>{
-        dispatch(fetchTypes());   
-    },[]);
-    setUrl('about(О нас')
+    // const isTagsLoading =types.status==='loading';
+    const isTagsLoading =false;
+    // React.useEffect(()=>{
+    //     dispatch(fetchTypes());   
+    // },[]);
+    const types = JSON.parse(window.localStorage.getItem('types'));
+    setUrl('about(Доставка')
     return(
         <Box sx={{ flexGrow: 1 }}>
        <Grid container spacing={1} alignItems="flex-start">
@@ -107,9 +110,24 @@ export const Delivery = ({setUrl}) =>{
                 <td style={{width:"30%", borderBottom:"1px solid #aaa", height:"40px", paddingLeft:"10px"}}><b>Реальное ФИО</b></td>
                 <td style={{width:"70%", borderBottom:"1px solid #aaa", height:"40px", color:"#555"}}>Обязательно (сотрудники не знают о содержании посылки) </td>
             </tr>
+
         </table>
 
-          </div>
+        <h3 style={{marginTop:"30px",fontWeight:"700"}}>Наша упаковка</h3>
+            <table style={{width:"80%",marginTop:"30px"}}>
+                <tr style={{textAlign:"center"}}>
+                    <td ><b>1. Сбор заказа</b></td>
+                    <td><b>2. Защитное покрытие</b></td>
+                    <td><b>3. Бандероль</b></td>
+                </tr>
+                <tr>
+                    <td><img src={Post1} style={{width:"100%", height:"100px"}}/></td>
+                    <td><img src={Post2} style={{width:"100%", height:"100px"}}/></td>
+                    <td><img src={Post3} style={{width:"100%", height:"100px"}}/></td>
+                </tr>   
+
+            </table>
+            </div>
           </Grid>            
        </Grid>
                       

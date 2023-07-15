@@ -3,7 +3,7 @@ import Grid from '@mui/material/Unstable_Grid2';
 
 import { TypesBlock } from '../../components/BlockTypes';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchGoods, fetchTypes } from '../../redux/slices/posts';
+import { fetchGoods, fetchTypes,fetchPopular,fetchSale } from '../../redux/slices/posts';
 import { Box } from '@mui/system';
 import {Popular, Sales,PopularM,SalesM} from '../../components';
 import styles from "./home.module.scss"
@@ -15,17 +15,18 @@ export const Home = ({count,setCount,setUrl}) => {
   'http://localhost:4444';
   const dispatch = useDispatch();
   
-  const {allgood,types} = useSelector((state) => state.goods);
+  const {allgood,types,sale} = useSelector((state) => state.goods);
   const isPostsLoading =allgood.status==='loading';
   const isTagsLoading =types.status==='loading';
+  const isSaleLoading =sale.status==='loading';
   React.useEffect(()=>{
-    dispatch(fetchGoods());
+    dispatch(fetchPopular());
     dispatch(fetchTypes());
-   
+    dispatch(fetchSale());
    },[]);
   
    setUrl(null);
-
+   console.log(sale);
   return (
 
     <Box sx={{ flexGrow: 1 }}>
@@ -43,8 +44,8 @@ export const Home = ({count,setCount,setUrl}) => {
               count={count}
               setCount={setCount}/> 
               <Sales 
-              isPostsLoading={isPostsLoading} 
-              allgood={allgood} 
+              isPostsLoading={isSaleLoading} 
+              allgood={sale} 
               backHost={backHost}
               count={count}
               setCount={setCount}/>
