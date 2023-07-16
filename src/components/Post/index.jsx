@@ -19,6 +19,7 @@ export const Post = ({
   title,
   imageUrl,
   user,
+  discount,
   viewsCount,
   buysCount,
   children,
@@ -29,7 +30,9 @@ export const Post = ({
   setCount,
   price,
   maxPrice,
-  metacontent
+  metacontent,
+  isSale,
+  altText
 }) => {
 
   if (isLoading) {
@@ -38,34 +41,22 @@ export const Post = ({
 
 
   
-  const addToCart = async ()=> {
-    const items ={
-      id,
-      cnt:5,
-      maxPrice,
-      sum: 5*parseInt(maxPrice),
-    }
-    let newVal = [...count];
-    let prodIn = newVal.findIndex((p)=> p.id === items.id);
-    if(prodIn===-1){
-      newVal.push(items);
-    } else{
-      newVal[prodIn].cnt +=5;
-      newVal[prodIn].sum = newVal[prodIn].cnt * parseInt(maxPrice);
-      newVal[prodIn].maxPrice = maxPrice;
-    }
-    setCount(newVal);
-  };
+
   
   return (
-    <div className={clsx(styles.root, { [styles.rootFull]: isFullPost })}>
-      {isEditable && (
+    <div className={styles.root}>
+      {isSale && (
         <div className={styles.editButtons}>
-          <Link to={`/good/${id}/edit`} >
-            <IconButton color="primary">
-              <EditIcon />
-            </IconButton>
-          </Link>
+
+            -{discount}%
+
+        </div>
+      )}
+      {isSale && (
+        <div className={styles.oldprice}>
+
+             от {price} руб.
+
         </div>
       )}
       {imageUrl && (
@@ -91,7 +82,7 @@ export const Post = ({
                   /> 
                   <div className={styles.review}>12 отзывов</div>
           </div>
-          <div className={styles.price}>от {price} руб.</div>
+          <div className={isSale? styles.pricesale : styles.price }>от {isSale?Math.ceil(price*((100-discount)/100)):price} руб.</div>
           {children && <div className={styles.content}>{children}</div>}
           <div className={styles.postDetails}>
                   <ul className={styles.postDetails}>
@@ -130,6 +121,7 @@ export const PostMobile = ({
   title,
   imageUrl,
   user,
+  discount,
   viewsCount,
   buysCount,
   children,
@@ -140,7 +132,8 @@ export const PostMobile = ({
   setCount,
   price,
   maxPrice,
-  metacontent
+  metacontent,
+  isSale
 }) => {
 
   if (isLoading) {
@@ -150,13 +143,18 @@ export const PostMobile = ({
   
   return (
     <div className={clsx(styles.rootmobile, { [styles.rootFull]: isFullPost })}>
-      {isEditable && (
+      {isSale && (
         <div className={styles.editButtons}>
-          <Link to={`/good/${id}/edit`} >
-            <IconButton color="primary">
-              <EditIcon />
-            </IconButton>
-          </Link>
+
+            -{discount}%
+
+        </div>
+      )}
+      {isSale && (
+        <div className={styles.oldprice}>
+
+             от {price} руб.
+
         </div>
       )}
       {imageUrl && (
@@ -182,7 +180,7 @@ export const PostMobile = ({
                   /> 
                   <div className={styles.review}>12 отзывов</div>
           </div>
-          <div className={styles.price}>от {price} руб.</div>
+          <div className={isSale? styles.pricesale : styles.price }>от {isSale?Math.ceil(price*((100-discount)/100)):price} руб.</div>
           {children && <div className={styles.content}>{children}</div>}
           <div className={styles.postDetails}>
                   <ul className={styles.postDetails}>
