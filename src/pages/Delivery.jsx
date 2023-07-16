@@ -10,14 +10,14 @@ import Post3 from "../uploads/deliverypost/packaging_4.jpg";
 
 
 export const Delivery = ({setUrl}) =>{
-    // const {types} = useSelector((state) => state.goods);
+    const {types} = useSelector((state) => state.goods);
     const dispatch = useDispatch();
-    // const isTagsLoading =types.status==='loading';
-    const isTagsLoading =false;
-    // React.useEffect(()=>{
-    //     dispatch(fetchTypes());   
-    // },[]);
-    const types = JSON.parse(window.localStorage.getItem('types'));
+    const isTagsLoading =types.status==='loading';
+
+    React.useEffect(()=>{
+        dispatch(fetchTypes());   
+    },[]);
+
     setUrl('about(Доставка')
     return(
         <Box sx={{ flexGrow: 1 }}>

@@ -39,7 +39,6 @@ export const FullPost = ({count,setCount, setUrl}) => {
     return <Post isLoading={isLoading} isFullPost/>;
   }
  
-  console.log(data)
   return (
 
 

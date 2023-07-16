@@ -23,16 +23,16 @@ export const Sales = ({
     return(
         <>
         <div className={styles.head}>
-        <h4 className={styles.h4}>Распродажа</h4>
+        <h4 className={styles.h4}>Товары недели</h4>
         <a className={styles.atext} href="/sale">Каталог препаратов</a>
         </div>
         {(isPostsLoading?[...Array(5)]:sortallGoods).map((obj,index) => isPostsLoading ? (
-            <Grid item xs={6} lg={4}>  
+            <Grid item xs={6} lg={4} >  
               <Post key={index} isLoading={true}/>
               </Grid> 
             ) : (
               
-              <Grid item xs={6} lg={4} styles={{paddingBottom:"20px"}}> 
+              <Grid item xs={6} lg={4} > 
               <Post 
                key={index}
                id={obj._id}
@@ -43,6 +43,8 @@ export const Sales = ({
                count={count} setCount={setCount}
                maxPrice={obj.price[0].p}
                buysCount={obj.bougthCount}
+               discount={obj.discount}
+              isSale={obj.discount>0}
               />
               </Grid> 
             ))}
@@ -108,6 +110,8 @@ const handleStepChange = (obj) => {
               count={count} setCount={setCount}
               maxPrice={obj.price[0].p}
               buysCount={obj.bougthCount}
+              discount={obj.discount}
+              isSale={obj.discount>0}
             />
 
           ))}

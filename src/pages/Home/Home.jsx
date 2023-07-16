@@ -1,12 +1,13 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Grid from '@mui/material/Unstable_Grid2';
 
 import { TypesBlock } from '../../components/BlockTypes';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchGoods, fetchTypes,fetchPopular,fetchSale } from '../../redux/slices/posts';
+import { fetchTypes,fetchPopular,fetchSale,fetchGoodsbyType } from '../../redux/slices/posts';
 import { Box } from '@mui/system';
-import {Popular, Sales,PopularM,SalesM} from '../../components';
+import {Popular, Sales,PopularM,SalesM,PostByType} from '../../components';
 import styles from "./home.module.scss"
+import axios from "../../axios";
 
 
 export const Home = ({count,setCount,setUrl}) => {
@@ -16,6 +17,9 @@ export const Home = ({count,setCount,setUrl}) => {
   const dispatch = useDispatch();
   
   const {allgood,types,sale} = useSelector((state) => state.goods);
+  const [viagra,setViagra] = useState();
+  const [sialis,setSialis] = useState();
+  const [levitra,setLevitra] = useState();
   const isPostsLoading =allgood.status==='loading';
   const isTagsLoading =types.status==='loading';
   const isSaleLoading =sale.status==='loading';
@@ -23,10 +27,27 @@ export const Home = ({count,setCount,setUrl}) => {
     dispatch(fetchPopular());
     dispatch(fetchTypes());
     dispatch(fetchSale());
+    axios.get(`/types/Аналоги%20Виагры`).then(({data})=>{
+      setViagra(data)
+    }).catch(err =>{
+      console.warn(err);
+      alert('Error get post')
+    })
+    axios.get(`/types/Аналоги%20Сиалиса`).then(({data})=>{
+      setSialis(data)
+    }).catch(err =>{
+      console.warn(err);
+      alert('Error get post')
+    })
+    axios.get(`/types/Аналоги%20Левитры`).then(({data})=>{
+      setLevitra(data)
+    }).catch(err =>{
+      console.warn(err);
+      alert('Error get post')
+    })
    },[]);
-  
    setUrl(null);
-   console.log(sale);
+
   return (
 
     <Box sx={{ flexGrow: 1 }}>
@@ -49,6 +70,31 @@ export const Home = ({count,setCount,setUrl}) => {
               backHost={backHost}
               count={count}
               setCount={setCount}/>
+              <PostByType
+              isPostsLoading={viagra?false:true} 
+              allgood={viagra} 
+              backHost={backHost}
+              count={count}
+              setCount={setCount}
+              name={'Дженерики Виагры'}
+              />
+
+              <PostByType
+              isPostsLoading={sialis?false:true} 
+              allgood={sialis} 
+              backHost={backHost}
+              count={count}
+              setCount={setCount}
+              name={'Дженерики Сиалиса'}
+              />
+              <PostByType
+              isPostsLoading={levitra?false:true} 
+              allgood={levitra} 
+              backHost={backHost}
+              count={count}
+              setCount={setCount}
+              name={'Дженерики Левитры'}
+              />
     
             </Grid> 
               
@@ -65,10 +111,12 @@ export const HomeMob = ({count,setCount}) => {
   'http://localhost:4444';
   const dispatch = useDispatch();
   
-  const {allgood} = useSelector((state) => state.goods);
+  const {allgood,sale} = useSelector((state) => state.goods);
   const isPostsLoading =allgood.status==='loading';
+  const isSaleLoading =sale.status==='loading';
   React.useEffect(()=>{
-    dispatch(fetchGoods());  
+    dispatch(fetchPopular());
+    dispatch(fetchSale());
    },[]);
    
   return (
@@ -83,8 +131,8 @@ export const HomeMob = ({count,setCount}) => {
               count={count}
               setCount={setCount}/> 
               <SalesM 
-              isPostsLoading={isPostsLoading} 
-              allgood={allgood} 
+              isPostsLoading={isSaleLoading} 
+              allgood={sale} 
               backHost={backHost}
               count={count}
               setCount={setCount}/>
