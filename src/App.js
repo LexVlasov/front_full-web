@@ -20,6 +20,7 @@ import { Home
   ,PopularGoodsM
   ,Refund
   ,Delivery
+  ,Payments
    } from './pages';
 import React, { useState } from 'react';
 import { fetchTypes } from './redux/slices/posts';
@@ -78,6 +79,7 @@ function App() {
         <Route path="/about" element={<AboutCompany setUrl={setUrl}/>}/>
         <Route path="/contact" element={<Contact setUrl={setUrl}/>}/>
         <Route path="/deliveryinfo" element={<Delivery setUrl={setUrl}  />}/>
+        <Route path="/paymentinfo" element={<Payments setUrl={setUrl}  />}/>
         </Routes>
       </Container>
       <PreFooter/>

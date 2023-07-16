@@ -121,9 +121,9 @@ export const Delivery = ({setUrl}) =>{
                     <td><b>3. Бандероль</b></td>
                 </tr>
                 <tr>
-                    <td><img src={Post1} style={{width:"100%", height:"100px"}}/></td>
-                    <td><img src={Post2} style={{width:"100%", height:"100px"}}/></td>
-                    <td><img src={Post3} style={{width:"100%", height:"100px"}}/></td>
+                    <td><img src={Post1} style={{width:"100%", height:"100px"}} alt="Сбор заказа One Pill"/></td>
+                    <td><img src={Post2} style={{width:"100%", height:"100px"}} alt="Зашитное покрытие One Pill"/></td>
+                    <td><img src={Post3} style={{width:"100%", height:"100px"}} alt="Бандероль One Pill"/></td>
                 </tr>   
 
             </table>

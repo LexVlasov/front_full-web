@@ -29,7 +29,7 @@ export const Header = ()=>{
                                 <Link to="/deliveryinfo">
                                 <Button className={styles.newpost}><LocalShippingIcon className={styles.icon}/>Доставка</Button>
                                 </Link>
-                                <Link to="/login">
+                                <Link to="/paymentinfo">
                                     <Button  className={styles.newpost}><PaymentIcon className={styles.icon}/>Оплата</Button>
                                 </Link>
                                 <Link to="/refund">
