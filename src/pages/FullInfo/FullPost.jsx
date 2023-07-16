@@ -31,10 +31,10 @@ export const FullPost = ({count,setCount, setUrl}) => {
       alert('Error in getting post');
     });
     dispatch(fetchTypes());
-  },[]);
+  },[dispatch,id]);
 
   if(data)
-  {setUrl('types/'+data.info[0].group_type+'('+data.info[0].group_type + '|' + 'good/'+id +'('+data.name);}
+  {setUrl('types/'+String(data.info[0].group_type)+'('+String(data.info[0].group_type) + '|good/'+String(id) +'('+String(data.name));}
   if(isLoading){
     return <Post isLoading={isLoading} isFullPost/>;
   }
@@ -71,7 +71,7 @@ export const FullPost = ({count,setCount, setUrl}) => {
 
 export const FullPostMobile = ({count,setCount}) => {
 
-  const {types} = useSelector((state) => state.goods);
+
   const backHost = 
   process.env.REACT_APP_API_URL?process.env.REACT_APP_API_URL:
   'http://localhost:4444';
@@ -80,7 +80,6 @@ export const FullPostMobile = ({count,setCount}) => {
   const [isLoading,setLoading] = React.useState(true);
   const {id} = useParams();
   const dispatch = useDispatch();
-  const isTagsLoading =types.status==='loading';
   
   React.useEffect(()=>{
     axios.get(`/good/${id}`).then(res=>{
@@ -91,7 +90,7 @@ export const FullPostMobile = ({count,setCount}) => {
       alert('Error in getting post');
     });
     dispatch(fetchTypes());
-  },[]);
+  },[dispatch,id]);
 
 
   if(isLoading){

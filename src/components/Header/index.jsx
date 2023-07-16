@@ -35,7 +35,7 @@ export const Header = ()=>{
                                 <Link to="/refund">
                                     <Button  className={styles.newpost}> <HistoryIcon className={styles.icon}/>Возврат</Button>
                                 </Link>
-                                <Link to="/register">
+                                <Link to="/questions">
                                     <Button  className={styles.newpost}><QuestionMarkIcon className={styles.icon}/>Вопросы</Button>
                                 </Link>
                                 <Link to="/register">
@@ -67,7 +67,7 @@ export const HeaderMobile = ({count})=>{
 
     React.useEffect(()=>{
         dispatch(fetchTypes());
-    },[]);
+    },[dispatch]);
     const ChooseType = (lvl1)=>{
         if(group!==lvl1){
             setGroup(lvl1);

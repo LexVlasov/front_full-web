@@ -1,14 +1,12 @@
 import React from 'react';
-import { Rating,IconButton, Button} from '@mui/material';
+import { Rating, Button} from '@mui/material';
 import clsx from 'clsx';
 import {Link} from 'react-router-dom';
-// import DeleteIcon from '@mui/icons-material/Clear';
-import EditIcon from '@mui/icons-material/Edit';
+
 import EyeIcon from '@mui/icons-material/RemoveRedEyeOutlined';
 import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import styles from './Post.module.scss';
-// import { UserInfo } from '../UserInfo';
 import { PostSkeleton } from './Skeleton';
 
 

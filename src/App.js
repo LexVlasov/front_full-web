@@ -21,10 +21,9 @@ import { Home
   ,Refund
   ,Delivery
   ,Payments
+  ,Questions
    } from './pages';
 import React, { useState } from 'react';
-import { fetchTypes } from './redux/slices/posts';
-import { useDispatch, useSelector } from "react-redux";
 import MobileDetect from 'mobile-detect';
 
 
@@ -35,11 +34,9 @@ function App() {
   const [currentPath,setCurrentPath] = useState(window.location.pathname);
   const [count, setCount] = useState(JSON.parse(window.localStorage.getItem('countcart')) ? JSON.parse(window.localStorage.getItem('countcart'))  : []);
   const [url,setUrl] = useState(null);
-  const dispatch = useDispatch();
-  const {types} = useSelector((state) => state.goods);
-  const isTagsLoading =types.status==='loading';
+
   React.useEffect(()=>{
-    dispatch(fetchTypes()); 
+
     window.localStorage.setItem('countcart',JSON.stringify(count));
   },[count])
 
@@ -80,6 +77,7 @@ function App() {
         <Route path="/contact" element={<Contact setUrl={setUrl}/>}/>
         <Route path="/deliveryinfo" element={<Delivery setUrl={setUrl}  />}/>
         <Route path="/paymentinfo" element={<Payments setUrl={setUrl}  />}/>
+        <Route path="/questions" element={<Questions setUrl={setUrl}  />}/>
         </Routes>
       </Container>
       <PreFooter/>

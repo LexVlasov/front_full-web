@@ -16,7 +16,7 @@ export const Delivery = ({setUrl}) =>{
 
     React.useEffect(()=>{
         dispatch(fetchTypes());   
-    },[]);
+    },[dispatch]);
 
     setUrl('about(Доставка')
     return(
