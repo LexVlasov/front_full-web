@@ -3,10 +3,9 @@ import Grid from '@mui/material/Unstable_Grid2';
 
 import { TypesBlock } from '../../components/BlockTypes';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchTypes,fetchPopular,fetchSale,fetchGoodsbyType } from '../../redux/slices/posts';
+import { fetchTypes,fetchPopular,fetchSale } from '../../redux/slices/posts';
 import { Box } from '@mui/system';
 import {Popular, Sales,PopularM,SalesM,PostByType} from '../../components';
-import styles from "./home.module.scss"
 import axios from "../../axios";
 
 
@@ -45,7 +44,7 @@ export const Home = ({count,setCount,setUrl}) => {
       console.warn(err);
       alert('Error get post')
     })
-   },[]);
+   },[dispatch]);
    setUrl(null);
 
   return (
@@ -117,7 +116,7 @@ export const HomeMob = ({count,setCount}) => {
   React.useEffect(()=>{
     dispatch(fetchPopular());
     dispatch(fetchSale());
-   },[]);
+   },[dispatch]);
    
   return (
 

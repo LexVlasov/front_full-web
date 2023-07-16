@@ -4,9 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Box } from "@mui/system";
 import  Grid  from "@mui/material/Grid";
 import { TypesBlock } from "../components/BlockTypes";
-import Post1 from "../uploads/deliverypost/packaging_1.jpg";
-import Post2 from "../uploads/deliverypost/packaging_3.jpg";
-import Post3 from "../uploads/deliverypost/packaging_4.jpg";
+
 
 
 export const Payments = ({setUrl}) =>{
@@ -16,7 +14,7 @@ export const Payments = ({setUrl}) =>{
 
     React.useEffect(()=>{
         dispatch(fetchTypes());   
-    },[]);
+    },[dispatch]);
 
     setUrl('about(Доставка')
     return(
