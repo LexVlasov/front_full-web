@@ -7,8 +7,8 @@ import styles from "./TypesBlock.module.scss"
 export const TypesBlock = ({ title,items, isLoading = true }) => {
 
   return (
-    <><div className={styles.main}>
-      <h4>{title}</h4>
+    <><div >
+      <h4 className={styles.main}>{title}</h4>
       
       <ul className={styles.root}>
         {(isLoading ? [...Array(5)] : items).map((name, i) => (

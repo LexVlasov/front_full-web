@@ -14,12 +14,17 @@ export const BuyButton = ({
 }) =>{
     
 
-    let nameCnt = 'таблетка';
-    if(catValue >1 && catValue <5){
-        nameCnt = 'таблетки'
-    } else if (catValue>=5) {
-        nameCnt = 'таблеток'
-    } 
+    const [cp,setCp] = React.useState(window.location.pathname);
+    let nameCnt = 0;
+    if(catValue>=10 && catValue<=19){
+        nameCnt = cp.substring(1)!=='cart'?'таблеток':'препаратов';
+    }else if(catValue%10 > 1 && catValue%10 <5){
+        nameCnt = cp.substring(1)!=='cart'?'таблетки':'препарата';
+    } else if (catValue%10>=5||catValue%10===0) {
+        nameCnt = cp.substring(1)!=='cart'?'таблеток':'препаратов';
+    } else {
+        nameCnt = cp.substring(1)!=='cart'?'таблетка':'препарат';
+    } ;
 
     return(
         <>

@@ -49,14 +49,14 @@ export const Home = ({count,setCount,setUrl}) => {
 
   return (
 
-    <Box sx={{ flexGrow: 1 }}>
+    <Box >
       <Grid container spacing={1} alignItems="flex-start">
-       <Grid item xs={12} md={3} lg={3} spacing={2}>
+       <Grid item xs={12} md={3} lg={3}>
           {(isTagsLoading?[...Array(5)]:types.items).map((obj,index)=> isTagsLoading ? '' :
             (<TypesBlock title={obj.lvl1_type} items={obj.group_type} isLoading={isTagsLoading} key={index} />)
           )}
         </Grid>                    
-        <Grid item container xs={12} md={9} lg={9} spacing={4} style={{paddingLeft:"20px"}}>
+        <Grid item container xs={12} md={9} lg={9} style={{paddingLeft:"20px"}}>
             <Popular
               isPostsLoading={isPostsLoading} 
               allgood={allgood} 

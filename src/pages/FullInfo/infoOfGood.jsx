@@ -109,13 +109,15 @@ export const InfoOfGood = ({
     return(
         <>
         <Grid item xs={12} sm={12} lg={12} >
-                    <Box className={styles.text}>
+                    <div className={styles.text}>
                     <div className={styles.analog}>{data.info[0].type}:</div>
                     {data.name}                     
-                    </Box>
+                    </div>
                   </Grid>
+  
                   <Grid item lg={4.4} >
-                    <Box sx={{Width: 270, textAlign:"center"}}>
+                  <Box sx={{Width: 270, textAlign:"center"}}>
+                  {data.discount>0&& <div className={styles.editButtons}>-{data.discount}%</div>}
                       <Box component="img" className={styles.imagemain}
                             src={data.info[0].avatarUrl ? `${backHost}${data.info[0].avatarUrl[image]}` : ''} />
                             <div className={styles.divimag}><Box component="img" className={styles.iamgeother}
@@ -124,87 +126,86 @@ export const InfoOfGood = ({
                             src={data.info[0].avatarUrl ? `${backHost}${data.info[0].avatarUrl[2]}` : ''} alt="2" onMouseEnter ={(e)=>{setImage(parseInt(e.target.alt))}} onMouseLeave={(e)=>{setImage(parseInt(e.target.alt))}}/></div></Box> 
                   </Grid>
                    <Grid item lg={3.4} comtainer alignItems="stretch" direction="column"> 
-                      <Box sx={{fontSize:"12px", fontWeight:"900", opacity:"60%", letterSpacing:"0px"}}>Цена за шт:</Box>
-                      <Box  className={styles.price}>{currentPrice}</Box>
-                      <Box sx={{display:"inline-block", verticalAlign:"middle", ml:"10px", mr:"10px", fontSize:"10px"}}>X</Box>  
-                      <Box sx={{display:"inline-block", m:"0 auto",minHeight:"28px"}}>
+                    <div className={styles.maindivpricebutton}>
+                      <div className={styles.prforone}>Цена за шт:</div>
+                      <div className={styles.priceblockandbut}>
+                        <span className={data.discount>0 ? styles.pricewd:styles.price}>{Math.ceil(currentPrice*((100-data.discount)/100))}  </span> 
+                      <span className={styles.x}>X</span>  
+                      <span style={{ width:"50%",display:"inline-block",verticalAlign:"top"}}>
                         <ButtonGroup sx={{verticalAlign:"middle", margin:"0 auto"}}>
                           <Button aria-label="reduce" style={{height:"28px", padding:0, minWidth:"30px",borderColor:"#2b91a7",backgroundColor:"#2b91a7",opacity:"70%"}} onClick={dicreaseItem}><RemoveIcon style={{height:"10px",width:"10px",color:"#fff"}}/> </Button>
                           <TextField inputProps={{style:{padding:0,height:"28px",textAlign:"center",width:"50px", fontSize:"12px",border:"0px"}}} defaultValue={value} value={(value<=0)||(!value)?parseInt(data.min_q):value} onChange={e=>getText(e.target.value)}></TextField>
                           <Button aria-label="increase" size="small" style={{height:"28px", padding:0, minWidth:"30px",borderColor:"#2b91a7",backgroundColor:"#2b91a7",opacity:"70%"}} onClick={increaseItem} ><AddIcon sx={{height:"10px",color:"#fff"}}/></Button>
                           <div className={styles.undercount}>Кол-во шт.</div>
                         </ButtonGroup>
-                      </Box>
-                      <TableContainer  sx={{ m:"0 auto",minHeight:"10px",padding:0, pt:5 }}>
-                      <Table aria-label="customized table">
+                        </span>
+                      </div>
                       
-                        <TableHead>
-                          <TableRow>
-                            <TableCell size="small"
-                                      align="left" className={styles.countandpr}>Кол-во:</TableCell>
-                            <TableCell size="small"
-                                      align="left" className={styles.countandpr}>Цена за шт.</TableCell>
-                          </TableRow>
-                        </TableHead>
-                        <TableBody>
+                      </div>
+                      {data.discount>0 && <span className={styles.pricewod}>{currentPrice}</span>}
+                      <table style={{minHeight:"10px",margin:"13% 0% 0% 0%",borderSpacing:"0px",borderCollapse:"collapse",width:"100%"}}>
+                        <tr>
+                          <th className={styles.countandpr}>Кол-во:</th>
+                          <th className={styles.countandpr}>Цена за шт.</th>
+                        </tr>
+
                         {data.price.map((row,key)=>( 
-                          <TableRow key={key} className={styles.rowsvoers}>
-                            <TableCell 
+                          <tr key={key} className={styles.rowsvoers}>
+                            <td 
                                       className={styles.pricecell}
                                       align="center"
                                       
-                                      >{(data.price.length-1) === key ? 'от '+row.n : row.n+'-'+(data.price[key+1].n-1)}</TableCell>
-                                      <TableCell 
+                                      >{(data.price.length-1) === key ? 'от '+row.n : row.n+'-'+(data.price[key+1].n-1)}</td>
+                                      <td 
                                       className={styles.pricecell}
                                       align="center"
                                       
-                                      >{row.p}</TableCell>
-                          </TableRow>
+                                      >{row.p}</td>
+                          </tr>
                         ))}
-                      </TableBody>
-                      </Table>
-                      </TableContainer>
+
+                      </table>
                   </Grid>
                     
                   <Grid item lg={4.2} sx={{pl:2,pr:2}}>
                   <BuyButton 
                       value={value} 
-                      totalSum={value*currentPrice} 
+                      totalSum={value*Math.ceil(currentPrice*((100-data.discount)/100))} 
                       flgCart={flgCart} 
                       addToCart={addGoodToCart} 
                       id={id}
                       catValue={catValue}/>
                   </Grid>
                  <Grid item lg={12} sx={{pt:5}}>
-                  <ul class="nav nav-tabs nav-justified" id="myTab" role="tablist">
-                    <li class="nav-item" role="presentation">
+                  <ul  id="myTab" role="tablist" style={{display:"-webkit-flex",display:"flex",flexWrap:"wrap",listStyle:"none",alignContent:"space-around",justifyContent:"space-evenly",flexDirection:"row",alignItems:"baseline",width:"100%"}}>
+                    <li  role="presentation" style={{width:"25%"}}>
                       <button  className={selectBut === 'discription' ? styles.headselection:styles.headdisable} onClick={()=>setSelectBut("discription")}>Описание</button>
                     </li>
-                    <li class="nav-item" role="presentation">
+                    <li  role="presentation" style={{width:"25%"}}>
                       <button  className={selectBut === 'annotation' ? styles.headselection:styles.headdisable} onClick={()=>setSelectBut("annotation")}>Аннотация</button>
                     </li>
-                    <li class="nav-item" role="presentation">
+                    <li  role="presentation" style={{width:"25%"}}>
                       <button  className={selectBut === 'instruction' ? styles.headselection:styles.headdisable} onClick={()=>setSelectBut("instruction")}>Инструкция</button>
                     </li>
-                    <li class="nav-item" role="presentation">
+                    <li  role="presentation" style={{width:"25%"}}>
                       <button className={selectBut === 'rewiev' ? styles.headselection:styles.headdisable} onClick={()=>setSelectBut("rewiev")}>Отзывы</button>
                     </li>
                   </ul>
                   <div className={styles.maindiv}>
                     {selectBut === 'discription' && <div >
-                      <button onClick={()=>setSelectBut("annotation")} className={styles.anotherannotation}>Показать аннотацию и оновную информацию по препарату "{data.info[0].name}"</button>
+                      <button onClick={()=>setSelectBut("annotation")} className={styles.anotherannotation}>Показать аннотацию и оcновную информацию по препарату "{data.info[0].name}"</button>
                       {data.info[0].about.map((obj,key)=>(
                         <div>
                         <h5 className={styles.h5title}>{obj.title}</h5>
                       {obj.info.map((item,index)=>(
                           ( item.includes(';') ? 
-                          ( <ul >{
+                          ( <ul style={{margin:"20px 40px 20px 40px"}}>{
                             item.split(';').map((li,lik)=>
                               <li>{li}</li>)}
                               </ul>)
                           
                           :     
-                          (<p>{item}</p>))
+                          (<p style={{margin:"10px"}}>{item}</p>))
                           
                       ))}
                       </div>

@@ -5,9 +5,9 @@ import App from "./App.js";
 import CssBaseline from "@mui/material/CssBaseline";
 import {BrowserRouter} from 'react-router-dom';
 // Bootstrap CSS
-import "bootstrap/dist/css/bootstrap.min.css";
-// Bootstrap Bundle JS
-import "bootstrap/dist/js/bootstrap.bundle.min";
+// import "bootstrap/dist/css/bootstrap.min.css";
+// // Bootstrap Bundle JS
+// import "bootstrap/dist/js/bootstrap.bundle.min";
 import "./index.scss";
 import { StyledEngineProvider, ThemeProvider } from "@mui/material";
 import { theme } from "./theme";

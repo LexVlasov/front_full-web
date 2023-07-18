@@ -47,8 +47,8 @@ function App() {
   return (
     <>
 
-      {md.os()!=='AndroidOS'&&md.os()!=='iOS' ?
-      (currentPath.substring(1)==='checkout'? 
+      {/* {md.os()!=='AndroidOS'&&md.os()!=='iOS' ? */}
+      {(currentPath.substring(1)==='checkout'? 
       (
       <Container maxWidth="md">
         <Routes>
@@ -59,12 +59,12 @@ function App() {
       :
       (
       <><Header/>
-      <Container maxWidth="lg">
+      <Container maxWidth="lg" minWidth="xs">
       <MainInfo count={count}/>
       </Container>
       <Middle count={count}/>
       <UnderMiddle count={count} url={url}/>
-      <Container maxWidth="lg">
+      <Container maxWidth="lg" minWidth="xs">
         <Routes>
         <Route path="/" element={<Home count={count} setCount={setCount} setUrl={setUrl}/>} /> 
         <Route path="/good/:id" element={<FullPost count={count} setCount={setCount} setUrl={setUrl} url={url}/>} />
@@ -83,8 +83,8 @@ function App() {
       <PreFooter/>
       <Footer/>
       </>
-      ))
-      :
+      ))}
+      {/* :
       (currentPath.substring(1)==='checkout'? 
       (
       <Container maxWidth="md">
@@ -112,7 +112,7 @@ function App() {
       <Footer/>
       </>
       ))
-      }
+      } */}
       
       
     </>

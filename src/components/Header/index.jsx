@@ -18,7 +18,7 @@ import ShoppingCart from "@mui/icons-material/ShoppingCart";
 export const Header = ()=>{
     return (
         <div className={styles.root}>
-            <Container maxWidth="lg">
+            <Container maxWidth="lg" minWidth="xs">
 
                     <div className={styles.buttons}>
                       

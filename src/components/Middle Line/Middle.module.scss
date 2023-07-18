@@ -1,23 +1,31 @@
 .root{
     background-color: #30374c;
-    padding: 0 auto;
     height: 60px;   
+    line-height: 60px;
+}
+
+@media screen and (min-width: 1200px)  {
+.cartroot {
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+}
 }
 
 .cart{
-    text-align: right;
-    height: 100%;
     a{
         text-decoration: none;
     }
 }
 .cstyle{
     color: #ffffff ;
-    height: 100%;
+    vertical-align: middle;
+
 }
 
 .info{
     margin-left: 10px;
+    
     color: #fff;
     font-size: 16px;
     display: inline-flex;
@@ -26,7 +34,7 @@
 }
 
 .cnt{
-    display: inline-flex; 
+
     margin-left: 5px;
     margin-right: 5px; 
     font-weight: 700; 
@@ -35,16 +43,15 @@
 }
 
 .sum{
-    display: inline-flex; 
+
     margin-left: 5px;
     margin-right: 5px; 
     font-weight: 700; 
     font-size: 16px;
-
+    &:after{
+        content:  "\20BD";
+        font-weight: 700;
+        padding-left: 2px;
+    }
 }
 
-.sum:after{
-    content:  "\20BD";
-    font-weight: 700;
-    padding-left: 2px;
-}

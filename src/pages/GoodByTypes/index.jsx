@@ -6,7 +6,7 @@ import { TypesBlock } from '../../components/BlockTypes';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchGoodsbyType, fetchTypes } from '../../redux/slices/posts';
 import { useParams } from 'react-router-dom';
-import { Box, Button } from '@mui/material';
+import { Box } from '@mui/material';
 import styles from "./GoodByType.module.scss";
 
 export const GoodsByType = ({count, setCount,setUrl}) => {
@@ -75,6 +75,8 @@ export const GoodsByType = ({count, setCount,setUrl}) => {
                   // tags={obj.tags}
                   // isEditable={userData?._id === obj.user._id}
                   count={count} setCount={setCount}
+                  discount={obj.discount}
+                  isSale={obj.discount>0}
                 />
                 </Grid> 
               ))}
@@ -153,6 +155,8 @@ export const GoodsByTypeMobile = ({count, setCount}) => {
                   // tags={obj.tags}
                   // isEditable={userData?._id === obj.user._id}
                   count={count} setCount={setCount}
+                  discount={obj.discount}
+                  isSale={obj.discount>0}
                 />
 
               ))}</div> 
