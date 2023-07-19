@@ -34,7 +34,7 @@ export const Refund = ({setUrl}) =>{
                 <i>Возврат стоит расценивать как уникальную услугу One Pill, т.к. согласно Постановление Правительства РФ от 19.01.1998 № 55 лекарственные средства надлежащего качества обязательному возврату не подлежат.</i>
                 </p>
         <h3 style={{marginBottom:"30px",fontWeight:"700"}}>Условия возврата</h3> 
-        <h5 style={{marginBottom:"20px",fontWeight:"700"}}>Общие</h5> 
+        <h4 style={{marginBottom:"20px",fontWeight:"700"}}>Общие</h4> 
         <ul style={{marginBottom:"20px"}}>
             <li style={{color:"#316ab1",marginBottom:"10px"}}><span style={{color:"#000"}}>стоимость доставки ложится на клиента и возврату не подлежит;</span></li>
             <li style={{color:"#316ab1",marginBottom:"10px"}}><span style={{color:"#000"}}>у позиций, которые продаются поштучно, возврат также осуществляется поштучно;</span></li>
@@ -45,7 +45,7 @@ export const Refund = ({setUrl}) =>{
             <li style={{color:"#316ab1",marginBottom:"10px"}}><span style={{color:"#000"}}>можете воспользоваться возвратом в течение 3х месяцев с момента покупки;</span></li>
             <li style={{color:"#316ab1",marginBottom:"10px"}}><span style={{color:"#000"}}>но не позднее, чем за полгода до истечения срока годности;</span></li>
         </ul>
-        <h5 style={{marginBottom:"30px",fontWeight:"700"}}>Брака:</h5>
+        <h4 style={{marginBottom:"30px",fontWeight:"700"}}>Брака:</h4>
         <ul style={{marginBottom:"20px"}}>
             <li style={{color:"#316ab1",marginBottom:"10px"}}><span style={{color:"#000"}}>можете воспользоваться возвратом не позднее, чем за полгода до истечения срока годности;</span></li>
         </ul>
