@@ -47,8 +47,8 @@ function App() {
   return (
     <>
 
-      {/* {md.os()!=='AndroidOS'&&md.os()!=='iOS' ? */}
-      {(currentPath.substring(1)==='checkout'? 
+      {md.os()!=='AndroidOS'&&md.os()!=='iOS' ?
+      (currentPath.substring(1)==='checkout'? 
       (
       <Container maxWidth="md">
         <Routes>
@@ -83,8 +83,8 @@ function App() {
       <PreFooter/>
       <Footer/>
       </>
-      ))}
-      {/* :
+      ))
+    :
       (currentPath.substring(1)==='checkout'? 
       (
       <Container maxWidth="md">
@@ -112,7 +112,7 @@ function App() {
       <Footer/>
       </>
       ))
-      } */}
+      } 
       
       
     </>

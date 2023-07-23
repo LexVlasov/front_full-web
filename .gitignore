@@ -7,7 +7,7 @@
 /credetinals
 # testing
 /coverage
-
+/src/uploads/certificates
 # production
 /build
 
