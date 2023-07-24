@@ -16,7 +16,7 @@ export const Payments = ({setUrl}) =>{
         dispatch(fetchTypes());   
     },[dispatch]);
 
-    setUrl('about(Доставка')
+    setUrl('paymentinfo(Оплата')
     return(
         <Box sx={{ flexGrow: 1 }}>
        <Grid container spacing={1} alignItems="flex-start">

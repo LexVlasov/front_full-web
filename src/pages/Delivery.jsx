@@ -18,7 +18,7 @@ export const Delivery = ({setUrl}) =>{
         dispatch(fetchTypes());   
     },[dispatch]);
 
-    setUrl('about(Доставка')
+    setUrl('deliveryinfo(Доставка')
     return(
         <Box sx={{ flexGrow: 1 }}>
        <Grid container spacing={1} alignItems="flex-start">

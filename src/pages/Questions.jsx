@@ -26,7 +26,7 @@ export const Questions = ({setUrl}) =>{
         setQuestion(newQ);
         
     }
-    setUrl('about(Доставка')
+    setUrl('questions(Вопросы')
     return(
         <Box sx={{ flexGrow: 1 }}>
        <Grid container spacing={1} alignItems="flex-start">

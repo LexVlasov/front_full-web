@@ -22,6 +22,8 @@ import { Home
   ,Delivery
   ,Payments
   ,Questions
+  ,Certificates
+  ,Reviews
    } from './pages';
 import React, { useState } from 'react';
 import MobileDetect from 'mobile-detect';
@@ -78,6 +80,8 @@ function App() {
         <Route path="/deliveryinfo" element={<Delivery setUrl={setUrl}  />}/>
         <Route path="/paymentinfo" element={<Payments setUrl={setUrl}  />}/>
         <Route path="/questions" element={<Questions setUrl={setUrl}  />}/>
+        <Route path="/certificates" element={<Certificates setUrl={setUrl}  />}/>
+        <Route path="/reviews" element={<Reviews setUrl={setUrl}  />}/>
         </Routes>
       </Container>
       <PreFooter/>

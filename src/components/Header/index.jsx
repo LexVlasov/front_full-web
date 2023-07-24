@@ -38,10 +38,10 @@ export const Header = ()=>{
                                 <Link to="/questions">
                                     <Button  className={styles.newpost}><QuestionMarkIcon className={styles.icon}/>Вопросы</Button>
                                 </Link>
-                                <Link to="/register">
+                                <Link to="/certificates">
                                     <Button  className={styles.newpost}><GppGoodIcon className={styles.icon}/>Сертификаты</Button>
                                 </Link>
-                                <Link to="/register">
+                                <Link to="/reviews">
                                     <Button  className={styles.newpost}><RateReviewIcon className={styles.icon}/>Отзывы</Button>
                                 </Link>
                                 <Link to="/contact">

@@ -13,4 +13,5 @@ export {Contact} from "./Contact";
 export {Delivery} from "./Delivery";
 export {Payments} from "./Payments";
 export {Questions} from "./Questions";
-export {Sertificates} from "./Sertificates";
+export {Certificates} from "./Certificates";
+export {Reviews} from "./Reviews";
