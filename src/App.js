@@ -81,7 +81,6 @@ function App() {
         <Route path="/paymentinfo" element={<Payments setUrl={setUrl}  />}/>
         <Route path="/questions" element={<Questions setUrl={setUrl}  />}/>
         <Route path="/certificates" element={<Certificates setUrl={setUrl}  />}/>
-        <Route path="/reviews" element={<Reviews setUrl={setUrl}  />}/>
         </Routes>
       </Container>
       <PreFooter/>

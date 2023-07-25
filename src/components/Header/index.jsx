@@ -41,9 +41,6 @@ export const Header = ()=>{
                                 <Link to="/certificates">
                                     <Button  className={styles.newpost}><GppGoodIcon className={styles.icon}/>Сертификаты</Button>
                                 </Link>
-                                <Link to="/reviews">
-                                    <Button  className={styles.newpost}><RateReviewIcon className={styles.icon}/>Отзывы</Button>
-                                </Link>
                                 <Link to="/contact">
                                     <Button  className={styles.newpost}><CallIcon className={styles.icon}/>Контакты</Button>
                                 </Link>
