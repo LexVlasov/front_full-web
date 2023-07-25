@@ -35,7 +35,7 @@ export const Sales = ({
               <Grid item xs={6} lg={4} > 
               <Post 
                key={index}
-               id={obj._id}
+               id={obj.id}
                title={obj.name}
                imageUrl={obj.info[0].avatarUrl[0] ? `${backHost}${obj.info[0].avatarUrl[0]}`:''} 
                price={obj.price[sortallGoods[0].price.length-1].p}
@@ -45,6 +45,7 @@ export const Sales = ({
                buysCount={obj.bougthCount}
                discount={obj.discount}
               isSale={obj.discount>0}
+              alias={obj.alias}
               />
               </Grid> 
             ))}
@@ -102,7 +103,7 @@ const handleStepChange = (obj) => {
 
             <PostMobile
               key={index}
-              id={obj._id}
+              id={obj.id}
               title={obj.name}
               imageUrl={obj.info[0].avatarUrl[0] ? `${backHost}${obj.info[0].avatarUrl[0]}`:''} 
               price={obj.price[obj.price.length-1].p}
@@ -112,6 +113,7 @@ const handleStepChange = (obj) => {
               buysCount={obj.bougthCount}
               discount={obj.discount}
               isSale={obj.discount>0}
+              alias={obj.alias}
             />
 
           ))}

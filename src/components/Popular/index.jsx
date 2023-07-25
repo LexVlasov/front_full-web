@@ -35,7 +35,7 @@ export const Popular = ({
               <Grid item xs={6} lg={4}> 
               <Post 
                 key={index}
-                id={obj._id}
+                id={obj.id}
                 title={obj.name}
                 imageUrl={obj.info[0].avatarUrl[0] ? `${backHost}${obj.info[0].avatarUrl[0]}`:''} 
                 price={obj.price[obj.price.length-1].p}
@@ -45,6 +45,7 @@ export const Popular = ({
                 buysCount={obj.bougthCount}
                 discount={obj.discount}
                 isSale={obj.discount>0}
+                alias={obj.alias}
               />
               </Grid> 
             ))}
@@ -101,7 +102,7 @@ export const PopularM = ({
           ) : (
             <PostMobile
               key={index}
-              id={obj._id}
+              id={obj.id}
               title={obj.name}
               imageUrl={obj.info[0].avatarUrl[0] ? `${backHost}${obj.info[0].avatarUrl[0]}`:''} 
               price={obj.price[obj.price.length-1].p}
@@ -111,6 +112,7 @@ export const PopularM = ({
               buysCount={obj.bougthCount}
               discount={obj.discount}
               isSale={obj.discount>0}
+              alias={obj.alias}
             />
 
           ))}
@@ -159,6 +161,7 @@ export const PostByType =({
     count,
     setCount,
     name,
+
 })=>{
   const sortallGoods = (isPostsLoading ? [...Array(5)]:[...allgood]).sort((a, b) => parseInt(b.bougthCount) - parseInt(a.bougthCount)).slice(0,3);
 
@@ -167,7 +170,7 @@ export const PostByType =({
 
         <div className={styles.head}>
         <h4 className={styles.h4}>{name}</h4>
-        <a className={styles.atext} href={`/${name}`}>Каталог препаратов</a>
+        <a className={styles.atext} href={`/types/Аналоги%20${name.split(' ')[1]}`}>Каталог препаратов</a>
         </div>
         {(isPostsLoading?[...Array(5)]:sortallGoods).map((obj,index) => isPostsLoading ? (
             <Grid item xs={6} lg={4} >  
@@ -178,7 +181,7 @@ export const PostByType =({
               <Grid item xs={6} lg={4}> 
               <Post 
                 key={index}
-                id={obj._id}
+                id={obj.id}
                 title={obj.name}
                 imageUrl={obj.info[0].avatarUrl[0] ? `${backHost}${obj.info[0].avatarUrl[0]}`:''} 
                 price={obj.price[obj.price.length-1].p}
@@ -188,6 +191,7 @@ export const PostByType =({
                 buysCount={obj.bougthCount}
                 discount={obj.discount}
                 isSale={obj.discount>0}
+                alias={obj.alias}
               />
               </Grid> 
             ))}

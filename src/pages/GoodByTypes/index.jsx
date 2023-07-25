@@ -52,13 +52,7 @@ export const GoodsByType = ({count, setCount,setUrl}) => {
           )}
         </Grid>                    
          <Grid item container xs={12} md={9} lg={9} spacing={4}>
-         <Grid item container justifyContent="center" alignItems="center" sx={{ mt: 2 }} xs={12} md={12} lg={12}>
-          {pageNumbers.map((number) => (
-            <button key={number} value={number} onClick={handleClick} className={currentPage===number ? styles.activepage : styles.page}>
-            {number}
-          </button> 
-          ))}      
-            </Grid>                  
+                 
             {(isPostsLoading?[...Array(5)]:currentItems).map((obj,index) => isPostsLoading ? (
                 <Post key={index} isLoading={true}/>
               ) : (
@@ -66,7 +60,7 @@ export const GoodsByType = ({count, setCount,setUrl}) => {
                 <Grid item xs={6} lg={4}> 
                 <Post 
                   key={index}
-                  id={obj._id}
+                  id={obj.id}
                   title={obj.name}
                   imageUrl={obj.info[0].avatarUrl ? `${backHost}${obj.info[0].avatarUrl[0]}`:''} 
                   price={obj.price[(obj.price.length)-1].p}
@@ -77,15 +71,21 @@ export const GoodsByType = ({count, setCount,setUrl}) => {
                   count={count} setCount={setCount}
                   discount={obj.discount}
                   isSale={obj.discount>0}
+                  alias={obj.alias}
+                  
                 />
                 </Grid> 
               ))}
-              <Grid item container justifyContent="center" alignItems="center" sx={{ mt: 2 ,mb:4}} xs={12} md={12} lg={12} >
+              <Grid item container justifyContent="left" alignItems="center" sx={{ mt: 2 ,mb:4}} xs={12} md={12} lg={12} >
+              {pageNumbers.length > 1 ? (
+            <>
+            <button className={styles.butnext} onClick={()=>{let e = currentPage; setCurrentPage(e>1?(e-1):e)}}>&#60; Назад</button>
           {pageNumbers.map((number) => (
             <button key={number} value={number} onClick={handleClick} className={currentPage===number ? styles.activepage : styles.page}>
               {number}
             </button> 
-          ))}      
+          ))}
+          <button className={styles.butnext} onClick={()=>{let e = currentPage; setCurrentPage(e<pageNumbers[pageNumbers.length-1]? (e+1):e)}}> Вперед &#62;</button> </>)    : ''} 
             </Grid>   
             </Grid>   
                     
@@ -132,13 +132,7 @@ export const GoodsByTypeMobile = ({count, setCount}) => {
 
 
     <>
-    <div className={styles.rootmobile}>
-          {pageNumbers.map((number) => (
-            <button key={number} value={number} onClick={handleClick} className={currentPage===number ? styles.activepagemobile : styles.pagemobile}>
-            {number}
-          </button> 
-          ))}      
-            </div><div className={styles.rootmobile}>                 
+            <div className={styles.rootmobile}>                 
             {(isPostsLoading?[...Array(5)]:currentItems).map((obj,index) => isPostsLoading ? (
                 <Post key={index} isLoading={true}/>
               ) : (
@@ -146,7 +140,7 @@ export const GoodsByTypeMobile = ({count, setCount}) => {
 
                 <PostMobile 
                   key={index}
-                  id={obj._id}
+                  id={obj.id}
                   title={obj.name}
                   imageUrl={obj.info[0].avatarUrl ? `${backHost}${obj.info[0].avatarUrl[0]}`:''} 
                   price={obj.price[(obj.price.length)-1].p}
@@ -157,15 +151,20 @@ export const GoodsByTypeMobile = ({count, setCount}) => {
                   count={count} setCount={setCount}
                   discount={obj.discount}
                   isSale={obj.discount>0}
+                  alias={obj.alias}
                 />
 
               ))}</div> 
               <Grid item container justifyContent="center" alignItems="center" sx={{ mt: 2 ,mb:4}} xs={12} md={12} lg={12} >
+              {pageNumbers.length > 1 ? (
+            <>
+            <button className={styles.butnext} onClick={()=>{let e = currentPage; setCurrentPage(e>1?(e-1):e)}}>&#60; Назад</button>
           {pageNumbers.map((number) => (
             <button key={number} value={number} onClick={handleClick} className={currentPage===number ? styles.activepage : styles.page}>
               {number}
             </button> 
-          ))}      
+          ))}
+          <button className={styles.butnext} onClick={()=>{let e = currentPage; setCurrentPage(e<pageNumbers[pageNumbers.length-1]? (e+1):e)}}> Вперед &#62;</button> </>)    : ''}   
             </Grid>   
 
             </>

@@ -59,7 +59,7 @@ export const Account = () => {
             <Post key={index} isLoading={true}/>
           ) : (
             <Post
-              id={obj._id}
+              id={obj.id}
               title={obj.title}
               imageUrl={obj.imageUrl ? `${backHost}${obj.imageUrl}`:''}
               user={obj.user}
@@ -69,6 +69,9 @@ export const Account = () => {
               tags={obj.tags}
               isEditable={userData?._id === obj.user._id}
               key={index}
+              alias={obj.alias}
+              discount={obj.discount}
+                isSale={obj.discount>0}
             />
           ))}
         </Grid>
