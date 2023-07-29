@@ -7,6 +7,12 @@ export const fetchReturnData = createAsyncThunk('order/fetchReturnData', async(p
     return data;
 })
 
+export const fetchOneClick = createAsyncThunk('oneclick/fetchOneClick', async(params) =>{
+    
+    const {data} = await axios.post('/oneclick',params);
+    return data;
+})
+
 const initialState = {
     data: null,
     status:'loading',
@@ -30,6 +36,18 @@ const paymentSlice = createSlice({
             state.status='loaded';
         })
         .addCase(fetchReturnData.rejected,(state)=>{
+            state.data = null;
+            state.status='error';
+        })
+        .addCase(fetchOneClick.pending,(state)=>{
+            state.data = null;
+            state.status='loading';
+        })
+        .addCase(fetchOneClick.fulfilled,(state,action)=>{
+            state.data = action.payload;
+            state.status='loaded';
+        })
+        .addCase(fetchOneClick.rejected,(state)=>{
             state.data = null;
             state.status='error';
         });

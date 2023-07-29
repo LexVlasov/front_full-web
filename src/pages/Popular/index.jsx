@@ -5,7 +5,7 @@ import styles from './populargoods.module.scss';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchGoods, fetchTypes } from '../../redux/slices/posts';
 import { Box } from '@mui/material';
-import { TypesBlock } from '../../components/BlockTypes';
+import { TypesBlock,DeliveryAdvertise } from '../../components/BlockTypes';
 
 export const PopularGoods = ({
     count,
@@ -36,7 +36,7 @@ export const PopularGoods = ({
   React.useEffect(()=>{
     dispatch(fetchGoods());
     dispatch(fetchTypes());
-  },[]);
+  },[dispatch]);
 
   const handleClick = (event) => {
     setCurrentPage(Number(event.target.value));
@@ -50,6 +50,7 @@ export const PopularGoods = ({
          {(isTypesLoading?[...Array(5)]:types.items).map((obj,index)=> isTypesLoading ? '' :
             (<TypesBlock title={obj.lvl1_type} items={obj.group_type} isLoading={isTypesLoading} key={index} />)
           )}
+          <DeliveryAdvertise/>
         </Grid>                    
          <Grid item container xs={12} md={9} lg={9} spacing={4}>
                 
@@ -119,7 +120,7 @@ for (let i = 1; i <= Math.ceil(sortallGoods.length / itemsPerPage); i++) {
 
 React.useEffect(()=>{
   dispatch(fetchGoods());
-},[]);
+},[dispatch]);
 
 const handleClick = (event) => {
   setCurrentPage(Number(event.target.value));

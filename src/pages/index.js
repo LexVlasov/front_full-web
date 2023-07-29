@@ -15,3 +15,4 @@ export {Payments} from "./Payments";
 export {Questions} from "./Questions";
 export {Certificates} from "./Certificates";
 export {Reviews} from "./Reviews";
+export {Terms} from "./Terms";

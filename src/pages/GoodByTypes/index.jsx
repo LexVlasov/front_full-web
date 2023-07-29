@@ -2,7 +2,7 @@ import React from 'react';
 import Grid from '@mui/material/Grid';
 
 import { Post,PostMobile } from "../../components/Post";
-import { TypesBlock } from '../../components/BlockTypes';
+import { TypesBlock,DeliveryAdvertise } from '../../components/BlockTypes';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchGoodsbyType, fetchTypes } from '../../redux/slices/posts';
 import { useParams } from 'react-router-dom';
@@ -20,7 +20,7 @@ export const GoodsByType = ({count, setCount,setUrl}) => {
   const isPostsLoading =allgood.status==='loading';
 
   const [currentPage, setCurrentPage] = React.useState(1);
-  const [itemsPerPage, setItemsPerPage] = React.useState(12);
+  const itemsPerPage = 12;
 
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
@@ -34,7 +34,7 @@ export const GoodsByType = ({count, setCount,setUrl}) => {
   React.useEffect(()=>{
     dispatch(fetchGoodsbyType(type));
     dispatch(fetchTypes());
-  },[]);
+  },[dispatch,type]);
 
   const handleClick = (event) => {
     setCurrentPage(Number(event.target.value));
@@ -50,6 +50,7 @@ export const GoodsByType = ({count, setCount,setUrl}) => {
          {(isTypesLoading?[...Array(5)]:types.items).map((obj,index)=> isTypesLoading ? '' :
             (<TypesBlock title={obj.lvl1_type} items={obj.group_type} isLoading={isTypesLoading} key={index} />)
           )}
+          <DeliveryAdvertise/>
         </Grid>                    
          <Grid item container xs={12} md={9} lg={9} spacing={4}>
                  
@@ -106,7 +107,7 @@ export const GoodsByTypeMobile = ({count, setCount}) => {
   const isPostsLoading =allgood.status==='loading';
 
   const [currentPage, setCurrentPage] = React.useState(1);
-  const [itemsPerPage, setItemsPerPage] = React.useState(12);
+  const itemsPerPage = 12;
 
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
@@ -119,7 +120,7 @@ export const GoodsByTypeMobile = ({count, setCount}) => {
 
   React.useEffect(()=>{
     dispatch(fetchGoodsbyType(type));
-  },[type]);
+  },[dispatch,type]);
 
   const handleClick = (event) => {
     setCurrentPage(Number(event.target.value));

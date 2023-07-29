@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import Grid from '@mui/material/Unstable_Grid2';
 
-import { TypesBlock } from '../../components/BlockTypes';
+import { TypesBlock, DeliveryAdvertise } from '../../components/BlockTypes';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchTypes,fetchPopular,fetchSale } from '../../redux/slices/posts';
 import { Box } from '@mui/system';
@@ -53,8 +53,10 @@ export const Home = ({count,setCount,setUrl}) => {
       <Grid container spacing={1} alignItems="flex-start">
        <Grid item xs={12} md={3} lg={3}>
           {(isTagsLoading?[...Array(5)]:types.items).map((obj,index)=> isTagsLoading ? '' :
-            (<TypesBlock title={obj.lvl1_type} items={obj.group_type} isLoading={isTagsLoading} key={index} />)
+            (<TypesBlock title={obj.lvl1_type} items={obj.group_type} isLoading={isTagsLoading} key={index} />
+            )
           )}
+          <DeliveryAdvertise/>
         </Grid>                    
         <Grid item container xs={12} md={9} lg={9} style={{paddingLeft:"20px"}}>
             <Popular

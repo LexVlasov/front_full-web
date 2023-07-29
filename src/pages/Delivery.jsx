@@ -3,7 +3,7 @@ import { fetchTypes } from '../redux/slices/posts';
 import { useDispatch, useSelector } from "react-redux";
 import { Box } from "@mui/system";
 import  Grid  from "@mui/material/Grid";
-import { TypesBlock } from "../components/BlockTypes";
+import { TypesBlock,DeliveryAdvertise } from "../components/BlockTypes";
 import Post1 from "../uploads/deliverypost/packaging_1.jpg";
 import Post2 from "../uploads/deliverypost/packaging_3.jpg";
 import Post3 from "../uploads/deliverypost/packaging_4.jpg";
@@ -26,7 +26,7 @@ export const Delivery = ({setUrl}) =>{
           {(isTagsLoading?[...Array(5)]:types.items).map((obj,index)=> isTagsLoading ? '' :
             (<TypesBlock title={obj.lvl1_type} items={obj.group_type} isLoading={isTagsLoading} key={index} />)
           )}
-  
+            <DeliveryAdvertise/>
           </Grid> 
           <Grid item container xs={12} md={9} lg={9} >
             <div style={{marginLeft:"30px", width:"100%"}}>

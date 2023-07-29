@@ -7,7 +7,7 @@ import { fetchTypes } from '../../redux/slices/posts';
 import { useDispatch, useSelector } from "react-redux";
 import { Box } from "@mui/system";
 import  Grid  from "@mui/material/Grid";
-import { TypesBlock } from "../../components/BlockTypes";
+import { TypesBlock,DeliveryAdvertise } from "../../components/BlockTypes";
 import {InfoOfGood,InfoOfGoodMobile} from "./infoOfGood";
 
 export const FullPost = ({count,setCount, setUrl}) => {
@@ -48,7 +48,7 @@ export const FullPost = ({count,setCount, setUrl}) => {
           {(isTagsLoading?[...Array(5)]:types.items).map((obj,index)=> isTagsLoading ? '' :
             (<TypesBlock title={obj.lvl1_type} items={obj.group_type} isLoading={isTagsLoading} key={index} />)
           )}
-  
+          <DeliveryAdvertise/>
           </Grid> 
           <Grid item container xs={12} md={9} lg={9} className={styles.root}>
           <meta name="keywords" content={`${data.ie_search} купить, москва, санкт-петербург, волгоград`}></meta>

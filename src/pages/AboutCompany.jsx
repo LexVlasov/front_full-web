@@ -3,7 +3,7 @@ import { fetchTypes } from '../redux/slices/posts';
 import { useDispatch, useSelector } from "react-redux";
 import { Box } from "@mui/system";
 import  Grid  from "@mui/material/Grid";
-import { TypesBlock } from "../components/BlockTypes";
+import { TypesBlock,DeliveryAdvertise } from "../components/BlockTypes";
 
 
 export const AboutCompany = ({setUrl}) =>{
@@ -13,7 +13,7 @@ export const AboutCompany = ({setUrl}) =>{
 
     React.useEffect(()=>{
         dispatch(fetchTypes());   
-    },[]);
+    },[dispatch]);
     setUrl('about(О нас')
     return(
         <Box sx={{ flexGrow: 1 }}>
@@ -22,7 +22,7 @@ export const AboutCompany = ({setUrl}) =>{
           {(isTagsLoading?[...Array(5)]:types.items).map((obj,index)=> isTagsLoading ? '' :
             (<TypesBlock title={obj.lvl1_type} items={obj.group_type} isLoading={isTagsLoading} key={index} />)
           )}
-  
+          <DeliveryAdvertise/>
           </Grid> 
           <Grid item container xs={12} md={9} lg={9} >
             <div style={{marginLeft:"30px", width:"100%"}}>
