@@ -27,10 +27,7 @@ export const Reviews = ()=>{
             setReview(review+e)
          }
     };
-    if(!isCommentsLoading){comments.items.map((obj,i)=>{
-        console.log(!obj.infoofgoods[0]&&obj)
-    });
-}
+
     return(
         <>
         {isCommentsLoading ? '' :
