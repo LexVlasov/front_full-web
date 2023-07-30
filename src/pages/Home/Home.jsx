@@ -5,7 +5,7 @@ import { TypesBlock, DeliveryAdvertise } from '../../components/BlockTypes';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchTypes,fetchPopular,fetchSale } from '../../redux/slices/posts';
 import { Box } from '@mui/system';
-import {Popular, Sales,PopularM,SalesM,PostByType} from '../../components';
+import {Popular, Sales,PopularM,SalesM,PostByType,Reviews} from '../../components';
 import axios from "../../axios";
 
 
@@ -96,7 +96,7 @@ export const Home = ({count,setCount,setUrl}) => {
               setCount={setCount}
               name={'Дженерики Левитры'}
               />
-    
+              <Reviews/>
             </Grid> 
               
                            

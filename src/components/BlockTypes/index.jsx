@@ -82,6 +82,10 @@ export const DeliveryAdvertise = () =>{
     }
     
   }
+  // const testTimer =()=> {
+  //   console.log('Hello after 4 second!');
+  // }
+  // setInterval(testTimer,4*1000);
   return(
     <>
     <div className={styles.delivery}>

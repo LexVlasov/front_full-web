@@ -13,3 +13,4 @@ export * from "./Popular";
 export * from "./Sales";
 export * from "./Footer";
 export * from "./PreFooter";
+export * from "./Reviews";

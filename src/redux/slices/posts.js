@@ -26,6 +26,10 @@ export const fetchGoodsbyType = createAsyncThunk('allgood/fetchGoodsbyType', asy
     return data;
 })
 
+export const fetchComments = createAsyncThunk('comments/fetchComments', async ()=>{
+  const {data} = await axios.get('/comments');
+  return data;
+})
 
 
 const initialState = {
@@ -122,6 +126,18 @@ const goodsSlice = createSlice({
           .addCase(fetchSale.rejected, (state) => {
             state.sale.items = [];
             state.sale.status = 'error';
+          })
+          .addCase(fetchComments.pending, (state) => {
+            state.comments.items = [];
+            state.comments.status = 'loading';
+          })
+          .addCase(fetchComments.fulfilled, (state, action) => {
+            state.comments.items = action.payload;
+            state.comments.status = 'loaded';
+          })
+          .addCase(fetchComments.rejected, (state) => {
+            state.comments.items = [];
+            state.comments.status = 'error';
           });
       },
     });
