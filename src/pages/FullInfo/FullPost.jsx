@@ -25,20 +25,21 @@ export const FullPost = ({count,setCount, setUrl}) => {
   React.useEffect(()=>{
     axios.get(`/good/${id}`).then(res=>{
       setData(res.data);
-      setLoading(false);   
+      setLoading(false);
     }).catch((err)=>{
       console.warn(err);
       alert('Error in getting post');
     });
+    
     dispatch(fetchTypes());
   },[dispatch,id]);
-
+  
   if(data)
-  {setUrl('types/'+String(data.info[0].group_type)+'('+String(data.info[0].group_type) + '|good/'+String(id) +'('+String(data.name));}
+  {setUrl('types/'+String(data.info[0].group_type)+'('+String(data.info[0].group_type) + '|good/'+String(id) +'('+String(data.name));
+  document.title = `${data.ie_search.split(',')[0]} купить в Москве и РФ | ${data.info[0].group_type} купить недорого | ${data.ie_search} ${data.name}`; }
   if(isLoading){
     return <Post isLoading={isLoading} isFullPost/>;
   }
- 
   return (
 
 

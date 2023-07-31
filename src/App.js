@@ -23,12 +23,11 @@ import { Home
   ,Payments
   ,Questions
   ,Certificates
-  ,Reviews
   ,Terms
    } from './pages';
 import React, { useState } from 'react';
 import MobileDetect from 'mobile-detect';
-
+import {Helmet} from "react-helmet";
 
 
 
@@ -61,7 +60,11 @@ function App() {
       )
       :
       (
-      <><Header/>
+      <>
+      <Helmet>
+          <title>Хотите купить дженерики Виагры дешево в Москве? У нас вы можете заказать аналоги Виагры по самым низким ценам (доставка по Москве и другим городам России)</title>
+        </Helmet>
+      <Header/>
       <Container maxWidth="lg" minWidth="xs">
       <MainInfo count={count}/>
       </Container>
@@ -69,6 +72,7 @@ function App() {
       <UnderMiddle count={count} url={url}/>
       <Container maxWidth="lg" minWidth="xs">
         <Routes>
+        
         <Route path="/" element={<Home count={count} setCount={setCount} setUrl={setUrl}/>} /> 
         <Route path="/good/:id" element={<FullPost count={count} setCount={setCount} setUrl={setUrl} url={url}/>} />
         <Route path="/types/:type" element={<GoodsByType count={count} setCount={setCount} setUrl={setUrl}/>} />

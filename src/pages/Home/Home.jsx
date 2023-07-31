@@ -23,6 +23,7 @@ export const Home = ({count,setCount,setUrl}) => {
   const isTagsLoading =types.status==='loading';
   const isSaleLoading =sale.status==='loading';
   React.useEffect(()=>{
+
     dispatch(fetchPopular());
     dispatch(fetchTypes());
     dispatch(fetchSale());
@@ -46,7 +47,7 @@ export const Home = ({count,setCount,setUrl}) => {
     })
    },[dispatch]);
    setUrl(null);
-
+   document.title = `Хотите купить дженерики Виагры дешево в Москве? У нас вы можете заказать аналоги Виагры по самым низким ценам (доставка по Москве и другим городам России)`;   
   return (
 
     <Box >

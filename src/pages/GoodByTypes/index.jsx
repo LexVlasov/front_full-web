@@ -39,8 +39,12 @@ export const GoodsByType = ({count, setCount,setUrl}) => {
   const handleClick = (event) => {
     setCurrentPage(Number(event.target.value));
   };
-
-  setUrl(type+'('+type);
+  if(type){
+    document.title = `${type} купить в Москве и РФ | ${type} купить недорого | ${type} `;
+    setUrl(type+'('+type); 
+  }
+  
+  
 
   return (
      <Box sx={{ flexGrow: 1 }}>
