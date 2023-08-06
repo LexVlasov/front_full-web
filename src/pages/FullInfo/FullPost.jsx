@@ -40,10 +40,13 @@ export const FullPost = ({count,setCount, setUrl}) => {
   if(isLoading){
     return <Post isLoading={isLoading} isFullPost/>;
   }
+  const canonical = data.alias === 0 ? "canonical" :'';
+  const hostname = window.location.origin;
   return (
 
 
-    <Box sx={{ flexGrow: 1 }}>
+    <Box sx={{ flexGrow: 1 }} rel={canonical} >
+      <link rel={canonical} href={`${hostname}/good/${id}`}/>
        <Grid container spacing={1} alignItems="flex-start">
           <Grid item xs={12} md={3} lg={3} spacing={2} >
           {(isTagsLoading?[...Array(5)]:types.items).map((obj,index)=> isTagsLoading ? '' :
