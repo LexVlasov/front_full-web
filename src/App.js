@@ -36,7 +36,7 @@ function App() {
   const [url,setUrl] = useState(null);
 
   const hostname = window.location.href;
-  console.log(url);
+
   React.useEffect(()=>{
 
     window.localStorage.setItem('countcart',JSON.stringify(count));
