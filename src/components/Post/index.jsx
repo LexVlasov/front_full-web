@@ -31,7 +31,8 @@ export const Post = ({
   maxPrice,
   metacontent,
   isSale,
-  altText
+  altText,
+  type
 }) => {
   const [rating,setRating] = useState();
 
@@ -49,7 +50,7 @@ export const Post = ({
    
   const cntMarks = rating?rating.length:0;  
   const avgMark = (rating?rating.map((obj,i)=>obj.rating):[...Array(3)]).reduce((a,b)=>a+b,0)/(cntMarks>0?cntMarks:1);
-  // console.log(rating.map((obj,i)=>obj.rating).reduce((a,b)=>a+b,0)/(cntMarks>0?cntMarks:1));
+
   if (isLoading) {
     return <PostSkeleton />;
   }
@@ -90,7 +91,7 @@ export const Post = ({
         <div className={styles.indention}>
           <meta name="keywords" content={`${metacontent} купить, москва, санкт-петербург, волгоград`}></meta>
           <h2 className={clsx(styles.title, { [styles.titleFull]: isFullPost })}>
-            {isFullPost ? title : <Link to={`/good/${title}`} >{title}</Link>}
+            {isFullPost ? title : <Link to={`/${type}/${title}`} >{title}</Link>}
           </h2>
           <div className={styles.ratingprice}>
                 <Rating 
@@ -115,7 +116,7 @@ export const Post = ({
                       <span>{buysCount}</span>
                     </li>
                   </ul>
-                  <Link to={`/good/${title}`}>
+                  <Link to={`/${type}/${title}`}>
                   <Button 
                     className={styles.buy} 
                     // onClick={addToCart} 
@@ -153,7 +154,8 @@ export const PostMobile = ({
   price,
   maxPrice,
   metacontent,
-  isSale
+  isSale,
+  type
 }) => {
 
   if (isLoading) {
@@ -188,7 +190,7 @@ export const PostMobile = ({
         <div className={styles.indention}>
         <meta name="keywords" content={`${metacontent} купить, москва, санкт-петербург, волгоград`}></meta>
           <h2 className={clsx(styles.title, { [styles.titleFull]: isFullPost })}>
-            {isFullPost ? title : <Link to={`/good/${title}`} >{title}</Link>}
+            {isFullPost ? title : <Link to={`/${type}/${title}`} >{title}</Link>}
           </h2>
           <div className={styles.ratingprice}>
                 <Rating 
@@ -213,7 +215,7 @@ export const PostMobile = ({
                       <span>{buysCount}</span>
                     </li>
                   </ul>
-                  <Link to={`/good/${title}`}>
+                  <Link to={`/${type}/${title}`}>
                   <Button 
                     className={styles.buy} 
                     // onClick={addToCart} 

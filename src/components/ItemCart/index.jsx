@@ -83,7 +83,7 @@ export const ItemCart = ({
 
     return (
         <div className={styles.main}>
-          <a href={`/good/${name}`}><img src={`${backHost}${avatarUrl}`} className={styles.image}></img></a>
+          <a href={`/${type}/${name}`}><img src={`${backHost}${avatarUrl}`} className={styles.image}></img></a>
           <div className={styles.info}><div className={styles.name}>{name}</div><div className={styles.type}>{type}</div></div>
           <div className={styles.divprice}>
             <div>
@@ -187,7 +187,7 @@ export const ItemCartMobile = ({
     return (
         <div className={styles.mainmboile}>
           <div className={styles.infomobile}>
-          <a href={`/good/${name}`} className={styles.imagemobile}><img src={`${backHost}${avatarUrl}`} className={styles.imagemobile}></img></a>
+          <a href={`/${type}/${name}`} className={styles.imagemobile}><img src={`${backHost}${avatarUrl}`} className={styles.imagemobile}></img></a>
           <div className={styles.name}>{name}</div><div className={styles.type}>{type}</div></div>
           <div className={styles.divpricemobile}>
   

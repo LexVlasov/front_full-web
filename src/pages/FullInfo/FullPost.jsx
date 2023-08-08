@@ -35,7 +35,7 @@ export const FullPost = ({count,setCount, setUrl}) => {
   },[dispatch,id]);
   
   if(data)
-  {setUrl('types/'+String(data.info[0].group_type)+'('+String(data.info[0].group_type) + '|good/'+String(id) +'('+String(data.name));
+  {setUrl(String(data.info[0].group_type)+'('+String(data.info[0].group_type) + '|'+String(data.info[0].group_type)+'/'+String(id) +'('+String(data.name));
   document.title = `${data.ie_search.split(',')[0]} купить в Москве и РФ | ${data.info[0].group_type} купить недорого | ${data.ie_search} ${data.name}`; }
   if(isLoading){
     return <Post isLoading={isLoading} isFullPost/>;
@@ -46,7 +46,7 @@ export const FullPost = ({count,setCount, setUrl}) => {
 
 
     <Box sx={{ flexGrow: 1 }} rel={canonical} >
-      <link rel={canonical} href={`${hostname}/good/${id}`}/>
+
        <Grid container spacing={1} alignItems="flex-start">
           <Grid item xs={12} md={3} lg={3} spacing={2} >
           {(isTagsLoading?[...Array(5)]:types.items).map((obj,index)=> isTagsLoading ? '' :
@@ -101,7 +101,9 @@ export const FullPostMobile = ({count,setCount}) => {
     return <Post isLoading={isLoading} isFullPost/>;
   }
  
-
+  const canonical = data.alias === 0 ? "canonical" :'';
+  const hostname = window.location.origin;
+  
   return (
 
 
@@ -123,3 +125,5 @@ export const FullPostMobile = ({count,setCount}) => {
 
   );
 };
+
+

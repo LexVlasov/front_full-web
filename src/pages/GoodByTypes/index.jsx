@@ -45,10 +45,10 @@ export const GoodsByType = ({count, setCount,setUrl}) => {
   }
   
   
-
+  const hostname = window.location.origin;
   return (
      <Box sx={{ flexGrow: 1 }}>
-       <Grid container spacing={2} alignItems="flex-start" >
+         <Grid container spacing={2} alignItems="flex-start" >
 
          <Grid item xs={12} md={3} lg={3} spacing={2}>                
          {(isTypesLoading?[...Array(5)]:types.items).map((obj,index)=> isTypesLoading ? '' :
@@ -66,6 +66,7 @@ export const GoodsByType = ({count, setCount,setUrl}) => {
                 <Post 
                   key={index}
                   id={obj.id}
+                  type={obj.info[0].group_type}
                   title={obj.name}
                   imageUrl={obj.info[0].avatarUrl ? `${backHost}${obj.info[0].avatarUrl[0]}`:''} 
                   price={obj.price[(obj.price.length)-1].p}
@@ -147,6 +148,7 @@ export const GoodsByTypeMobile = ({count, setCount}) => {
                   key={index}
                   id={obj.id}
                   title={obj.name}
+                  type={obj.info[0].group_type}
                   imageUrl={obj.info[0].avatarUrl ? `${backHost}${obj.info[0].avatarUrl[0]}`:''} 
                   price={obj.price[(obj.price.length)-1].p}
                   viewsCount={obj.viewsCount}

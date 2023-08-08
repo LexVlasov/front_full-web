@@ -37,6 +37,7 @@ export const Sales = ({
                key={index}
                id={obj.id}
                title={obj.name}
+               type={obj.info[0].group_type}
                imageUrl={obj.info[0].avatarUrl[0] ? `${backHost}${obj.info[0].avatarUrl[0]}`:''} 
                price={obj.price[sortallGoods[0].price.length-1].p}
                viewsCount={obj.viewsCount}
@@ -105,6 +106,7 @@ const handleStepChange = (obj) => {
               key={index}
               id={obj.id}
               title={obj.name}
+              type={obj.info[0].group_type}
               imageUrl={obj.info[0].avatarUrl[0] ? `${backHost}${obj.info[0].avatarUrl[0]}`:''} 
               price={obj.price[obj.price.length-1].p}
               viewsCount={obj.viewsCount}

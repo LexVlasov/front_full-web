@@ -63,6 +63,7 @@ export const Sale = ({
                   key={index}
                   id={obj.id}
                   title={obj.name}
+                  type={obj.info[0].group_type}
                   imageUrl={obj.info[0].avatarUrl ? `${backHost}${obj.info[0].avatarUrl[0]}`:''} 
                   price={obj.price[(obj.price.length)-1].p}
                   viewsCount={obj.viewsCount}
@@ -140,6 +141,7 @@ const handleClick = (event) => {
                 key={index}
                 id={obj.id}
                 title={obj.name}
+                type={obj.info[0].group_type}
                 imageUrl={obj.info[0].avatarUrl ? `${backHost}${obj.info[0].avatarUrl[0]}`:''} 
                 price={obj.price[(obj.price.length)-1].p}
                 viewsCount={obj.viewsCount}

@@ -20,7 +20,7 @@ export const TypesBlock = ({ title,items, isLoading = true }) => {
         {(isLoading ? [...Array(5)] : items).map((name, i) => (
           <a
             className={styles.a}
-            href={`/types/${name}`}
+            href={`/${name}`}
           >
             <li key={i} className={styles.li}>                
                 {isLoading ? (
@@ -82,10 +82,7 @@ export const DeliveryAdvertise = () =>{
     }
     
   }
-  // const testTimer =()=> {
-  //   console.log('Hello after 4 second!');
-  // }
-  // setInterval(testTimer,4*1000);
+
   return(
     <>
     <div className={styles.delivery}>
@@ -120,7 +117,7 @@ export const DeliveryAdvertise = () =>{
 
     </div>
     <div className={styles.adv}>
-      <a href="/good/Durex%20Classic">
+      <a href="/Презервативы/Durex%20Classic">
         <img src={Adv} className={styles.adv_image} alt="Добавьте ПРЕЗЕРВАТИВ в свой заказ" />
     <div className={styles.adv_text}>Добавьте <b style={{color:"#316bb1"}}>ПРЕЗЕРВАТИВ</b> в свой заказ</div>
     </a>

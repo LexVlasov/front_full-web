@@ -1,5 +1,5 @@
 
-import {Routes, Route} from 'react-router-dom';
+import {Routes, Route,useParams} from 'react-router-dom';
 import Container from '@mui/material/Container';
 import { Header, MainInfo, Middle, Footer,PreFooter, UnderMiddle,HeaderMobile } from './components';
 import { Home
@@ -30,13 +30,13 @@ import MobileDetect from 'mobile-detect';
 import {Helmet} from "react-helmet";
 
 
-
-
 function App() {
   const [currentPath,setCurrentPath] = useState(window.location.pathname);
   const [count, setCount] = useState(JSON.parse(window.localStorage.getItem('countcart')) ? JSON.parse(window.localStorage.getItem('countcart'))  : []);
   const [url,setUrl] = useState(null);
 
+  const hostname = window.location.href;
+  console.log(url);
   React.useEffect(()=>{
 
     window.localStorage.setItem('countcart',JSON.stringify(count));
@@ -53,6 +53,7 @@ function App() {
       (currentPath.substring(1)==='checkout'? 
       (
       <Container maxWidth="md">
+        <link rel="canonical" href={`${hostname}`}/>
         <Routes>
           <Route path='/checkout' element={<MakeOrder count={count} setCount={setCount} setCurrentPath={setCurrentPath}/>}/>
         </Routes>
@@ -65,6 +66,7 @@ function App() {
           <title>Хотите купить дженерики Виагры дешево в Москве? У нас вы можете заказать аналоги Виагры по самым низким ценам (доставка по Москве и другим городам России)</title>
         </Helmet>
       <Header/>
+      <link rel="canonical" href={`${hostname}`}/>
       <Container maxWidth="lg" minWidth="xs">
       <MainInfo count={count}/>
       </Container>
@@ -74,8 +76,8 @@ function App() {
         <Routes>
         
         <Route path="/" element={<Home count={count} setCount={setCount} setUrl={setUrl}/>} /> 
-        <Route path="/good/:id" element={<FullPost count={count} setCount={setCount} setUrl={setUrl} url={url}/>} />
-        <Route path="/types/:type" element={<GoodsByType count={count} setCount={setCount} setUrl={setUrl}/>} />
+        <Route path="/:type/:id" element={<FullPost count={count} setCount={setCount} setUrl={setUrl} url={url}/>} />
+        <Route path="/:type" element={<GoodsByType count={count} setCount={setCount} setUrl={setUrl}/>} />
         <Route path="/cart/" element={<ShoppingCart count={count} setCount={setCount} setUrl={setUrl}/>} />
         <Route path="/popular" element={<PopularGoods count={count} setCount={setCount} setUrl={setUrl}/>}/>
         <Route path="/sale" element={<Sale count={count} setCount={setCount} setUrl={setUrl}/>}/>
@@ -97,6 +99,7 @@ function App() {
       (currentPath.substring(1)==='checkout'? 
       (
       <Container maxWidth="md">
+        <link rel="canonical" href={`${hostname}`}/>
         <Routes>
           <Route path='/checkout' element={<MakeOrderM count={count} setCount={setCount} setCurrentPath={setCurrentPath}/>}/>
         </Routes>
@@ -105,6 +108,7 @@ function App() {
       :
       ( 
       <><HeaderMobile count={count}/>
+      <link rel="canonical" href={`${hostname}`}/>
       <Container>
         <Routes>
         <Route path="/" element={<HomeMob count={count} setCount={setCount} />} /> 

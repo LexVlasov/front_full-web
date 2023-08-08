@@ -37,6 +37,7 @@ export const Popular = ({
                 key={index}
                 id={obj.id}
                 title={obj.name}
+                type={obj.info[0].group_type}
                 imageUrl={obj.info[0].avatarUrl[0] ? `${backHost}${obj.info[0].avatarUrl[0]}`:''} 
                 price={obj.price[obj.price.length-1].p}
                 viewsCount={obj.viewsCount}
@@ -104,6 +105,7 @@ export const PopularM = ({
               key={index}
               id={obj.id}
               title={obj.name}
+              type={obj.info[0].group_type}
               imageUrl={obj.info[0].avatarUrl[0] ? `${backHost}${obj.info[0].avatarUrl[0]}`:''} 
               price={obj.price[obj.price.length-1].p}
               viewsCount={obj.viewsCount}
@@ -170,7 +172,7 @@ export const PostByType =({
 
         <div className={styles.head}>
         <h4 className={styles.h4}>{name}</h4>
-        <a className={styles.atext} href={`/types/Аналоги%20${name.split(' ')[1]}`}>Каталог препаратов</a>
+        <a className={styles.atext} href={`/Аналоги%20${name.split(' ')[1]}`}>Каталог препаратов</a>
         </div>
         {(isPostsLoading?[...Array(5)]:sortallGoods).map((obj,index) => isPostsLoading ? (
             <Grid item xs={6} lg={4} >  
@@ -183,6 +185,7 @@ export const PostByType =({
                 key={index}
                 id={obj.id}
                 title={obj.name}
+                type={obj.info[0].group_type}
                 imageUrl={obj.info[0].avatarUrl[0] ? `${backHost}${obj.info[0].avatarUrl[0]}`:''} 
                 price={obj.price[obj.price.length-1].p}
                 viewsCount={obj.viewsCount}
