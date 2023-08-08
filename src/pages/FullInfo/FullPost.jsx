@@ -56,6 +56,7 @@ export const FullPost = ({count,setCount, setUrl}) => {
           </Grid> 
           <Grid item container xs={12} md={9} lg={9} className={styles.root}>
           <meta name="keywords" content={`${data.ie_search} купить москва санкт-петербург волгоград доставка`}></meta>
+          <meta name="description" content={`Закажите ${data.info[0].group_type} ${id} в интернет-аптеке One Pill в Москве. Насладитесь качественным продуктом с быстрой доставкой в день заказа. При покупке от 3000 рублей скидка на доставку по Москве. Ваше здоровье в надежных руках с One Pill!  Все оттенки твоих желаний... +7(800)511-31-02`} />
           <InfoOfGood 
             data={data}
             count={count}

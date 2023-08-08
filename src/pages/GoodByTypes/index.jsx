@@ -43,11 +43,13 @@ export const GoodsByType = ({count, setCount,setUrl}) => {
     document.title = `${type} купить в Москве и РФ | ${type} купить недорого | ${type} `;
     setUrl(type+'('+type); 
   }
-  
-  
+  let leywords = (isPostsLoading ? [...Array(5)] : allgood.items.map((obj,i)=>obj.ie_search)).reduce((a,b)=> a+ ' '+b,'');
+
   const hostname = window.location.origin;
   return (
      <Box sx={{ flexGrow: 1 }}>
+      <meta name="description" content={`Ищете ${type} в Москве? Посетите интернет-аптеку One Pill! Мы предлагаем высококачественные ${type} по доступным ценам с возможностью доставки в день заказа. При покупке от 3000 рублей скидка на доставку по Москве. Заботьтесь о своем здоровье с One Pill! Все оттенки твоих желаний... +7(800)511-31-02`} />
+      <meta name="keywords" content={leywords} />
          <Grid container spacing={2} alignItems="flex-start" >
 
          <Grid item xs={12} md={3} lg={3} spacing={2}>                

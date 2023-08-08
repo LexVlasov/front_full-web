@@ -6,8 +6,6 @@ import {  Grid,  } from "@mui/material";
 
 export const UnderMiddle = ({count, url})=>{
 
-
-    (url ? url :'').split('|').map((element)=>{console.log(element)})
     return (
         <div className={styles.root}>
             <Container maxWidth="lg">
