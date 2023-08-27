@@ -78,18 +78,23 @@ export const ItemCart = ({
   };
 
   const deleteItem = async ()=>{
-
+    let newVal = [...totalCart];
+    let prodIn = newVal.findIndex((p)=> p.id === id);
+    // console.log(newVal.filter(item=>item.id !== newVal[prodIn].id));
+    setCount(newVal.filter(item=>item.id !== newVal[prodIn].id));
   };
 
     return (
         <div className={styles.main}>
+          <div className={styles.info}>
           <a href={`/${type}/${name}`}><img src={`${backHost}${avatarUrl}`} className={styles.image}></img></a>
-          <div className={styles.info}><div className={styles.name}>{name}</div><div className={styles.type}>{type}</div></div>
+          <div className={styles.divnameandtype}><div className={styles.name}>{name}</div><div className={styles.type}>{type}</div></div>
+          </div>
           <div className={styles.divprice}>
             <div>
               <div className={styles.price}>{priceNow}</div>
               <div className={styles.x}>x</div>
-              <ButtonGroup sx={{width:"110px",float:"right",margin:"35px 15px 10px 0px",display:"inline-flex", }}>
+              <ButtonGroup className={styles.buttongroup}>
                 <Button aria-label="reduce" style={{height:"28px", padding:0, minWidth:"30px",borderColor:"#2b91a7",backgroundColor:"#2b91a7",opacity:"70%"}} onClick={removeFromCart}><RemoveIcon style={{height:"10px",width:"10px",color:"#fff"}}/> </Button>
                 <TextField inputProps={{style:{padding:0,height:"28px",textAlign:"center",width:"50px", fontSize:"12px",border:"0px"}}} value={count} onChange={e=>getText(e.target.value)}></TextField>
                 <Button aria-label="increase" size="small" style={{height:"28px", padding:0, minWidth:"30px",borderColor:"#2b91a7",backgroundColor:"#2b91a7",opacity:"70%"}} onClick={addToCart} ><AddIcon sx={{height:"10px",color:"#fff"}}/></Button>
@@ -97,7 +102,7 @@ export const ItemCart = ({
                 
               </ButtonGroup>
             </div>
-            <div className={styles.divdelete}><button className={styles.delete} onClick={removeFromCart}>удалить</button></div>
+            <div className={styles.divdelete}><button className={styles.delete} onClick={deleteItem}>удалить</button></div>
           </div>
           
         </div>
@@ -181,7 +186,9 @@ export const ItemCartMobile = ({
 
   const deleteItem = async ()=>{
     let newVal = [...totalCart];
-    setCount(newVal.filter(item=>item.id !== id));
+    let prodIn = newVal.findIndex((p)=> p.id === id);
+    console.log(newVal.filter(item=>item.id !== newVal[prodIn].id));
+    // setCount(newVal.filter(item=>item.id !== newVal[prodIn].id));
   };
 
     return (

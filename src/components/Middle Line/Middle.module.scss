@@ -2,6 +2,9 @@
     background-color: #30374c;
     height: 60px;   
     line-height: 60px;
+    @media (max-width:800px) {
+    display: none;
+    }
 }
 
 @media screen and (min-width: 1200px)  {

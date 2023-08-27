@@ -1,15 +1,14 @@
 import React, { useState } from 'react';
-import Grid from '@mui/material/Unstable_Grid2';
 
 import { TypesBlock, DeliveryAdvertise } from '../../components/BlockTypes';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchTypes,fetchPopular,fetchSale } from '../../redux/slices/posts';
-import { Box } from '@mui/system';
-import {Popular, Sales,PopularM,SalesM,PostByType,Reviews} from '../../components';
+import {Popular, Sales,PostByType,Reviews} from '../../components';
 import axios from "../../axios";
+import styles from "./home.module.scss";
 
+export const Home = ({count,setCount,setUrl,blockTypes,isTypesLoading}) => {
 
-export const Home = ({count,setCount,setUrl}) => {
   const backHost = 
   process.env.REACT_APP_API_URL?process.env.REACT_APP_API_URL:
   'http://localhost:4444';
@@ -47,21 +46,15 @@ export const Home = ({count,setCount,setUrl}) => {
     })
    },[dispatch]);
    setUrl(null);
+
    document.title = `Хотите купить дженерики Виагры дешево в Москве? У нас вы можете заказать аналоги Виагры по самым низким ценам (доставка по Москве и другим городам России)`;   
   return (
     
-    <Box >
+    <div>
       <meta name="description" content="Добро пожаловать в интернет-аптеку One Pill в Москве! У нас вы найдете широкий выбор дженериков виагры, левитры, сиалиса, БАД для здоровья, презервативов, женской виагры и многое другое. Гарантируем качественный сервис и быструю доставку в день заказа. При покупке от 3000 рублей скидка на доставку по Москве. Все оттенки твоих желаний... +7(800)511-31-02"/>
 
-      <Grid container spacing={1} alignItems="flex-start">
-       <Grid item xs={12} md={3} lg={3}>
-          {(isTagsLoading?[...Array(5)]:types.items).map((obj,index)=> isTagsLoading ? '' :
-            (<TypesBlock title={obj.lvl1_type} items={obj.group_type} isLoading={isTagsLoading} key={index} />
-            )
-          )}
-          <DeliveryAdvertise/>
-        </Grid>                    
-        <Grid item container xs={12} md={9} lg={9} style={{paddingLeft:"20px"}}>
+      <div className={styles.rootgrid}>
+        <div className={styles.productgrid}>
             <Popular
               isPostsLoading={isPostsLoading} 
               allgood={allgood} 
@@ -100,49 +93,17 @@ export const Home = ({count,setCount,setUrl}) => {
               name={'Дженерики Левитры'}
               />
               <Reviews/>
-            </Grid> 
-              
+              </div>
+            <div className={styles.typesblockgrid}>
+          {(blockTypes.items).map((obj,index)=> 
+            (<TypesBlock title={obj.lvl1_type} items={obj.group_type} isLoading={false} key={index} />
+            )
+          )}
+          <DeliveryAdvertise/>
+        </div>        
                            
-      </Grid>                        
-</Box>
+      </div>                        
+</div>
   );
 };
 
-
-export const HomeMob = ({count,setCount}) => {
-  const backHost = 
-  process.env.REACT_APP_API_URL?process.env.REACT_APP_API_URL:
-  'http://localhost:4444';
-  const dispatch = useDispatch();
-  
-  const {allgood,sale} = useSelector((state) => state.goods);
-  const isPostsLoading =allgood.status==='loading';
-  const isSaleLoading =sale.status==='loading';
-  React.useEffect(()=>{
-    dispatch(fetchPopular());
-    dispatch(fetchSale());
-   },[dispatch]);
-   
-  return (
-
-
-                    
-        <div >
-            <PopularM
-              isPostsLoading={isPostsLoading} 
-              allgood={allgood} 
-              backHost={backHost}
-              count={count}
-              setCount={setCount}/> 
-              <SalesM 
-              isPostsLoading={isSaleLoading} 
-              allgood={sale} 
-              backHost={backHost}
-              count={count}
-              setCount={setCount}/>
-    
-            </div> 
-              
-
-  );
-};

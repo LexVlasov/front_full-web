@@ -9,11 +9,11 @@ import Adv from "../../uploads/mainInfo/advertise.jpg";
 import CallDOne from "../../uploads/mainInfo/calldone.jpg";
 import { fetchOneClick } from "../../redux/slices/makeorder";
 import { useDispatch } from 'react-redux';
-
+import {Link} from 'react-router-dom';
 export const TypesBlock = ({ title,items, isLoading = true }) => {
 
   return (
-    <div>
+    <div className={styles.roottypes}>
       <h4 className={styles.main}>&#8801; {title}</h4>
       
       <ul className={styles.root}>
@@ -87,7 +87,7 @@ export const DeliveryAdvertise = () =>{
     <>
     <div className={styles.delivery}>
     
-      <img src={Delivery} style={{position:"absolute",opacity:"0.9"}} alt="Курьерская доставка по Москве в день заказа"></img>
+      <img src={Delivery} style={{position:"absolute",opacity:"0.9",width:"100%", height:"300px"}} alt="Курьерская доставка по Москве в день заказа"></img>
       <div className={styles.txtdelivery}><b>БЫСТРАЯ ДОСТАВКА</b></div>
       <div className={styles.txtmsc}>Курьерская доставка по <b>Москве</b> в день заказа.</div>
       <div className={styles.txtmsc}>Доставка во все города Почтой России (1 класс) или EMS.</div>
@@ -126,5 +126,39 @@ export const DeliveryAdvertise = () =>{
 
 
     </>
+  )
+}
+
+
+export const TypesBlockMbile =({
+  menu,
+  types,
+  isTypesLoading,
+  group,
+  ChooseType,
+  LinkTo
+})=>{
+  return(
+    <div className={styles.menum} id="header">
+            {menu === 2 ? 
+                <ul className={styles.ulmobile}>
+                    {types.map((obj,ind)=>(
+                        (isTypesLoading ? 
+                            (
+                                group === 1 ? <li className={styles.limobile} key={ind} onClick={()=>ChooseType(obj.lvl1_type)}>{obj.lvl1_type}</li>
+                            :
+                            (group===obj.lvl1_type?
+                                obj.group_type.map((gr,i)=>(<li className={styles.limobile} key={i}>
+                                    <Link to={`/${gr}`} onClick={LinkTo}>
+                                        <button className={styles.typemobilet}>{gr}</button>
+                                        </Link>
+                                </li>)) : '')
+                            )
+                            : ''
+                            )
+                    ))}
+                </ul>
+            :''}
+            </div>
   )
 }

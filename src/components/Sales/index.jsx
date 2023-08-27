@@ -26,13 +26,13 @@ export const Sales = ({
         <h4 className={styles.h4}>Товары недели</h4>
         <a className={styles.atext} href="/sale">Каталог препаратов</a>
         </div>
-        {(isPostsLoading?[...Array(5)]:sortallGoods).map((obj,index) => isPostsLoading ? (
-            <Grid item xs={6} lg={4} >  
+        {(isPostsLoading?[...Array(1)]:sortallGoods).map((obj,index) => isPostsLoading ? (
+            <Grid item xs={12} lg={4} >  
               <Post key={index} isLoading={true}/>
               </Grid> 
             ) : (
               
-              <Grid item xs={6} lg={4} > 
+              <div className={styles.populargrid}> 
               <Post 
                key={index}
                id={obj.id}
@@ -48,7 +48,7 @@ export const Sales = ({
               isSale={obj.discount>0}
               alias={obj.alias}
               />
-              </Grid> 
+              </div> 
             ))}
 
         </>

@@ -12,9 +12,9 @@ export const ShoppingCart = ({count,setCount,setUrl}) =>{
 
     setUrl('cart(Корзина');
     return(
-        <div style={{height:"100%"}}>
-        <Grid container spacing={2}>
-            <Grid item lg={8.5} className={count.length === 0 ? styles.maininfoload:styles.maininfo}>
+        <div className={styles.rootcartgrid}>
+
+            <div className={count.length === 0 ? styles.maininfoload:styles.maininfo}>
             {(count.length > 0 ?
                 
                 (count.map((ob,i)=> 
@@ -36,11 +36,10 @@ export const ShoppingCart = ({count,setCount,setUrl}) =>{
                  )
                 )  
                 : <div className={styles.emptycart}>В корзине пока что пусто....</div>)}
-            </Grid>
-            <Grid item lg={3}>
+            </div>
+            <div className={styles.buybuttomgrid}>
                 <BuyButton totalSum={totalSum.reduce((a,b)=>a+b,0)} value={totalCnt.reduce((a,b)=>a+b,0)} flgCart={true}/>
-            </Grid>
-        </Grid>
+            </div>
         </div>
     );
 };

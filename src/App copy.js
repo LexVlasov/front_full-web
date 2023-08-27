@@ -1,9 +1,10 @@
 
 import {Routes, Route,useParams} from 'react-router-dom';
 import Container from '@mui/material/Container';
-import { Header, MainInfo, Middle, Footer,PreFooter, UnderMiddle } from './components';
+import { Header, MainInfo, Middle, Footer,PreFooter, UnderMiddle,HeaderMobile } from './components';
 import { Home
-   , FullPost
+  , HomeMob
+  , FullPost
   , GoodsByType
   ,ShoppingCart
   ,PopularGoods
@@ -11,6 +12,12 @@ import { Home
   ,AboutCompany
   ,Contact
   ,MakeOrder
+  ,MakeOrderM
+  , GoodsByTypeMobile
+  ,FullPostMobile
+  ,ShoppingCartMobile
+  ,SaleM
+  ,PopularGoodsM
   ,Refund
   ,Delivery
   ,Payments
@@ -21,31 +28,29 @@ import { Home
 import React, { useState } from 'react';
 import MobileDetect from 'mobile-detect';
 import {Helmet} from "react-helmet";
-import { fetchTypes } from "./redux/slices/posts";
-import { useDispatch, useSelector } from "react-redux";
+
 
 function App() {
   const [currentPath,setCurrentPath] = useState(window.location.pathname);
   const [count, setCount] = useState(JSON.parse(window.localStorage.getItem('countcart')) ? JSON.parse(window.localStorage.getItem('countcart'))  : []);
   const [url,setUrl] = useState(null);
-  const dispatch = useDispatch();
-  const {types} = useSelector((state)=>state.goods);
-  const isTypesLoading = types.status === 'loaded';
+
   const hostname = window.location.href;
-  const [menu,setMenu] = useState(1);
-  const [group,setGroup] = useState(1);
+
   React.useEffect(()=>{
 
     window.localStorage.setItem('countcart',JSON.stringify(count));
-    dispatch(fetchTypes());
-  },[count,dispatch]);
+  },[count])
+
+  let md = new MobileDetect(window.navigator.userAgent);
+
 
 
   return (
     <>
 
-     
-      {currentPath.substring(1)==='checkout'? 
+      {md.os()!=='AndroidOS'&&md.os()!=='iOS' ?
+      (currentPath.substring(1)==='checkout'? 
       (
       <Container maxWidth="md">
         <link rel="canonical" href={`${hostname}`}/>
@@ -60,24 +65,17 @@ function App() {
       <Helmet>
           <title>Хотите купить дженерики Виагры дешево в Москве? У нас вы можете заказать аналоги Виагры по самым низким ценам (доставка по Москве и другим городам России)</title>
         </Helmet>
-      <Header 
-          types={types} 
-          isTypesLoading={isTypesLoading}
-          menu={menu}
-          setMenu={setMenu}
-          group={group}
-          setGroup={setGroup} />
+      <Header/>
       <link rel="canonical" href={`${hostname}`}/>
       <Container maxWidth="lg" minWidth="xs">
       <MainInfo count={count}/>
       </Container>
       <Middle count={count}/>
       <UnderMiddle count={count} url={url}/>
-
       <Container maxWidth="lg" minWidth="xs">
         <Routes>
         
-        <Route path="/" element={<Home count={count} setCount={setCount} setUrl={setUrl} blockTypes={types} isTypesLoading={isTypesLoading}/>} /> 
+        <Route path="/" element={<Home count={count} setCount={setCount} setUrl={setUrl}/>} /> 
         <Route path="/:type/:id" element={<FullPost count={count} setCount={setCount} setUrl={setUrl} url={url}/>} />
         <Route path="/:type" element={<GoodsByType count={count} setCount={setCount} setUrl={setUrl}/>} />
         <Route path="/cart/" element={<ShoppingCart count={count} setCount={setCount} setUrl={setUrl}/>} />
@@ -92,19 +90,42 @@ function App() {
         <Route path="/certificates" element={<Certificates setUrl={setUrl}  />}/>
         <Route path="/terms" element={<Terms setUrl={setUrl}  />}/>
         </Routes>
-      </Container> 
+      </Container>
       <PreFooter/>
-      <Footer
-        types={types} 
-        isTypesLoading={isTypesLoading}
-        menu={menu}
-        setMenu={setMenu}
-        group={group}
-        setGroup={setGroup}
-      />
+      <Footer/>
       </>
-      )}
-    
+      ))
+    :
+      (currentPath.substring(1)==='checkout'? 
+      (
+      <Container maxWidth="md">
+        <link rel="canonical" href={`${hostname}`}/>
+        <Routes>
+          <Route path='/checkout' element={<MakeOrderM count={count} setCount={setCount} setCurrentPath={setCurrentPath}/>}/>
+        </Routes>
+      </Container>
+      )
+      :
+      ( 
+      <><HeaderMobile count={count}/>
+      <link rel="canonical" href={`${hostname}`}/>
+      <Container>
+        <Routes>
+        <Route path="/" element={<HomeMob count={count} setCount={setCount} />} /> 
+        <Route path="/good/:id" element={<FullPostMobile count={count} setCount={setCount}  />} />
+        <Route path="/types/:type" element={<GoodsByTypeMobile count={count} setCount={setCount} />} />
+        <Route path="/cart/" element={<ShoppingCartMobile count={count} setCount={setCount} />} />
+        <Route path="/popular" element={<PopularGoodsM count={count} setCount={setCount} />}/>
+        <Route path="/sale" element={<SaleM count={count} setCount={setCount} />}/>
+        <Route path="/about" element={<AboutCompany />}/>
+        <Route path="/contact" element={<Contact />}/>
+        </Routes>
+      </Container>
+      <PreFooter/>
+      <Footer/>
+      </>
+      ))
+      } 
       
       
     </>

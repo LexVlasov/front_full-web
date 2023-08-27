@@ -4,29 +4,31 @@ $blue: #316ab1;
   background-color: #fff;
   border: 1px solid #dedede;
   border-radius: 6px;
-  margin: 5px;
-  min-width: 270px;
+  margin: 25px 5px 5px 5px;
   min-height: 150px;
+  min-width: 270px;
   max-width: 300px;
   max-height: 300px;
   position: relative;
-  margin-top: 25px;
   &:hover {
-    border: 1px solid #316ab1;
-    box-shadow: 0 0 0 1px #316ab1;
+    border: 1px solid $blue;
+    box-shadow: 0 0 0 1px $blue;
 
   }
 
 }
 
+.linkmain{
 
+    text-decoration: none;
+    color:#000
+}
 
 
 .image {
   width: 100%;
   height: 150px;
   object-fit:contain;
-
   &Full {
     min-height: 150px;
     height: 100%;
@@ -34,7 +36,7 @@ $blue: #316ab1;
 }
 
 .wrapper {
-  padding: 10px 10px 10px;
+  padding: 10px 10px 10px 0px;
 }
 
 .content {
@@ -140,6 +142,7 @@ $blue: #316ab1;
   }
   .buy{
     height: 30px;
+    margin-left: 25px;
     background-color: #2b91a7;
     .buytext{
       margin-left: 5px;
@@ -203,7 +206,7 @@ $blue: #316ab1;
 }
 
 .oldprice {
-  margin-top: 73%;
+  margin-top: 190px;
   vertical-align: top;
   text-align: center;
   margin-left: 65%;
@@ -218,20 +221,7 @@ $blue: #316ab1;
 }
 
 
-.rootmobile {
-  background-color: #fff;
-  border: 1px solid #dedede;
-  margin-bottom: 10px;
-}
 
-
-.rootmobilem {
-  background-color: #fff;
-  border: 1px solid #dedede;
-  margin-bottom: 10px;
-  width: 100%;
-  height: 80px;
-}
 
 
 .imagemob {

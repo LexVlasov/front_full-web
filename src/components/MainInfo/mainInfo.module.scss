@@ -1,5 +1,29 @@
 .root{
     height: 150px;
+    margin: 0;
+    padding: 0;
+    @media (max-width:800px) {
+        display: block;
+        height: 70px;
+        margin: 0;
+        padding: 0;
+        }
+}
+
+.maindiv{
+    min-height:100%; 
+    margin:0 auto;
+    @media (max-width:800px) {
+        display: none;
+        }
+}
+
+.image{
+    width:90px;
+    height:90px; 
+    margin:0 auto;
+    vertical-align:middle;
+    display:inline-block;
     
 }
 
@@ -19,6 +43,9 @@
 	background: linear-gradient(to right, #316ab1 20%, #7EB5C2 100%);
 	-webkit-background-clip: text;
 	-webkit-text-fill-color: transparent;
+    @media (max-width:800px) {
+    display: none;
+    }
 }
 .subhead{
     font-size:16px; 
@@ -27,23 +54,42 @@
     vertical-align: bottom;
     text-align: center;
     opacity: 80%;
+    @media (max-width:800px) {
+        display: none;
+        }
     }
 
 
 
 .phonenumber{
     font-size:36px;
-    // font-family:"Arial Black";
     font-weight: 900;
     color:#30374c;
     text-align:center;
     min-height:70%;
+    @media (max-width:800px) {
+        font-size:24px;
+        width: 100%;
+        min-height: 24px;
+        transition: margin-top 0.3s ease;
+    }
 }
 
 .schedule{
     text-align:center;
     opacity:70%;
     min-height:30%;
+    @media (max-width:800px) {
+        font-size:12px;
+        width: 100%;
+        min-height: 12px;
+    }
+}
+.maindelivery{
+    padding:2;
+    @media (max-width:800px) {
+    display: none;
+    }
 }
 .deliver{
     font-size:22px; 
@@ -52,6 +98,9 @@
     min-height:100%;
     margin-top: 7px;
     opacity:70%;
+    @media (max-width:800px) {
+        display:none;
+    }
 }
 
 .checksum{
@@ -65,3 +114,4 @@
     align-items: center;
     margin:0 auto;
 }
+

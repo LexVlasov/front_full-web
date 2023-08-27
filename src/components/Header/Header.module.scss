@@ -1,108 +1,76 @@
-.root{
+.root {
     background-color: #30374c;
     padding: 0 auto;
     border-bottom: 1px solid #e0e0e0;
+    height: 60px;
     margin-bottom: 30px;
-    height: 60px;   
+  @media (max-width: 800px) {
+    min-height: 60px;
+    width: 100%; 
+    height: 100%;
+    display: block;
+    margin-bottom: 0px;
+  }
 }
 
 .rootmobile{
-    background-color: #30374c;
-    padding: 0 auto;
-    border-bottom: 1px solid #e0e0e0;
-    margin-bottom: 30px;
-    height: 60px;
-    width: 100%;
-    display: inline-block;   
-}
-
-.buttons{
+  display: none;
+  @media (max-width: 800px) {
     display: flex;
-    justify-content: space-evenly;
-
-    a{
-        text-decoration: none;
-    }
+  }
 }
 
+.buttons {
+  display: flex;
+  justify-content: space-evenly;
+    a{
+      text-decoration: none;
+  }
+  @media (max-width: 800px) {
+    display: none;
+  }
+}
 
-.newpost{
+.newpost {
     color: #ffffff;
     height: 60px;
     vertical-align: middle;
     opacity: 0.6;
-    &:hover{
-        opacity: 1;  
+    transition: opacity 0.3s ease;
+    &:hover {
+      opacity: 1;
+      transition: opacity 0.3s ease;
     }
+  
+  }
+  
+.icon {
+  width: 20px;
+  height: 20px;
+  padding-right: 3px;
+
 }
-
-
-.icon{
-    width:20px;
-    height:20px;
-    padding-right:3px;
-}
-
 .iconmobile{
-    height: 100%;
-    width: 60px;
-    background-color: #30374c;
-    color: #ffffff;
-    border: none;
-    font-size: 30px;
+  display: flex;
+  justify-content: space-evenly;
+  height: 100%;
+  background-color: #30374c;
+  color: #ffffff;
+  line-height: 59px;
+  border: none;
+  font-size: 36px;
+  width: 20%;
 }
 
-.textheadmobile{
-    font-size: 30px;
-    color: #ffffff;
-    text-align: left;
-    width: 60%;
-    display: inline-block;
-} 
-
-.cart{
-    color: #ffffff;
-    width: 10%;
-    height: 60px;
-    vertical-align: top;
-    text-align: right;
-} 
-.countitems{
-    color: #000;
-    border-radius: 10px;
-    width: 20px;
-    height: 20px;
-    margin-left: -5px;
-    text-align: center;
-    vertical-align: top;
-    background-color: #fff;
-    position: absolute;
-}
-.ulmobile{
-    list-style-type:none;
-    margin: 0px 0px 40px 0px;
-    padding: 0;
-    
-}
-
- .limobile{
-    color: #000;
-    height: 70px;
-    display: block;
-    line-height: 70px;
-    font-size: 20px;
-    padding-left: 5%;
-    border-bottom: 1px solid #b4b4b484;
-    &:hover{
-        background-color: #c4dedd; 
-    }
-
- }
-
- .typemobilet{
-    color: #000000;
-    height: 70px;
-    background: transparent;
-    border: 0px;
+.onepill{  
+  display: flex;
+  justify-content: space-evenly;
+  font-size: 36px;
+  background: linear-gradient(to right, #316ab1 20%, #7EB5C2 100%);
+	-webkit-background-clip: text;
+	-webkit-text-fill-color: transparent;
+  line-height: 60px;
+  text-decoration: none;
+  width: 60%;
 }
 

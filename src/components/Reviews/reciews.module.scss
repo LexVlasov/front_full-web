@@ -12,6 +12,12 @@
     border-bottom:solid 1px #00000042;
     width:95%;
     font-weight: bold;
+    @media (max-width:800px) {
+        width: 95%;
+        margin:0 auto;
+        padding: 20px 0px 10px 20px;
+
+      }
 }
 
 .review{

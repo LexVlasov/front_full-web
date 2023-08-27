@@ -11,8 +11,8 @@ export const MainInfo = ({count,setCount}) => {
    
       <Box sx={{ flexGrow: 1 }} className={styles.root}>
         <Grid container spacing={1} direction="row">
-          <Grid item xs={12} md={6} lg={4} sx={{padding:2}} style={{minHeight:"100%", margin:"0 auto"}}>
-              <Link to={'/'}><img src={Image} alt='One Pill' style={{width:"90px",height:"90px", margin:"0 auto", verticalAlign:"middle",display:"inline-block"}}/>
+          <Grid item xs={12} md={6} lg={4} sx={{padding:2}} className={styles.maindiv} >
+              <Link to={'/'}><img src={Image} alt='One Pill' className={styles.image} />
                 <div className={styles.name}>
                 <div className={styles.head}>One Pill
                 </div>
@@ -26,7 +26,7 @@ export const MainInfo = ({count,setCount}) => {
             </div>
             <div className={styles.schedule}>Ежедневно, с 10 до 21-го ч. Звонок бесплатный</div></>)}
           </Grid>
-          <Grid item xs={12} md={6} lg={3} sx={{padding:2}} >
+          <Grid item xs={12} md={6} lg={3} className={styles.maindelivery} >
             {currentPath.substring(1)==='checkout'? 
             (<><div className={styles.checksum}>{(count ? count.map((obj,i)=> obj.sum):[]).reduce((a,b)=>a+b,0)} 
             </div></>)

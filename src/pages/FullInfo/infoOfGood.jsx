@@ -4,7 +4,7 @@ import RemoveIcon from '@mui/icons-material/Remove';
 import AddIcon from '@mui/icons-material/Add';
 import { Box } from "@mui/system";
 import  Grid  from "@mui/material/Grid";
-import { Button, ButtonGroup, TableHead, TextField } from "@mui/material";
+import { Button, ButtonGroup, TextField } from "@mui/material";
 import { BuyButton,BuyButtonMobile } from "../../components";
 import {useParams} from 'react-router-dom';
 import {TopInfo, BuyButtonAndTable} from "./topinfo";
@@ -20,7 +20,7 @@ export const InfoOfGood = ({
 
       const {id} = useParams();
       const [value,setValue] = React.useState(parseInt(data.default_q));
-      const [flgCart,setFlgCart] = React.useState(false);
+      const [flgCart,setFlgCart] = React.useState(count.some(obj => obj.id === id ? true :false));
       const [selectBut,setSelectBut] = React.useState('discription');
       const [image,setImage] = React.useState(0);
 
@@ -100,17 +100,18 @@ export const InfoOfGood = ({
       }
       catValue = value;
     };
-
+    
+    console.log(count);
     return(
         <>
-        <Grid item xs={12} sm={12} lg={12} >
+        <div className={styles.headtitlegrid} >
                     <div className={styles.text}>
                     <div className={styles.analog}>{data.info[0].type}:</div>
                     {data.name}                     
                     </div>
-                  </Grid>
+                  </div>
   
-                  <Grid item lg={4.4} >
+                  <div className={styles.imagegrid} >
                   <Box sx={{Width: 270, textAlign:"center"}}>
                   {data.discount>0&& <div className={styles.editButtons}>-{data.discount}%</div>}
                       <Box component="img" className={styles.imagemain}
@@ -119,8 +120,8 @@ export const InfoOfGood = ({
                             src={data.info[0].avatarUrl ? `${backHost}${data.info[0].avatarUrl[0]}` : ''} alt="0" onMouseEnter ={(e)=>{setImage(parseInt(e.target.alt))}} onMouseLeave={(e)=>{setImage(parseInt(e.target.alt))}} /><Box component="img" className={styles.iamgeother}
                             src={data.info[0].avatarUrl ? `${backHost}${data.info[0].avatarUrl[1]}` : ''} alt="1" onMouseEnter ={(e)=>{setImage(parseInt(e.target.alt))}} onMouseLeave={(e)=>{setImage(parseInt(e.target.alt))}}/><Box component="img" className={styles.iamgeother}
                             src={data.info[0].avatarUrl ? `${backHost}${data.info[0].avatarUrl[2]}` : ''} alt="2" onMouseEnter ={(e)=>{setImage(parseInt(e.target.alt))}} onMouseLeave={(e)=>{setImage(parseInt(e.target.alt))}}/></div></Box> 
-                  </Grid>
-                   <Grid item lg={3.4} comtainer alignItems="stretch" direction="column"> 
+                  </div>
+                   <div className={styles.pricebuttongrid}> 
                     <div className={styles.maindivpricebutton}>
                       <div className={styles.prforone}>Цена за шт:</div>
                       <div className={styles.priceblockandbut}>
@@ -160,9 +161,9 @@ export const InfoOfGood = ({
                         ))}
 
                       </table>
-                  </Grid>
+                  </div>
                     
-                  <Grid item lg={4.2} sx={{pl:2,pr:2}}>
+                  <div className={styles.totalcatgrid}>
                   <BuyButton 
                       value={value} 
                       totalSum={value*Math.ceil(currentPrice*((100-data.discount)/100))} 
@@ -170,9 +171,9 @@ export const InfoOfGood = ({
                       addToCart={addGoodToCart} 
                       id={id}
                       catValue={catValue}/>
-                  </Grid>
-                 <Grid item lg={12} sx={{pt:5}}>
-                  <ul  id="myTab" role="tablist" style={{display:"-webkit-flex",display:"flex",flexWrap:"wrap",listStyle:"none",alignContent:"space-around",justifyContent:"space-evenly",flexDirection:"row",alignItems:"baseline",width:"100%"}}>
+                  </div>
+                 <div className={styles.allinfogid}>
+                  <ul  id="myTab" role="tablist" style={{display:"flex",flexWrap:"wrap",listStyle:"none",alignContent:"space-around",justifyContent:"space-evenly",flexDirection:"row",alignItems:"baseline",width:"100%"}}>
                     <li  role="presentation" style={{width:"25%"}}>
                       <button  className={selectBut === 'discription' ? styles.headselection:styles.headdisable} onClick={()=>setSelectBut("discription")}>Описание</button>
                     </li>
@@ -220,7 +221,7 @@ export const InfoOfGood = ({
                     </div>}
                     {selectBut === 'rewiev' && <div >Пока нет отзывов</div>}
                   </div>
-                  </Grid>       
+                  </div>       
                   </>
     )
   };

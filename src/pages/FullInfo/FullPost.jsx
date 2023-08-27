@@ -45,28 +45,31 @@ export const FullPost = ({count,setCount, setUrl}) => {
   return (
 
 
-    <Box sx={{ flexGrow: 1 }} rel={canonical} >
+  
 
-       <Grid container spacing={1} alignItems="flex-start">
-          <Grid item xs={12} md={3} lg={3} spacing={2} >
-          {(isTagsLoading?[...Array(5)]:types.items).map((obj,index)=> isTagsLoading ? '' :
-            (<TypesBlock title={obj.lvl1_type} items={obj.group_type} isLoading={isTagsLoading} key={index} />)
-          )}
-          <DeliveryAdvertise/>
-          </Grid> 
-          <Grid item container xs={12} md={9} lg={9} className={styles.root}>
+       <div className={styles.rootgriffull}>
+          
+          <div className={styles.rootproductgrid}>
           <meta name="keywords" content={`${data.ie_search} купить москва санкт-петербург волгоград доставка`}></meta>
           <meta name="description" content={`Закажите ${data.info[0].group_type} ${id} в интернет-аптеке One Pill в Москве. Насладитесь качественным продуктом с быстрой доставкой в день заказа. При покупке от 3000 рублей скидка на доставку по Москве. Ваше здоровье в надежных руках с One Pill!  Все оттенки твоих желаний... +7(800)511-31-02`} />
+          {isLoading?'':
           <InfoOfGood 
             data={data}
             count={count}
             setCount={setCount}
             backHost={backHost}
-          />
-          </Grid>            
-       </Grid>
+          />}
+
+          </div> 
+          <div  className={styles.typesblockgrid} >
+          {(isTagsLoading?[...Array(5)]:types.items).map((obj,index)=> isTagsLoading ? '' :
+            (<TypesBlock title={obj.lvl1_type} items={obj.group_type} isLoading={isTagsLoading} key={index} />)
+          )}
+          <DeliveryAdvertise/>
+          </div>            
+       </div>
                       
-      </Box>
+
       
 
   );

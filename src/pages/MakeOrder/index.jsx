@@ -68,7 +68,6 @@ export const MakeOrder = ({count,setCount,setCurrentPath}) =>{
                 console.warn(err);
                 alert('Error create order')
               }
-
         }
         
     };
@@ -152,14 +151,14 @@ export const MakeOrder = ({count,setCount,setCurrentPath}) =>{
         <div>
         <Box sx={{ flexGrow: 1 }} className={styles.root}>
             <Grid container spacing={1} direction="row">
-            <Grid item xs={12} md={8} sx={{padding:2}} style={{minHeight:"100%", margin:"0 auto"}}>
+            <div className={styles.headergrid}>
                 <Link to={'/'} onClick={()=>setCurrentPath('/')}><img src={Image} alt='One Pill' style={{width:"90px",height:"90px", margin:"0 auto", verticalAlign:"middle",display:"inline-block"}} />
                     <div className={styles.name}>
                     <div className={styles.head}>One Pill
                     </div>
                     <div className={styles.subhead}>Все оттенки твоих желаний...</div>
                     </div></Link>
-            </Grid>
+            </div>
             <Grid item xs={12} md={4} sx={{padding:2}} >
                     <div>
                         <div className={styles.checksum}>Итого: {(count ? count.map((obj,i)=> obj.sum):[]).reduce((a,b)=>a+b,0)} 
@@ -173,11 +172,11 @@ export const MakeOrder = ({count,setCount,setCurrentPath}) =>{
         <div className={styles.wayorderhead}>Оформление заказа</div>
             <div className={styles.wrapper}>
                 <ol className={styles.cstepper}>
-                    <li className={styles.cstepper__item}><h9 className={page===1?styles.numberactive:styles.numberdone}>1</h9><h10>Населенный пункт</h10></li>
-                    <li className={styles.cstepper__item} ><h9 className={page ===2 ? styles.numberactive : (page>2 ? styles.numberdone:styles.numbernonactive)}>2</h9><h7>Способ доставки</h7></li>
-                    <li className={styles.cstepper__item} ><h9 className={page ===3 ? styles.numberactive : (page>3 ? styles.numberdone:styles.numbernonactive)}>3</h9><h7>Получатель</h7></li>
-                    <li className={styles.cstepper__item} ><h9 className={page ===4 ? styles.numberactive : (page>4 ? styles.numberdone:styles.numbernonactive)}>4</h9><h7>Оплата</h7></li>
-                    <li className={styles.cstepper__item} ><h9 className={page ===5 ? styles.numberdone:styles.numbernonactive}>5</h9><h7>Заказ оформлен</h7></li>
+                    <li className={styles.cstepper__item}><h9 className={page===1?styles.numberactive:styles.numberdone}>1</h9><h10 className={styles.h7mobile}>Населенный пункт</h10></li>
+                    <li className={styles.cstepper__item} ><h9 className={page ===2 ? styles.numberactive : (page>2 ? styles.numberdone:styles.numbernonactive)}>2</h9><h7 className={styles.h7mobile}>Способ доставки</h7></li>
+                    <li className={styles.cstepper__item} ><h9 className={page ===3 ? styles.numberactive : (page>3 ? styles.numberdone:styles.numbernonactive)}>3</h9><h7 className={styles.h7mobile}>Получатель</h7></li>
+                    <li className={styles.cstepper__item} ><h9 className={page ===4 ? styles.numberactive : (page>4 ? styles.numberdone:styles.numbernonactive)}>4</h9><h7 className={styles.h7mobile}>Оплата</h7></li>
+                    <li className={styles.cstepper__item} ><h9 className={page ===5 ? styles.numberdone:styles.numbernonactive}>5</h9><h7 className={styles.h7mobile}>Заказ оформлен</h7></li>
                 </ol>
             </div>
             {renderSwitch(page)}
@@ -211,11 +210,11 @@ export const MakeOrder = ({count,setCount,setCurrentPath}) =>{
             </div>
             <div className={styles.totalsumcnt}> 
               <div className={styles.ts}>
-                <div className={styles.descripttotal}>Стоимость доставки:</div> <div 
-                className={ delivery[0]===0||(delivery[0].free_delivery<(count ? count.map((obj,i)=> obj.sum):[]).reduce((a,b)=>a+b,0)&&(delivery[0].id===5||delivery[0].id===4)) ? styles.costdel :styles.costdelcost }>{delivery[0]===0 ? 'Не выбрано':(delivery[0].free_delivery<(count ? count.map((obj,i)=> obj.sum):[]).reduce((a,b)=>a+b,0)&&(delivery[0].id===5||delivery[0].id===4)?'Бесплатно':delivery[0].price)}</div>
+                <div className={styles.descripttotal}>Доставка:</div> <div 
+                className={ delivery[0]===0||(delivery[0].free_delivery<(count ? count.map((obj,i)=> obj.sum):[]).reduce((a,b)=>a+b,0)&&(delivery[0].id===5||delivery[0].id===4)) ? styles.costdel :styles.costdelcost }>{delivery[0]===0 ? '-':(delivery[0].free_delivery<(count ? count.map((obj,i)=> obj.sum):[]).reduce((a,b)=>a+b,0)&&(delivery[0].id===5||delivery[0].id===4)?'Бесплатно':delivery[0].price)}</div>
               </div>
               <div className={styles.ts}>
-                <div className={styles.descripttotal}>Общая скидка: </div><div className={discount ===0 ?styles.costdel:styles.costdelcost}>{(count ? count.map((obj,i)=> Math.floor(obj.maxPrice*(discount)*obj.cnt)):[]).reduce((a,b)=>a+b,0)}</div>
+                <div className={styles.descripttotal}>Скидка: </div><div className={discount ===0 ?styles.costdel:styles.costdelcost}>{(count ? count.map((obj,i)=> Math.floor(obj.maxPrice*(discount)*obj.cnt)):[]).reduce((a,b)=>a+b,0)}</div>
                 </div>
                 <div className={styles.ts}>
                 <div className={styles.descripttotal}>К оплате: </div> <div className={styles.totalpay}>{totalSum} </div>

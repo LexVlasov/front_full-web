@@ -46,6 +46,7 @@
     width: 270px;
     min-width: 270px;
     background-color:#2b90a734 ;
+
  }
  .buttonbuy{
     width: 270px;
@@ -55,6 +56,10 @@
     background-color:#2b91a7;
     border-radius: 5px;
     color: #fff;
+    height: 50px;
+    @media (max-width: 800px) {
+        width: 100%;
+    }
  }
  .oneclick{
     width: 270px;
@@ -64,6 +69,10 @@
     background-color:#316ab1;
     border-radius: 5px;
     color: #fff;
+    height: 50px;
+    @media (max-width: 800px) {
+        width: 100%;
+    }
  }
 
  .makeorder{

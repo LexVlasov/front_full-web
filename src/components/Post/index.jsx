@@ -21,17 +21,14 @@ export const Post = ({
   viewsCount,
   buysCount,
   children,
-  isFullPost,
   isLoading,
   alias,
-  isEditable,
-  count,
-  setCount,
   price,
   maxPrice,
   metacontent,
   isSale,
   altText,
+  isFullPost,
   type
 }) => {
   const [rating,setRating] = useState();
@@ -65,6 +62,7 @@ export const Post = ({
     } ;
   
   return (
+
     <div className={styles.root}>
       {isSale && (
         <div className={styles.editButtons}>
@@ -90,8 +88,8 @@ export const Post = ({
       <div className={styles.wrapper}>
         <div className={styles.indention}>
           <meta name="keywords" content={`${metacontent} купить, москва, санкт-петербург, волгоград`}></meta>
-          <h2 className={clsx(styles.title, { [styles.titleFull]: isFullPost })}>
-            {isFullPost ? title : <Link to={`/${type}/${title}`} >{title}</Link>}
+          <h2 className={styles.title}>
+            { <Link to={`/${type}/${title}`} >{title}</Link>}
           </h2>
           <div className={styles.ratingprice}>
                 <Rating 
