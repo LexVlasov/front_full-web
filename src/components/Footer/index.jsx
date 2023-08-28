@@ -31,9 +31,11 @@ export const Footer = ({types,isTypesLoading,menu,setMenu,group,setGroup})=>{
             <div className={styles.iconsmenu}>
 
                 <button className={styles.catalog} onClick={ClickMenu}>
+                    
                 <a href={`#${headerId}`}>
-                <LocalMallRoundedIcon/>
+                <LocalMallRoundedIcon alt="Каталог"/>
                 </a>
+                <div style={{height:"12px",fontSize:"12px",color:"#fff",lineHeight:"12px"}}>Каталог</div>
                 </button>
                 <Link to="/" className={styles.iconop}>
                 <img src={Image}/>
@@ -42,6 +44,7 @@ export const Footer = ({types,isTypesLoading,menu,setMenu,group,setGroup})=>{
                 <Link to="/cart">
                 <ShoppingCart/>
                 </Link>
+                <div style={{height:"12px",fontSize:"12px",color:"#fff",lineHeight:"12px"}}>Корзина</div>
                 </button>
                 
             </div>

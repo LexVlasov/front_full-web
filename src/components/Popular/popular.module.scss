@@ -39,15 +39,15 @@
 }
 
 .populargrid{
-    // -webkit-box-flex: 0;
-    // flex-grow: 0;
-    // flex-basis: auto;
     width: calc(100% * 4 / var(--Grid-columns));
-    // min-width: 0px;
-    // box-sizing: border-box;
     margin: calc(var(--Grid-rowSpacing) / -2) calc(var(--Grid-columnSpacing) / -2);
     padding: calc(var(--Grid-rowSpacing) / 2) calc(var(--Grid-columnSpacing) / 2);
     @media (max-width:800px) {
         width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center; 
+        margin: 0px;
+        position: relative;
     }
 }

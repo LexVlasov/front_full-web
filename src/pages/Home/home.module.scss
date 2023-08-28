@@ -34,5 +34,8 @@
     margin: calc(var(--Grid-rowSpacing) / -2) calc(var(--Grid-columnSpacing) / -2);
     @media (max-width: 800px) {
         width: 100%;
+        display: block;
+        justify-content: center;
+        align-items: center; 
     }
 }

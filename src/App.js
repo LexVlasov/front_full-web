@@ -1,5 +1,5 @@
 
-import {Routes, Route,useParams} from 'react-router-dom';
+import {Routes, Route} from 'react-router-dom';
 import Container from '@mui/material/Container';
 import { Header, MainInfo, Middle, Footer,PreFooter, UnderMiddle } from './components';
 import { Home
@@ -19,7 +19,6 @@ import { Home
   ,Terms
    } from './pages';
 import React, { useState } from 'react';
-import MobileDetect from 'mobile-detect';
 import {Helmet} from "react-helmet";
 import { fetchTypes } from "./redux/slices/posts";
 import { useDispatch, useSelector } from "react-redux";

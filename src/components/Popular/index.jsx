@@ -1,15 +1,6 @@
 import React from "react";
-import Grid from '@mui/material/Unstable_Grid2';
-import { Post,PostMobile } from '../Post';
-import { useTheme } from '@mui/material/styles';
+import { Post } from '../Post';
 import styles from './popular.module.scss';
-import SwipeableViews from 'react-swipeable-views';
-import { autoPlay } from 'react-swipeable-views-utils';
-import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
-import KeyboardArrowLeft from '@mui/icons-material/KeyboardArrowLeft';
-import KeyboardArrowRight from '@mui/icons-material/KeyboardArrowRight';
-import MobileStepper from '@mui/material/MobileStepper'; 
 
 export const Popular = ({
     isPostsLoading,
@@ -78,15 +69,15 @@ export const PostByType =({
         <a className={styles.atext} href={`/Аналоги%20${name.split(' ')[1]}`}>Каталог препаратов</a>
         </div>
         {(isPostsLoading?[...Array(5)]:sortallGoods).map((obj,index) => isPostsLoading ? (
-            <Grid item xs={12} lg={4} >  
+            <div className={styles.populargrid}> 
               <Post key={index} isLoading={true}/>
-              </Grid> 
+              </div> 
             ) : (
               
-              <Grid item xs={12} lg={4}> 
+              <div className={styles.populargrid}> 
               <Post 
                 key={index}
-                id={obj.id}
+                id={obj.id}s
                 title={obj.name}
                 type={obj.info[0].group_type}
                 imageUrl={obj.info[0].avatarUrl[0] ? `${backHost}${obj.info[0].avatarUrl[0]}`:''} 
@@ -99,7 +90,7 @@ export const PostByType =({
                 isSale={obj.discount>0}
                 alias={obj.alias}
               />
-              </Grid> 
+              </div> 
             ))}
 
         </>
