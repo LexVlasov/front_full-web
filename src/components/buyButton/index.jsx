@@ -10,7 +10,9 @@ export const BuyButton = ({
     value,
     flgCart,
     addToCart,
-    catValue
+    catValue,
+    oneClick,
+    setOneClick
 }) =>{
     
 
@@ -25,7 +27,6 @@ export const BuyButton = ({
     } else {
         nameCnt = cp.substring(1)!=='cart'?'таблетка':'препарат';
     } ;
-
     return(
         <>
         <div className={styles.maininfo}>
@@ -47,7 +48,7 @@ export const BuyButton = ({
         )
          :
         (<><button className={styles.buttonbuy} onClick={addToCart}><ShoppingCart sx={{mr:1,color:"#fff"}}/>В КОРЗИНУ</button>
-        <button className={styles.oneclick}>Купить в 1 клик</button> </>)
+        <button className={styles.oneclick} onClick={()=>setOneClick(1)}>Купить в 1 клик</button> </>)
         }
         </div>
         </>
@@ -64,6 +65,7 @@ export const BuyButtonMobile = ({
 }) =>{
     
     const [cp,setCp] = React.useState(window.location.pathname);
+    const [oneC,setOneC] = React.useState(0);
     let nameCnt = cp.substring(1)!=='cart'?'таблеток':'препаратов';
     if(catValue > 1 && catValue <5){
         nameCnt = cp.substring(1)!=='cart'?'таблетки':'препарата';

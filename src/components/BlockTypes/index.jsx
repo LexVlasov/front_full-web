@@ -49,28 +49,25 @@ export const DeliveryAdvertise = () =>{
 
   const handleNameChange =(e)=>{
     setName(e.target.value);
-    let newOneClick = [];
-    const newData = {
-      auth:process.env.REACT_APP_API_KEY ,
-      shop_id:31 ,
-      phone:0,
-      name:e.target.value,
-    };
-    newOneClick.push(newData);
-    setOneClick(newOneClick);
   }
 
   const handlePhoneNumberChange =(e)=>{
     setPhoneNumber(e.target.value);
-    let newOneClick = [...oneClick];
-    newOneClick[0].phone = e.target.value;
-    setOneClick(newOneClick);
   };
 
   const handleSubmit= async (e)=>{
     try{
       e.preventDefault();
-      const data = await dispatch(fetchOneClick(oneClick));
+      let newOneClick = [];
+      const newData = {
+        auth:process.env.REACT_APP_API_KEY ,
+        shop_id:31 ,
+        phone:phoneNumber,
+        name:name,
+        message:'',
+      };
+      newOneClick.push(newData);
+      const data = await dispatch(fetchOneClick(newOneClick));
       if(!data.payload){
         alert('Error in make order!');
       }else{

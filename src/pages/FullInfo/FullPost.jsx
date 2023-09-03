@@ -5,10 +5,9 @@ import { Post } from "../../components/Post";
 import axios from "../../axios";
 import { fetchTypes } from '../../redux/slices/posts';
 import { useDispatch, useSelector } from "react-redux";
-import { Box } from "@mui/system";
-import  Grid  from "@mui/material/Grid";
 import { TypesBlock,DeliveryAdvertise } from "../../components/BlockTypes";
-import {InfoOfGood,InfoOfGoodMobile} from "./infoOfGood";
+import {InfoOfGood,} from "./infoOfGood";
+import { OneClick } from "../../components";
 
 export const FullPost = ({count,setCount, setUrl}) => {
 
@@ -17,7 +16,7 @@ export const FullPost = ({count,setCount, setUrl}) => {
   process.env.REACT_APP_API_URL?process.env.REACT_APP_API_URL:
   'http://localhost:4444';
   const [data,setData] = React.useState();
-  
+  const [oneClick,setOneClick] = React.useState(0);
   const [isLoading,setLoading] = React.useState(true);
   const {id} = useParams();
   const dispatch = useDispatch();
@@ -58,8 +57,13 @@ export const FullPost = ({count,setCount, setUrl}) => {
             count={count}
             setCount={setCount}
             backHost={backHost}
+            oneClick={oneClick}
+            setOneClick={setOneClick}
           />}
-
+          <OneClick  
+              oneClick={oneClick}            
+              setOneClick={setOneClick}
+              />
           </div> 
           <div  className={styles.typesblockgrid} >
           {(isTagsLoading?[...Array(5)]:types.items).map((obj,index)=> isTagsLoading ? '' :

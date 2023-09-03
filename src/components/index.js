@@ -14,3 +14,4 @@ export * from "./Sales";
 export * from "./Footer";
 export * from "./PreFooter";
 export * from "./Reviews";
+export * from "./OneClick";

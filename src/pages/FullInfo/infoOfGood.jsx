@@ -15,7 +15,9 @@ export const InfoOfGood = ({
     data,
     count,
     setCount,
-    backHost
+    backHost,
+    oneClick,
+    setOneClick
     }) => {
 
       const {id} = useParams();
@@ -100,8 +102,7 @@ export const InfoOfGood = ({
       }
       catValue = value;
     };
-    
-    console.log(count);
+
     return(
         <>
         <div className={styles.headtitlegrid} >
@@ -112,10 +113,14 @@ export const InfoOfGood = ({
                   </div>
   
                   <div className={styles.imagegrid} >
+                    
                   <Box sx={{Width: 270, textAlign:"center"}}>
                   {data.discount>0&& <div className={styles.editButtons}>-{data.discount}%</div>}
                       <Box component="img" className={styles.imagemain}
                             src={data.info[0].avatarUrl ? `${backHost}${data.info[0].avatarUrl[image]}` : ''} />
+                            {/* <picture>
+                      <source srcset={data.info[0].avatarUrl ? `${backHost}${data.info[0].avatarUrl[image]}` : ''}  />
+                    </picture> */}
                             <div className={styles.divimag}><Box component="img" className={styles.iamgeother}
                             src={data.info[0].avatarUrl ? `${backHost}${data.info[0].avatarUrl[0]}` : ''} alt="0" onMouseEnter ={(e)=>{setImage(parseInt(e.target.alt))}} onMouseLeave={(e)=>{setImage(parseInt(e.target.alt))}} /><Box component="img" className={styles.iamgeother}
                             src={data.info[0].avatarUrl ? `${backHost}${data.info[0].avatarUrl[1]}` : ''} alt="1" onMouseEnter ={(e)=>{setImage(parseInt(e.target.alt))}} onMouseLeave={(e)=>{setImage(parseInt(e.target.alt))}}/><Box component="img" className={styles.iamgeother}
@@ -170,6 +175,8 @@ export const InfoOfGood = ({
                       flgCart={flgCart} 
                       addToCart={addGoodToCart} 
                       id={id}
+                      oneClick={oneClick}
+                      setOneClick={setOneClick}
                       catValue={catValue}/>
                   </div>
                  <div className={styles.allinfogid}>
