@@ -75,7 +75,7 @@ export const FullPost = ({count,setCount, setUrl}) => {
                 "@type": "Brand",
                 "name": "${id}"
               },
-              "offers": ${offers},
+              "offers": [${offers}],
               "image": [
                 "${backHost}${data.info[0].avatarUrl[0]}",
                 "${backHost}${data.info[0].avatarUrl[1]}",
