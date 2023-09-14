@@ -39,7 +39,6 @@ function App() {
     dispatch(fetchTypes());
   },[count,dispatch]);
 
-
   return (
     <>
 

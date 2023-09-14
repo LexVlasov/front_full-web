@@ -41,6 +41,17 @@ export const FullPost = ({count,setCount, setUrl}) => {
   }
   const canonical = data.alias === 0 ? "canonical" :'';
   const hostname = window.location.origin;
+  let offers = []
+  if(!isLoading){data.price.map((obj,i)=>{
+    offers.push(
+      `{
+        "@type": "Offer",
+        "price": ${obj.p},
+        "priceCurrency": "RUB",
+        "availability": "InStock"
+      }`
+    )
+  })};
   return (
 
 
@@ -51,6 +62,30 @@ export const FullPost = ({count,setCount, setUrl}) => {
           <div className={styles.rootproductgrid}>
           <meta name="keywords" content={`${data.ie_search} купить москва санкт-петербург волгоград доставка`}></meta>
           <meta name="description" content={`Закажите ${data.info[0].group_type} ${id} в интернет-аптеке One Pill в Москве. Насладитесь качественным продуктом с быстрой доставкой в день заказа. При покупке от 3000 рублей скидка на доставку по Москве. Ваше здоровье в надежных руках с One Pill!  Все оттенки твоих желаний... +7(800)511-31-02`} />
+          {isLoading?'':
+           <script type="application/ld+json">
+          {`
+             {
+              "@context": "http://schema.org",
+              "@type": "Product",
+              "name": "${id}",
+              "description": "Закажите ${data.info[0].group_type} ${id} в интернет-аптеке One Pill в Москве. Насладитесь качественным продуктом с быстрой доставкой в день заказа. При покупке от 3000 рублей скидка на доставку по Москве. Ваше здоровье в надежных руках с One Pill!  Все оттенки твоих желаний... +7(800)511-31-02",
+              "sku": "${id.slice(0,3).toUpperCase()}${id.replace(/\s/g,'').substring(id.length-6).toUpperCase()}",
+              "brand": {
+                "@type": "Brand",
+                "name": "${id}"
+              },
+              "offers": [${offers}],
+              "image": [
+                "${backHost}${data.info[0].avatarUrl[0]}",
+                "${backHost}${data.info[0].avatarUrl[1]}",
+                "${backHost}${data.info[0].avatarUrl[2]}"
+              ],
+              "url": "${window.location.href}"
+            }
+          `}
+          </script> 
+        }
           {isLoading?'':
           <InfoOfGood 
             data={data}
