@@ -25,7 +25,7 @@ export const Footer = ({types,isTypesLoading,menu,setMenu,group,setGroup})=>{
         const id = document.getElementById("header").id;
         if (id) {setHeaderId(id)};
       }, [headerId]);
-
+      
     return(
         <div className={styles.root}>
             <div className={styles.iconsmenu}>
@@ -48,13 +48,15 @@ export const Footer = ({types,isTypesLoading,menu,setMenu,group,setGroup})=>{
                 </button>
                 
             </div>
-            <Container maxWidth="lg" className={styles.text}>
+            <div className={styles.divtextcookie}>
+            <span  className={styles.text}>
 
 
                    {`© 2014-${currentYear} OnePill. Все права защищены`}                   
 
 
-            </Container>
+            </span>
+            </div>
         </div>
     );
 };

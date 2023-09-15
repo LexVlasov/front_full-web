@@ -10,11 +10,11 @@ export const Middle = ({count})=>{
     const theme = createTheme({
         palette:{
           primary:{
-            main:"#2b91a7" //2b91a7
+            main:"#2b91a7" 
           }
         }
       })
-
+      
     return (
         <div className={styles.root}>
             <div className={styles.cartroot}>

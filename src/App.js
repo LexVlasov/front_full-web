@@ -33,12 +33,13 @@ function App() {
   const hostname = window.location.href;
   const [menu,setMenu] = useState(1);
   const [group,setGroup] = useState(1);
+  
   React.useEffect(()=>{
 
     window.localStorage.setItem('countcart',JSON.stringify(count));
     dispatch(fetchTypes());
   },[count,dispatch]);
-
+  
   return (
     <>
 
@@ -76,6 +77,7 @@ function App() {
         <Routes>
         
         <Route path="/" element={<Home count={count} setCount={setCount} setUrl={setUrl} blockTypes={types} isTypesLoading={isTypesLoading}/>} /> 
+        <Route path="/?promo=TG2023" element={<Home count={count} setCount={setCount} setUrl={setUrl} blockTypes={types} isTypesLoading={isTypesLoading}/>} /> 
         <Route path="/:type/:id" element={<FullPost count={count} setCount={setCount} setUrl={setUrl} url={url}/>} />
         <Route path="/:type" element={<GoodsByType count={count} setCount={setCount} setUrl={setUrl}/>} />
         <Route path="/cart/" element={<ShoppingCart count={count} setCount={setCount} setUrl={setUrl}/>} />

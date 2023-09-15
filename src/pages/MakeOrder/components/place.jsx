@@ -24,7 +24,7 @@ export const Place = ({order,setOrder,count}) =>{
             setMove(2);
         }
     };
-
+    const [discookie,setDiscookie] = useState(document.cookie.split('; ').find((row)=>row.startsWith('promo')).split('=')[1]);
     const uploadCity = (e) =>{
         let newOrder = [];
         const newData = {
@@ -32,7 +32,7 @@ export const Place = ({order,setOrder,count}) =>{
             shop_id:31 ,
             delivery_id:'',
             pay_id:'',
-            discount:0,
+            discount:discookie==='TG2023'||discookie==='OP2023'?5:0,
             product_id:product_id_count,
             quantity:quantity,
             promocode_id:'',
@@ -63,6 +63,22 @@ export const Place = ({order,setOrder,count}) =>{
                         focused={move!==0?true:false}
                         value={order.length >0 ?order[0].address_1:''}
                     />
+                    
+                    </div>
+                    <div className={styles.wayorderhead}>Промокод</div>
+                    <div className={styles.way}>
+                        <TextField 
+                                    className={styles.city} 
+                                    size="small" 
+                                    label="Промокод"
+                                    helperText={"Укажите промокод"}
+                                    onChange={e=>{setDiscookie(e.target.value)}}
+                                    color={discookie!=='TG2023'&&discookie!=='OP2023'?"error":"success"}
+                                    // onBlur={e=>Move(e.target.value)}
+                                    focused={discookie.length!==0?true:false}
+                                    value={discookie}
+                                />
+                    
                     </div>
                     </>);
 };

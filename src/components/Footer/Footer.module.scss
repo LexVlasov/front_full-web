@@ -8,12 +8,17 @@
     position: fixed;
     bottom: 0;
 }
-
+.divtextcookie{
+    width: 100%;
+    display: flex;
+}
 .text{
     color: #ffffff;
     margin:0;
     font-size: 14px;
     line-height: 60px;
+    width: 80%;
+    margin-left: 25px;
     @media (max-width:800px) {
     display: none;
     }
@@ -72,3 +77,4 @@
     }
     
 }
+

@@ -6,6 +6,9 @@ import { fetchTypes,fetchPopular,fetchSale } from '../../redux/slices/posts';
 import {Popular, Sales,PostByType,Reviews} from '../../components';
 import axios from "../../axios";
 import styles from "./home.module.scss";
+import { useParams } from 'react-router-dom';
+import girl from "../../uploads/mainInfo/girl.webp";
+import bgpopup from "../../uploads/mainInfo/backgpopup.webp";
 
 export const Home = ({count,setCount,setUrl,blockTypes,isTypesLoading}) => {
 
@@ -13,7 +16,7 @@ export const Home = ({count,setCount,setUrl,blockTypes,isTypesLoading}) => {
   process.env.REACT_APP_API_URL?process.env.REACT_APP_API_URL:
   'http://localhost:4444';
   const dispatch = useDispatch();
-  
+  // const id = window.location.search;
   const {allgood,types,sale} = useSelector((state) => state.goods);
   const [viagra,setViagra] = useState();
   const [sialis,setSialis] = useState();
@@ -21,6 +24,13 @@ export const Home = ({count,setCount,setUrl,blockTypes,isTypesLoading}) => {
   const isPostsLoading =allgood.status==='loading';
   const isTagsLoading =types.status==='loading';
   const isSaleLoading =sale.status==='loading';
+  const promo = window.location.search.length >0 ? window.location.search.split('=')[1] : 'NaN';
+  if(promo!=='NaN'){
+    document.cookie =  `promo=${promo}`
+  }
+  
+  const discookie = document.cookie.split('; ').find((row)=>row.startsWith('promo')).split('=')[1];
+  const [popup,setPopup] = useState(discookie==='TG2023'||discookie==='OP2023'?1:0)
   React.useEffect(()=>{
 
     dispatch(fetchPopular());
@@ -101,7 +111,22 @@ export const Home = ({count,setCount,setUrl,blockTypes,isTypesLoading}) => {
           )}
           <DeliveryAdvertise/>
         </div>        
-                           
+        {popup === 1 && !isPostsLoading ? 
+         <div className={styles.mainpopup}>
+          <div className={styles.popup}>
+          <img src={bgpopup} className={styles.imgbg}/>
+          <img src={girl} className={styles.imggirl}/>
+            <div className={styles.poptext}>
+            <b className={styles.btext}>Скидка 5% активирована </b> Ваши покупки - выгоднее!
+            </div>
+            <div className={styles.buttonclose}>
+            <button className={styles.buttonsubmit} onClick={()=>setPopup(0)}>К покупкам!</button>
+            </div>
+            
+          </div>
+          </div>
+          : ''
+          }                  
       </div>                        
 </div>
   );

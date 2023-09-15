@@ -5,7 +5,7 @@ import Container from '@mui/material/Container';
 import {  Grid,  } from "@mui/material";
 
 export const UnderMiddle = ({count, url})=>{
-
+    
     return (
         <div className={styles.root}>
             <Container maxWidth="lg">

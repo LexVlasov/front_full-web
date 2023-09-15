@@ -34,8 +34,8 @@ export const MakeOrder = ({count,setCount,setCurrentPath}) =>{
         product_id_count=product_id_count+':'+obj.product_id;
     }});
     
-    const discount = order.length>0?(order[0].pay_id===5||order[0].pay_id===6||order[0].pay_id===3?0.05:0):0;
-    let totalSum = (count ? count.map((obj,i)=> Math.ceil(obj.maxPrice*(1-discount)*obj.cnt)):[]).reduce((a,b)=>a+b,0);
+    const discount = order.length>0?(order[0].pay_id===5||order[0].pay_id===6||order[0].pay_id===3||order[0].discount>0?0.05:0):0;
+    let totalSum = (count ? count.map((obj,i)=> Math.round(obj.maxPrice*(1-discount)*obj.cnt)):[]).reduce((a,b)=>a+b,0);
 
     if(delivery[0]!==0){
         if(totalSum>delivery[0].free_delivery&&(delivery[0].id!==5&&delivery[0].id!==4)){
@@ -64,6 +64,7 @@ export const MakeOrder = ({count,setCount,setCurrentPath}) =>{
                 setNewCount(count);
                 setCount([]);
                 window.open(data.payload.pay_link,'_blank');
+                document.cookie =  `promo=`
               }catch(err){
                 console.warn(err);
                 alert('Error create order')
@@ -78,9 +79,9 @@ export const MakeOrder = ({count,setCount,setCurrentPath}) =>{
     };
 
     let flgDisable = false;
-
+    console.log(order)
     if(page===1){
-        flgDisable = order.length===0 ? true : false
+        flgDisable = order.length===0? true:(order[0].address_1.length===0? true : false)
     } else if(page===3){
         flgDisable = (order[0].phone.length>0&&order[0].address_2.length>0) ? false : true
     };
@@ -214,7 +215,7 @@ export const MakeOrder = ({count,setCount,setCurrentPath}) =>{
                 className={ delivery[0]===0||(delivery[0].free_delivery<(count ? count.map((obj,i)=> obj.sum):[]).reduce((a,b)=>a+b,0)&&(delivery[0].id===5||delivery[0].id===4)) ? styles.costdel :styles.costdelcost }>{delivery[0]===0 ? '-':(delivery[0].free_delivery<(count ? count.map((obj,i)=> obj.sum):[]).reduce((a,b)=>a+b,0)&&(delivery[0].id===5||delivery[0].id===4)?'Бесплатно':delivery[0].price)}</div>
               </div>
               <div className={styles.ts}>
-                <div className={styles.descripttotal}>Скидка: </div><div className={discount ===0 ?styles.costdel:styles.costdelcost}>{(count ? count.map((obj,i)=> Math.floor(obj.maxPrice*(discount)*obj.cnt)):[]).reduce((a,b)=>a+b,0)}</div>
+                <div className={styles.descripttotal}>Скидка: </div><div className={discount ===0 ?styles.costdel:styles.costdelcost}>{(count ? count.map((obj,i)=> Math.round(obj.maxPrice*(discount)*obj.cnt)):[]).reduce((a,b)=>a+b,0)}</div>
                 </div>
                 <div className={styles.ts}>
                 <div className={styles.descripttotal}>К оплате: </div> <div className={styles.totalpay}>{totalSum} </div>
