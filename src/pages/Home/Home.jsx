@@ -29,7 +29,7 @@ export const Home = ({count,setCount,setUrl,blockTypes,isTypesLoading}) => {
     document.cookie =  `promo=${promo}`
   }
   
-  const discookie = document.cookie.split('; ').find((row)=>row.startsWith('promo')).split('=')[1];
+  const discookie = document.cookie.split('; ').find((row)=>row.startsWith('promo')) ? document.cookie.split('; ').find((row)=>row.startsWith('promo')).split('=')[1] : '';
   const [popup,setPopup] = useState(discookie==='TG2023'||discookie==='OP2023'?1:0)
   React.useEffect(()=>{
 
