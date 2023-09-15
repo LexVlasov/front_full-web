@@ -86,7 +86,7 @@ export const ItemCart = ({
     return (
         <div className={styles.main}>
           <div className={styles.info}>
-          <a href={`/${type}/${name}`}><img src={`${backHost}${avatarUrl}`} className={styles.image}></img></a>
+          <a href={`/${type}/${name}`}><img src={`${backHost}${avatarUrl}`} className={styles.image} alt={name}></img></a>
           <div className={styles.divnameandtype}><div className={styles.name}>{name}</div><div className={styles.type}>{type}</div></div>
           </div>
           <div className={styles.divprice}>

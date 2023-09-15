@@ -1,7 +1,6 @@
 export * from "./GoodByTypes";
 export * from "./Home/Home";
 export * from "./FullInfo/FullPost";
-export * from "./AddPost";
 export * from "./Login";
 export * from "./Cart";
 export * from "./Popular";

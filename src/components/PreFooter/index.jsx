@@ -1,12 +1,11 @@
 import React from "react";
-import Container from '@mui/material/Container';
 import styles from "./PreFooter.module.scss";
 
 
 
 export const PreFooter = ()=>{
 
-    const currentYear = new Date().getFullYear();
+    // const currentYear = new Date().getFullYear();
     return(
         <div className={styles.root}>
             {/* <Container maxWidth="lg">

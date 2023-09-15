@@ -43,7 +43,7 @@ export const Post = ({
             alert('Error get post')
           })
         }    
-    },[id]);
+    },[id,alias]);
    
   const cntMarks = rating?rating.length:0;  
   const avgMark = (rating?rating.map((obj,i)=>obj.rating):[...Array(3)]).reduce((a,b)=>a+b,0)/(cntMarks>0?cntMarks:1);

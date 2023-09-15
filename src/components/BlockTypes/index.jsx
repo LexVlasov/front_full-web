@@ -43,7 +43,7 @@ export const DeliveryAdvertise = () =>{
 
   const [name,setName] = React.useState();
   const [phoneNumber,setPhoneNumber] = React.useState();
-  const [oneClick,setOneClick] =React.useState();
+
   const [call,setCall] =React.useState('0');
   const dispatch = useDispatch();
 

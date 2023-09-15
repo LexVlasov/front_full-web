@@ -1,5 +1,4 @@
 import React from "react";
-import Container from '@mui/material/Container';
 import styles from "./Footer.module.scss";
 import ShoppingCart from "@mui/icons-material/ShoppingCart";
 import LocalMallRoundedIcon from '@mui/icons-material/LocalMallRounded';
@@ -38,7 +37,7 @@ export const Footer = ({types,isTypesLoading,menu,setMenu,group,setGroup})=>{
                 <div style={{height:"12px",fontSize:"12px",color:"#fff",lineHeight:"12px"}}>Каталог</div>
                 </button>
                 <Link to="/" className={styles.iconop}>
-                <img src={Image}/>
+                <img src={Image} alt="OnePill"/>
                 </Link>
                 <button className={styles.catalog} onClick={()=>{}}>
                 <Link to="/cart">

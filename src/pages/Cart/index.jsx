@@ -1,7 +1,6 @@
 
-import { Grid } from "@mui/material";
 import React from "react";
-import { BuyButton, ItemCart,ItemCartMobile, BuyButtonMobile } from "../../components";
+import { BuyButton, ItemCart } from "../../components";
 import styles from './car.style.module.scss';
 
 

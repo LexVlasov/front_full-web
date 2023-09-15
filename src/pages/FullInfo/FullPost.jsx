@@ -39,8 +39,8 @@ export const FullPost = ({count,setCount, setUrl}) => {
   if(isLoading){
     return <Post isLoading={isLoading} isFullPost/>;
   }
-  const canonical = data.alias === 0 ? "canonical" :'';
-  const hostname = window.location.origin;
+  // const canonical = data.alias === 0 ? "canonical" :'';
+  // const hostname = window.location.origin;
   let offers = []
   if(!isLoading){data.price.map((obj,i)=>{
     offers.push(

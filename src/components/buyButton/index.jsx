@@ -16,7 +16,7 @@ export const BuyButton = ({
 }) =>{
     
 
-    const [cp,setCp] = React.useState(window.location.pathname);
+    const cp = window.location.pathname;
     let nameCnt = 0;
     if(catValue>=10 && catValue<=19){
         nameCnt = cp.substring(1)!=='cart'?'таблеток':'препаратов';
@@ -64,8 +64,8 @@ export const BuyButtonMobile = ({
     am
 }) =>{
     
-    const [cp,setCp] = React.useState(window.location.pathname);
-    const [oneC,setOneC] = React.useState(0);
+    const cp = window.location.pathname;
+    // const [oneC,setOneC] = React.useState(0);
     let nameCnt = cp.substring(1)!=='cart'?'таблеток':'препаратов';
     if(catValue > 1 && catValue <5){
         nameCnt = cp.substring(1)!=='cart'?'таблетки':'препарата';
