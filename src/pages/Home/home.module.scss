@@ -47,6 +47,15 @@
     background-color: #00000028;
     top: 350px;
     left:350px;
+    @media (max-width: 800px) {
+        width: 100%;
+        position: absolute;
+        top: 0;
+        left: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center; 
+    }
 }
 
 .popup{
@@ -58,6 +67,14 @@
     background-color: #fff;
     line-height: 200px;
     text-align: center;
+    @media (max-width: 800px) {
+        width: 370px;
+        margin: -500px 0px 0px 0px;
+        height: 300px;
+         
+    }
+    
+    
     
 }
 
@@ -70,7 +87,12 @@
     font-size: 28px;
     margin-top: 20px;
     position: relative;
-    
+    @media (max-width: 800px) {
+        font-size: 22px;
+        height: 200px;
+        line-height: 30px;
+        
+    }
 }
 
 .buttonclose{
@@ -78,6 +100,7 @@
     height: 80px;
     line-height: 80px;
     position: relative;
+
 }
 
 .buttonsubmit{
@@ -99,21 +122,33 @@
     display: flex;
     width: 596px;
     height: 396px;
-    top: 152px;
-    left: 302px;
+    // top: 152px;
+    // left: 302px;
     border-radius: 10px;
     opacity: 0.2;
+    @media (max-width: 800px) {
+        width: 370px;
+        margin: 0px 0px 0px 0px;
+        height: 300px;
+    }
 }
 
 .imggirl{
     position: absolute;
     display: flex;
-    top: 148px;
-    left: 345px;
     opacity: 0.7;
+    text-align: center;
+    @media (max-width: 800px) {
+        width: 370px;
+        display: block;
+        height: 300px;
+    }
 }
 
 .btext{
     font-size: 40px;
     color: rgb(0, 0, 0);
+    @media (max-width: 800px) {
+        font-size: 26px;
+    }
 }
