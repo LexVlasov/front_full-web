@@ -79,7 +79,6 @@ export const MakeOrder = ({count,setCount,setCurrentPath}) =>{
     };
 
     let flgDisable = false;
-    console.log(order)
     if(page===1){
         flgDisable = order.length===0? true:(order[0].address_1.length===0? true : false)
     } else if(page===3){

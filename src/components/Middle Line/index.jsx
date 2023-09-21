@@ -24,7 +24,7 @@ export const Middle = ({count})=>{
                                 <IconButton aria-label="cart"  className={styles.cart} >
                                 <ThemeProvider theme={theme}>
                                 <Badge style={{color:"#316ab1"}} >
-                                <Link to="/cart/" > 
+                                <Link to="/cart" > 
                                     <ShoppingCart className={styles.cstyle}/>
                                     <div className={styles.info}>Препаратов: <div className={styles.cnt}>{(count ? count.map((obj,i)=> obj.id):[]).length}</div>  На сумму: <div className={styles.sum}>{(count ? count.map((obj,i)=> obj.sum):[]).reduce((a,b)=>a+b,0)}</div></div>
                                     </Link>

@@ -15,3 +15,4 @@ export * from "./Questions";
 export * from "./Certificates";
 export * from "./Reviews";
 export * from "./Terms";
+export * from "./404";

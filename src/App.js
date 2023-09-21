@@ -1,5 +1,5 @@
 
-import {Routes, Route} from 'react-router-dom';
+import {Routes, Route } from 'react-router-dom';
 import Container from '@mui/material/Container';
 import { Header, MainInfo, Middle, Footer,PreFooter, UnderMiddle } from './components';
 import { Home
@@ -17,11 +17,13 @@ import { Home
   ,Questions
   ,Certificates
   ,Terms
+  ,Error404
    } from './pages';
 import React, { useState } from 'react';
 import {Helmet} from "react-helmet";
 import { fetchTypes } from "./redux/slices/posts";
 import { useDispatch, useSelector } from "react-redux";
+import axios from "./axios";
 
 function App() {
   const [currentPath,setCurrentPath] = useState(window.location.pathname);
@@ -33,23 +35,31 @@ function App() {
   const hostname = window.location.href;
   const [menu,setMenu] = useState(1);
   const [group,setGroup] = useState(1);
-  
-  React.useEffect(()=>{
+  const [allUrls,SetAllUrls] = useState();
 
+  React.useEffect(()=>{
+    axios.get(`/allurls`).then(({data})=>{
+      SetAllUrls(data)
+    }).catch(err =>{
+      console.warn(err);
+      alert('Error get post')
+    });
     window.localStorage.setItem('countcart',JSON.stringify(count));
     dispatch(fetchTypes());
   },[count,dispatch]);
-  
+  const isItnotall = allUrls ? (allUrls.includes(decodeURIComponent(window.location.pathname))?0:1):'';
+
   return (
     <>
-
+       {allUrls? 
      
-      {currentPath.substring(1)==='checkout'? 
+      (isItnotall === 1 || currentPath.substring(1)==='checkout'? 
       (
       <Container maxWidth="md">
         <link rel="canonical" href={`${hostname}`}/>
         <Routes>
           <Route path='/checkout' element={<MakeOrder count={count} setCount={setCount} setCurrentPath={setCurrentPath}/>}/>
+          <Route path='*' element={<Error404 setCurrentPath={setCurrentPath}/>}/>
         </Routes>
       </Container>
       )
@@ -75,12 +85,11 @@ function App() {
 
       <Container maxWidth="lg" minWidth="xs">
         <Routes>
-        
         <Route path="/" element={<Home count={count} setCount={setCount} setUrl={setUrl} blockTypes={types} isTypesLoading={isTypesLoading}/>} /> 
         <Route path="/?promo=TG2023" element={<Home count={count} setCount={setCount} setUrl={setUrl} blockTypes={types} isTypesLoading={isTypesLoading}/>} /> 
         <Route path="/:type/:id" element={<FullPost count={count} setCount={setCount} setUrl={setUrl} url={url}/>} />
         <Route path="/:type" element={<GoodsByType count={count} setCount={setCount} setUrl={setUrl}/>} />
-        <Route path="/cart/" element={<ShoppingCart count={count} setCount={setCount} setUrl={setUrl}/>} />
+        <Route path="/cart" element={<ShoppingCart count={count} setCount={setCount} setUrl={setUrl}/>} />
         <Route path="/popular" element={<PopularGoods count={count} setCount={setCount} setUrl={setUrl}/>}/>
         <Route path="/sale" element={<Sale count={count} setCount={setCount} setUrl={setUrl}/>}/>
         <Route path="/refund" element={<Refund setUrl={setUrl}/>}/>
@@ -91,6 +100,7 @@ function App() {
         <Route path="/questions" element={<Questions setUrl={setUrl}  />}/>
         <Route path="/certificates" element={<Certificates setUrl={setUrl}  />}/>
         <Route path="/terms" element={<Terms setUrl={setUrl}  />}/>
+        
         </Routes>
       </Container> 
       <PreFooter/>
@@ -102,10 +112,11 @@ function App() {
         group={group}
         setGroup={setGroup}
       />
+
       </>
-      )}
+      ))
     
-      
+      :''}
       
     </>
   );
