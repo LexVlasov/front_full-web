@@ -3,10 +3,15 @@ import Grid from '@mui/material/Unstable_Grid2';
 import { Box } from '@mui/system';
 import {Link} from 'react-router-dom';
 import Image from "../../uploads/mainInfo/logo.png";
+import {Helmet} from "react-helmet";
 
 export const Error404 = ({setCurrentPath}) =>{
     return(
+
         <div>
+        <Helmet>
+          <title>404 - Page Not Found</title>
+        </Helmet>
         <Box sx={{ flexGrow: 1 }} className={styles.root}>
             <Grid container spacing={1} direction="row">
             <div className={styles.headergrid}>
