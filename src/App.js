@@ -35,31 +35,18 @@ function App() {
   const hostname = window.location.href;
   const [menu,setMenu] = useState(1);
   const [group,setGroup] = useState(1);
-  const [allUrls,SetAllUrls] = useState();
 
-  React.useEffect(()=>{
-    axios.get(`/allurls`).then(({data})=>{
-      SetAllUrls(data)
-    }).catch(err =>{
-      console.warn(err);
-      alert('Error get post')
-    });
-    window.localStorage.setItem('countcart',JSON.stringify(count));
-    dispatch(fetchTypes());
-  },[count,dispatch]);
-  const isItnotall = allUrls ? (allUrls.includes(decodeURIComponent(window.location.pathname))?0:1):'';
 
   return (
     <>
-       {allUrls? 
+       {
      
-      (isItnotall === 1 || currentPath.substring(1)==='checkout'? 
+      ( currentPath.substring(1)==='checkout'? 
       (
       <Container maxWidth="md">
         <link rel="canonical" href={`${hostname}`}/>
         <Routes>
           <Route path='/checkout' element={<MakeOrder count={count} setCount={setCount} setCurrentPath={setCurrentPath}/>}/>
-          <Route path='*' element={<Error404 setCurrentPath={setCurrentPath}/>}/>
         </Routes>
       </Container>
       )
@@ -115,8 +102,7 @@ function App() {
 
       </>
       ))
-    
-      :''}
+    }
       
     </>
   );
