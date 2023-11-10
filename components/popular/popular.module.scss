@@ -1,0 +1,41 @@
+.root{
+    min-width: 0;
+    max-width: 1400px;
+    margin-left: auto;
+    margin-right: auto;
+    height:400px;
+    margin-top: 10px;
+    @media (max-width: 1000px) {
+        height: 350px;
+        
+    }
+}
+.title{
+    height: 50px;
+    @media (max-width: 1000px) {
+        padding: 0px 10px 0px 15px;
+    }
+}
+
+.gooodblock{
+    height: 350px;
+    display: flex;
+    max-width: 1400px;
+    min-width: 0px;
+    @media (max-width: 1000px) {
+        margin: 0px 10px 0px 0px;
+    }
+
+}
+
+.slideslick{
+    max-width: 1400px;
+    min-width: 0px;
+    height: 350px;
+    @media (max-width: 1000px) {
+        margin: 0px -20px 0px 15px;
+        height: 310px;
+    }
+}
+
+

@@ -1,0 +1,86 @@
+.root{
+    min-width: 0;
+    max-width: 1400px;
+    margin-left: auto;
+    margin-right: auto;
+    height: 400px;
+    background: linear-gradient(to right, #fff -10% , #316ab1 40%, #316ab1 60%, #fff 110% );
+    position: relative;
+    @media (max-width: 1000px) {
+        display: flex;
+        height: 200px;
+        margin: 0px 15px 0px 15px;
+    }
+    
+}
+
+.img1{
+    height: 400px;
+    width: 55%;
+    object-fit: contain;
+    @media (max-width: 1000px) {
+        height: 200px;
+        width: 50%;
+    }
+}
+.img2{
+    height: 400px;
+    width: 45%;
+    object-fit: contain;
+    @media (max-width: 1000px) {
+        display: none;
+    }
+}
+
+.firsttext{
+    position: absolute; /* Абсолютное позиционирование */
+    top: 100px; /* Размещаем текст по вертикали по центру */
+    left: 50%; /* Размещаем текст по горизонтали по центру */
+    transform: translate(-50%, -50%); /* Центрируем текст относительно самого себя */
+    width: 400px;
+    color: #ddd;
+    text-align: left;
+    font-size: 38px;
+    z-index: 1;
+    & b{
+        color: #fff;
+    }
+    @media (max-width: 1000px) {
+        position:relative;
+        font-size: 22px;
+        top:0px;
+        left: 10%;
+        transform: translate(0%, 0%);
+        width: 50%;
+      }
+}
+
+.secondtext{
+    position: absolute; /* Абсолютное позиционирование */
+    top: 340px; /* Размещаем текст по вертикали по центру */
+    left: 850px; /* Размещаем текст по горизонтали по центру */
+    transform: translate(-50%, -50%); /* Центрируем текст относительно самого себя */
+    color: #316ab1;
+    font-size: 28px;
+    z-index: 1;
+    text-align: center;
+    background-color: #fff;
+    width: 200px;
+    border-radius: 20px;
+    line-height: 50px;
+    height: 50px;
+    transition: background-color 0.5s ease;
+    &:hover{
+        background-color: #eee;
+        transition: background-color 0.5s ease;
+    }
+    @media (max-width: 1000px) {
+        width: 100px;
+        font-size: 16px;
+        line-height: 30px;
+        height: 30px;
+        top:70%;
+        left: 10%;
+        transform: translate(0%, 0%);
+      }
+}
