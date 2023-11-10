@@ -21,10 +21,10 @@ const Certificates = () =>{
             <h1 style={{marginBottom:"30px",fontWeight:"700"}}>Сертификаты</h1>
             {cntImg.map((obj,i)=>(
                 <div key={i}>
-                <Image src={imgArray[obj*0]} width={250} height={310} style={{margin:"10px 10px 10px 10px"}} alt={imgArray[obj*0].split('/')[5].split('.')[0]}/>
-                <Image src={imgArray[obj*1]} width={250} height={310} style={{margin:"10px 10px 10px 10px"}} alt={imgArray[obj*1].split('/')[5].split('.')[0]}/> 
-                <Image src={imgArray[obj*2]} width={250} height={310} style={{margin:"10px 10px 10px 10px"}} alt={imgArray[obj*2].split('/')[5].split('.')[0]}/> 
-                <Image src={imgArray[obj*3]} width={250} height={310} style={{margin:"10px 10px 10px 10px"}} alt={imgArray[obj*3].split('/')[5].split('.')[0]}/> 
+                <Image src={imgArray[obj*0]} width={800} height={800} style={{margin:"10px 10px 10px 10px"}} alt={imgArray[obj*0].split('/')[5].split('.')[0]}/>
+                <Image src={imgArray[obj*1]} width={800} height={800} style={{margin:"10px 10px 10px 10px"}} alt={imgArray[obj*1].split('/')[5].split('.')[0]}/> 
+                <Image src={imgArray[obj*2]} width={800} height={800} style={{margin:"10px 10px 10px 10px"}} alt={imgArray[obj*2].split('/')[5].split('.')[0]}/> 
+                <Image src={imgArray[obj*3]} width={800} height={800} style={{margin:"10px 10px 10px 10px"}} alt={imgArray[obj*3].split('/')[5].split('.')[0]}/> 
                 </div>
             ))}
         </div>

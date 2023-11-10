@@ -180,8 +180,7 @@ const MakeOrder =({
             {count.map((obj,ind)=>(
   
             <div className={styles.mainorder} key={ind}>
-                <Link href={`/preparations/${obj.group_type}/${obj.name}`}><Image src={`${backHost}${obj.avatar}`} className={styles.imagekda} alt={obj.name} width={w}
-            height={h} /></Link>
+                <Link href={`/preparations/${obj.group_type}/${obj.name}`}><Image src={`${backHost}${obj.avatar}`} className={styles.imagekda} alt={obj.name} width={800} height={800}/></Link>
                 <div className={styles.infoorder}><h3 className={styles.nameorder}>{obj.name}</h3></div>
                 <div className={styles.priceorder}>
                     <div className={styles.priceorder}>

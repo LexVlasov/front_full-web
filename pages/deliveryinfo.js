@@ -107,9 +107,9 @@ const DeliveryInfo = () =>{
                         <td><b>3. Бандероль</b></td>
                     </tr>
                     <tr>
-                        <td><Image width={200} height={200} src='/upload/deliverypost/packaging_1.jpg' alt="Сбор заказа One Pill"  /></td>
-                        <td><Image width={200} height={200} src='/upload/deliverypost/packaging_3.jpg' alt="Зашитное покрытие One Pill"  /></td>
-                        <td><Image width={200} height={200} src='/upload/deliverypost/packaging_4.jpg' alt="Бандероль One Pill"  /></td>
+                        <td><Image width={800} height={800} src='/upload/deliverypost/packaging_1.jpg' alt="Сбор заказа One Pill"  /></td>
+                        <td><Image width={800} height={800} src='/upload/deliverypost/packaging_3.jpg' alt="Зашитное покрытие One Pill"  /></td>
+                        <td><Image width={800} height={800} src='/upload/deliverypost/packaging_4.jpg' alt="Бандероль One Pill"  /></td>
                     </tr>   
                     </tbody>
                 </table>

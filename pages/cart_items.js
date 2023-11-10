@@ -97,7 +97,7 @@ const Cart =({popularProduct})=>{
                 {count.length > 0? count.map((item,ind)=>(
                     <li key={ind}>
                         <div className={styles.item}>
-                            <Link href={`/preparations/${item.group_type}/${item.name}`}><Image width={w} height={h} src={`${backHost}${item.avatar}`} alt={item.name}/></Link>
+                            <Link href={`/preparations/${item.group_type}/${item.name}`}><Image width={800} height={800} src={`${backHost}${item.avatar}`} alt={item.name}/></Link>
                             <div className={styles.maininfo}>
                             <Link href={`/preparations/${item.group_type}/${item.name}`}><h3 className={styles.title}>{item.name}</h3></Link>
                             <div className={styles.itemtype}>{item.type}</div>
