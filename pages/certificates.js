@@ -18,6 +18,7 @@ const Certificates = () =>{
     const cntImg = [1,2,3];
     return(
         <div className={styles.about}>
+            <title>Сертификаты! У нас вы можете заказать аналоги Виагры по самым низким ценам (доставка по Москве и другим городам России)</title>
             <h1 style={{marginBottom:"30px",fontWeight:"700"}}>Сертификаты</h1>
             {cntImg.map((obj,i)=>(
                 <div key={i}>

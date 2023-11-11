@@ -16,6 +16,7 @@ const Questions = () =>{
     }
     return(
         <div className={styles.about}>
+            <title>FAQ! У нас вы можете заказать аналоги Виагры по самым низким ценам (доставка по Москве и другим городам России)</title>
             <h1 style={{marginBottom:"30px",fontWeight:"700"}} >Вопросы и ответы</h1>
             <p className={styles.question} onClick={()=>onClickQ(1)}>Почему в России запретили &quot;Сеалекс&quot; и &quot;Али Капс&quot;?</p>
             <div hidden={!(question.includes(1))} className={styles.divquest}>

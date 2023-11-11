@@ -4,6 +4,7 @@ import styles from "../components/all.module.scss";
 const PaymentInfo = () =>{
     return(
         <div className={styles.delivery}>
+            <title>Информация об оплате! У нас вы можете заказать аналоги Виагры по самым низким ценам (доставка по Москве и другим городам России)</title>
             <h1 >Оплата</h1>
 
 <p>
