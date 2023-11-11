@@ -98,7 +98,7 @@ import Popular from "../popular/popular";
   };
   return (
     <>
-    <title>{data.ie_search.split(',')[0]} купить в Москве и РФ | {data.info[0].group_type} купить недорого | {data.ie_search} {data.name}</title>
+    <title>{`${data.ie_search.split(',')[0]} купить в Москве и РФ | ${data.info[0].group_type} купить недорого | ${data.ie_search} ${data.name}`}</title>
     <meta name="keywords" content={`${data.ie_search} купить москва санкт-петербург волгоград доставка`}></meta>
     <meta name="description" content={`Закажите ${data.info[0].group_type} ${data.name} в интернет-аптеке One Pill (1pill.net) в Москве. Насладитесь качественным продуктом с быстрой доставкой в день заказа. При покупке от 3000 рублей скидка на доставку по Москве. Ваше здоровье в надежных руках с One Pill!  Все оттенки твоих желаний... +7(800)511-31-02`} />
     <JsonLd data={productData} /> 

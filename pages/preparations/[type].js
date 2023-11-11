@@ -14,9 +14,10 @@ const ProductType = ({
     manufactures,
     alcohol,
     fun_time,
+    type
 }) =>{
-    const router = useRouter();
-    const { type } = router.query;
+    // const router = useRouter();
+    // const { type } = router.query;
     const { windowWidth } = useAppState();
     const [mobFilter,setMobFilter] = useState(0);
     const [currentPage, setCurrentPage] = useState(1);
@@ -50,11 +51,11 @@ const ProductType = ({
     let keywords = data.map((obj,i)=>obj.ie_search).reduce((a,b)=> a+ ' '+b,'');
     const currentItems = [...filterItems].slice(indexOfFirstItem, indexOfLastItem);
     return(
-        <>
+        <div>
         {statusCode < 200 || statusCode>= 300?
         <NextError statusCode={statusCode} /> :
-        (<>
-        <title>{`${type} купить в Москве и РФ | ${type} купить недорого | ${type}`} </title>
+        (<div>
+        <title>{`${type} купить в Москве и РФ | ${type} купить недорого | ${type}`}</title>
         <div className={styles.root}>
             <meta name="description" content={`Ищете ${type} в Москве? Посетите интернет-аптеку One Pill (1pill.net)! Мы предлагаем высококачественные ${type} по доступным ценам с возможностью доставки в день заказа. При покупке от 3000 рублей скидка на доставку по Москве. Заботьтесь о своем здоровье с One Pill! Все оттенки твоих желаний... +7(800)511-31-02`} />
             <meta name="keywords" content={keywords} />
@@ -77,7 +78,7 @@ const ProductType = ({
                 mobFilter={mobFilter}
                 reset={reset}
                 />
-                {windowWidth<1000&&<div className={styles.divsort}><div className={styles.sort}> Сортировка </div><LuSettings2 className={styles.iconsetting} onClick={()=> setMobFilter(mobFilter===0?1:0)}/></div>}
+                {windowWidth<1000?<div className={styles.divsort}><div className={styles.sort}> Сортировка </div><LuSettings2 className={styles.iconsetting} onClick={()=> setMobFilter(mobFilter===0?1:0)}/></div>:undefined}
             </div>
             
             <div >
@@ -97,9 +98,9 @@ const ProductType = ({
           <button className={styles.butnext} onClick={()=>{let e = currentPage; setCurrentPage(e<pageNumbers[pageNumbers.length-1]? (e+1):e)}}> <a href={windowWidth>=1000?'#header':'#under'}>Вперед &#62;</a></button> </>)    : ''} 
             </div>
             
-        </div></>)
+        </div></div>)
          } 
-        </>        
+        </div>        
     )
 }
 export default ProductType;
@@ -142,6 +143,7 @@ export async function getServerSideProps(context) {
             manufactures,
             alcohol,
             fun_time,
+            type
         },
     };
 };
