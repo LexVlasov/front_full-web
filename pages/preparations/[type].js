@@ -32,16 +32,16 @@ const ProductType = ({
     const [manuf,setManuf] = useState(manufactures);
     const [alco,setAlco] = useState(alcohol);
     const [ftime,setFtime] = useState(fun_time)
-    const reset = () =>{
-        setDosageNew(dosages);
-        setManuf(manufactures);
-        setAlco(alcohol);
-        setFtime(fun_time);
-    };
+    // const reset = () =>{
+    //     setDosageNew(dosages);
+    //     setManuf(manufactures);
+    //     setAlco(alcohol);
+    //     setFtime(fun_time);
+    // };
     const filterItems = [...data]
     .filter((item)=> dosageNew.includes(item.f_dosage))
     .filter((item)=> manuf.includes(item.f_manufacturer))
-    .filter((item)=> alco.includes(item.f_alcohol))
+    // .filter((item)=> alco.includes(item.f_alcohol))
     .filter((item)=> ftime.includes(item.f_time))
     ;
 
@@ -76,7 +76,7 @@ const ProductType = ({
                 fun_time={fun_time}
                 setMobFilter={setMobFilter}
                 mobFilter={mobFilter}
-                reset={reset}
+                // reset={reset}
                 />
                 {windowWidth<1000?<div className={styles.divsort}><div className={styles.sort}> Сортировка </div><LuSettings2 className={styles.iconsetting} onClick={()=> setMobFilter(mobFilter===0?1:0)}/></div>:undefined}
             </div>

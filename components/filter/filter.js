@@ -38,37 +38,74 @@ const Filter =({
         const { name, checked } = event.target;
         
         if (checked) {
-          setDosageNew((prevDosageNew) => [...prevDosageNew, name]);
+          if(dosageNew.length===dosage.length){
+            setDosageNew([name])
+          }else{
+            setDosageNew((prevDosageNew) => [...prevDosageNew, name]);
+          }
+          
         } else {
-          setDosageNew((prevDosageNew) => prevDosageNew.filter((d) => d !== name));
+            if(dosageNew.length===1){
+            setDosageNew(dosage)
+          } else{
+            setDosageNew((prevDosageNew) => prevDosageNew.filter((d) => d !== name));
+          }
         }
       };
-      
     const handleManufacture = (event) => {
         const { name, checked } = event.target;
         
         if (checked) {
-          setManuf((prevManuf) => [...prevManuf, name]);
+          if(manuf.length===manufacturer.length){
+            setManuf([name])
+          }else{
+            setManuf((prevManuf) => [...prevManuf, name]);
+          }
+          
         } else {
-          setManuf((prevManuf) => prevManuf.filter((d) => d !== name));
+          if(manuf.length===1){
+            setManuf(manufacturer)
+          } else{
+            setManuf((prevManuf) => prevManuf.filter((d) => d !== name));
+          }
+          
         }
       };
-      const handleAlco = (event) => {
-        const { name, checked } = event.target;
+      // const handleAlco = (event) => {
+      //   const { name, checked } = event.target;
         
-        if (checked) {
-          setAlco((prevAlco) => [...prevAlco, name]);
-        } else {
-          setAlco((prevAlco) => prevAlco.filter((d) => d !== name));
-        }
-      }; 
+      //   if (checked) {
+      //     if(alco.length===alcohol.length){
+      //       setManuf([name])
+      //     }else{
+      //       setAlco((prevAlco) => [...prevAlco, name]);
+      //     }
+          
+      //   } else {
+      //     if(alco.length===1){
+      //       setManuf(alcohol)
+      //     } else{
+      //       setAlco((prevAlco) => prevAlco.filter((d) => d !== name));
+      //     }
+          
+      //   }
+      // }; 
       const handleTime = (event) => {
         const { name, checked } = event.target;
         
         if (checked) {
-          setFtime((prevFtime) => [...prevFtime, name]);
+          if(ftime.length===fun_time.length){
+            setFtime([name])
+          }else{
+            setFtime((prevFtime) => [...prevFtime, name]);
+          }
+          
         } else {
-          setFtime((prevFtime) => prevFtime.filter((d) => d !== name));
+          if(ftime.length===1){
+            setFtime(fun_time)
+          } else{
+            setFtime((prevFtime) => prevFtime.filter((d) => d !== name));
+          }
         }
       };   
     return(
@@ -83,7 +120,7 @@ const Filter =({
                     type="checkbox" 
                     id={d} 
                     name={d} 
-                    checked={dosageNew.includes(d)}
+                    // checked={dosageNew.includes(d)}
                     onChange={handleDosage}
                     className={styles.checkbox}/>
                     <label  className={styles.labelname}>{d}
@@ -98,7 +135,7 @@ const Filter =({
                     type="checkbox" 
                     id={d} 
                     name={d} 
-                    checked={manuf.includes(d)}
+                    // checked={manuf.includes(d)}
                     onChange={handleManufacture}
                     className={styles.checkbox}/>
                     <label  className={styles.labelname}>{d}
@@ -107,7 +144,7 @@ const Filter =({
                 </li>
             ))}
             </ul>
-            <div className={styles.other} onClick={()=>chooseSelect('a')}><div className={styles.title}>Алкоголь</div> <KeyboardArrowDownIcon/></div>
+            {/* <div className={styles.other} onClick={()=>chooseSelect('a')}><div className={styles.title}>Алкоголь</div> <KeyboardArrowDownIcon/></div>
             <ul className={styles.allcheckboxes}>
             {select.includes('a')&&alcohol.map((d,i)=>(
                 <li className={styles.checkboxdosage} key={i}>
@@ -116,13 +153,13 @@ const Filter =({
                     type="checkbox" 
                     id={d} 
                     name={d} 
-                    checked={alco.includes(d)}
+                    // checked={alco.includes(d)}
                     onChange={handleAlco}
                     className={styles.checkbox}/>
                     <label  className={styles.labelname} >{d}
                     <div className={styles.tooltip}>{d}</div></label>
                 </li>
-            ))}</ul>
+            ))}</ul> */}
             <div className={styles.other} onClick={()=>chooseSelect('f')}><div className={styles.title}>Время действия</div> <KeyboardArrowDownIcon/></div>
             <ul className={styles.allcheckboxes}>
             {select.includes('f')&&fun_time.map((d,i)=>(
@@ -131,14 +168,15 @@ const Filter =({
                     type="checkbox" 
                     id={d} 
                     name={d} 
-                    checked={ftime.includes(d)}
+                    // checked={ftime.includes(d)}
                     onChange={handleTime}
                     className={styles.checkbox}/>
                     <label  className={styles.labelname}>{d}
                     </label>
                 </li>
             ))}</ul>
-            <div className={styles.reset} onClick={()=>reset()}>Сбросить</div>
+            {mobFilter===1?<div className={styles.reset} onClick={()=>setMobFilter(0)}>Применить</div>:''}
+            {/* <div className={styles.reset} onClick={()=>reset()}>Сбросить</div> */}
         </div>
     )
 }
