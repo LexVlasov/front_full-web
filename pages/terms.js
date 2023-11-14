@@ -3,10 +3,10 @@ import styles from "../components/all.module.scss";
 
 const Terms = () =>{
     return(
-<div className={styles.about} itemscope="" itemtype="http://schema.org/Article">
+<div className={styles.about} itemScope="" itemType="http://schema.org/Article">
 <title>Пользовательское соглашение</title>
 
-    <h1 itemprop="name">Пользовательское соглашение</h1>
+    <h1 itemProp="name">Пользовательское соглашение</h1>
     
     
     

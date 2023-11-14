@@ -2,6 +2,7 @@ import styles from "./oneclick.module.scss";
 import {useState} from 'react';
 import axios from "../axios";
 import Image from 'next/image';
+import Link from "next/link";
 const OneClick = () =>{
 
     const [name,setName] = useState();
@@ -58,7 +59,7 @@ const OneClick = () =>{
             <div className={styles.input_group}><input type="tel" id="phone" className={styles.input_group_input} name="input" value={phoneNumber} onChange={handlePhoneNumberChange} required/> <label htmlFor="phone" className={styles.input_group_label}>Номер телефона</label> </div>
             
             <button className={styles.submit} type="submit">Заказать звонок</button>
-            <div className={styles.txtcall}>Нажимая на «Заказать звонок», вы подтверждаете, что ознакомились с <a href="/terms">Пользовательским соглашением</a></div>
+            <div className={styles.txtcall}>Нажимая на «Заказать звонок», вы подтверждаете, что ознакомились с <Link href="/terms">Пользовательским соглашением</Link></div>
             </form>
 
             
