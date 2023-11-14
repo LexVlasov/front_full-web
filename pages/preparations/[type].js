@@ -38,7 +38,7 @@ const ProductType = ({
     //     setAlco(alcohol);
     //     setFtime(fun_time);
     // };
-    const filterItems = [...data]
+    const filterItems = statusCode < 200 || statusCode>= 300?[]:[...data]
     .filter((item)=> dosageNew.includes(item.f_dosage))
     .filter((item)=> manuf.includes(item.f_manufacturer))
     // .filter((item)=> alco.includes(item.f_alcohol))
@@ -48,7 +48,7 @@ const ProductType = ({
     for (let i = 1; i <= Math.round(filterItems.length / itemsPerPage); i++) {
         pageNumbers.push(i);
     }
-    let keywords = data.map((obj,i)=>obj.ie_search).reduce((a,b)=> a+ ' '+b,'');
+    let keywords = statusCode < 200 || statusCode>= 300?[]:data.map((obj,i)=>obj.ie_search).reduce((a,b)=> a+ ' '+b,'');
     const currentItems = [...filterItems].slice(indexOfFirstItem, indexOfLastItem);
     return(
         <div>
