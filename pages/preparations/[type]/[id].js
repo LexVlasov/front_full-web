@@ -39,7 +39,7 @@ export async function getServerSideProps(context) {
             popularProduct =  product ? product.data : '';
         }
     } catch (error) {
-        console.warn(error);
+        // console.warn(error);
         context.res.statusCode = error.response?.status || 500;
         statusCode = error.response?.status || 500;
     }
